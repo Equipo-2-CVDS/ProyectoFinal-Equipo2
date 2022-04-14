@@ -25,6 +25,7 @@
 
 	<mappers>
         <mapper resource="mappers/UsuarioMapper.xml"></mapper>      
-		<mapper resource="mappers/RolesMapper.xml"></mapper>            
-    </mappers> 
+		<mapper resource="mappers/RolesMapper.xml"></mapper>
+		<mapper resource="mappers/RecursoMapper.xml"></mapper>
+	</mappers>
 </configuration>

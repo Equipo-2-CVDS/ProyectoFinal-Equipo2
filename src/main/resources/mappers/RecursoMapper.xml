@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.RecursosMapper">
+    <resultMap type='Recurso' id='RescursosResult'>
+        <id property='id' column='id' />
+        <result property='nombre' column='nombre' />
+        <result property='tipo' column='tipo' />
+        <result property='capacidad' column='capacidad' />
+        <result property='ubicacion' column='ubicacion' />
+        <result property='horario' column='horario' />
+        <result property='estado' column='estado' />
+    </resultMap>
+
+    <select id="getRecursosDisponibles" resultMap="RescursosResult"
+            parameterType="map">
+        SELECT
+        r.id ,
+        r.nombre ,
+        r.tipo ,
+        r.capacidad ,
+        r.ubicacion ,
+        r.horario
+        FROM RECURSOS r
+        WHERE r.estado = #{estado}
+    </select>
+
+</mapper>
