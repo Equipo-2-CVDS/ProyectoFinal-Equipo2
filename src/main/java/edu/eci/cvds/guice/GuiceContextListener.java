@@ -7,6 +7,13 @@ import javax.servlet.ServletContextListener;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
+import edu.eci.cvds.persistence.RolesDAO;
+import edu.eci.cvds.persistence.UsuarioDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisRolesDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisUsuarioDAO;
+import edu.eci.cvds.services.ProyectoServices;
+import edu.eci.cvds.services.impl.ProyectoServicesImpl;
+
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -25,6 +32,9 @@ public class GuiceContextListener implements ServletContextListener {
 				install(JdbcHelper.PostgreSQL);
 				setEnvironmentId("development");
 				setClassPathResource("mybatis-config.xml");
+				bind(UsuarioDAO.class).to(MyBatisUsuarioDAO.class);
+				bind(ProyectoServices.class).to(ProyectoServicesImpl.class);
+				bind(RolesDAO.class).to(MyBatisRolesDAO.class);
 			}
 		}
 
