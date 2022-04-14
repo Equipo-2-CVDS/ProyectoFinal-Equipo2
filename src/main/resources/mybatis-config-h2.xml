@@ -6,6 +6,11 @@
 	<properties resource="test.properties">
 	</properties>
 
+	<typeAliases>
+        <typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
+		<typeAlias type='edu.eci.cvds.entities.Rol' alias='Rol'/>
+    </typeAliases>
+
 	<environments default="test">
 		<environment id="test">
 			<transactionManager type="JDBC" />
@@ -17,4 +22,9 @@
 			</dataSource>
 		</environment>
 	</environments>
+
+	<mappers>
+        <mapper resource="mappers/UsuarioMapper.xml"></mapper>  
+		<mapper resource="mappers/RolesMapper.xml"></mapper>                  
+    </mappers> 
 </configuration>
