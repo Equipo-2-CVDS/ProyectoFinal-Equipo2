@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+      <style>
+        body{
+            font-family: 'Courier New', Courier, monospace;
+            background-color: rgb(46, 46, 184);
+            color: white;
+            text-align: center;
+            padding: 3% 25%;
+            border-radius: 3%;
+        }
+
+        .div{
+            background-color: rgba(1, 1, 70, 0.623);
+            padding: 5% 15%;
+            border-radius: 3%;
+        }
+
+        .form{
+            background-color: rgba(4, 0, 8, 0.664);
+            padding: 5% 20%;
+            border-radius: 3%;
+            display:inline-block;
+        }
+
+        .botn{
+            margin-top: 15px;
+            padding: 3% 10%;
+        }
+
+        .texto{
+            font-size: 32px;
+        }
+        </style>
+        <title>Plataforma Gestión de Recursos Biblioteca</title>
+    <h:body>
+        <img class = "logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
+        <div class="div">
+            <p:outputLabel class="texto" value="Plataforma Gestión de Recursos Biblioteca"/>
+            <div class="form">
+                <h:form id="form1">
+                    <p:commandButton class="botn" value="Consultar Recurso" action="#{navigationController.paginaConsultaR()}"/>
+                    <p:commandButton class="botn" value="Log In" action="#{navigationController.paginaLogin()}"/>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
