@@ -29,6 +29,7 @@
         border-radius: 3%;
     }
     .but{
+        border-radius: 5px;
         margin-top: 15px;
         padding: 3% 10%;
     }
@@ -38,14 +39,10 @@
         border-radius: 3%;
     }
   </style>
-<h:body style="margin: 0%;">
+<h:body>
 <p:messages id="messages" showDetail="true" closable="true">
     <p:autoUpdate />
 </p:messages>
-<br></br>
-<br></br>
-<br></br>
-<br></br>
 <img class = "logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
 <div class="divPrimer">
     <div class="text-title">
@@ -55,6 +52,8 @@
         <h:form>
             <div>
                 <p:commandButton class="but" value="Registrar Recurso" action="#{navigationController.paginaRegistroR()}"/>
+            </div>
+            <div>
                 <h:commandButton action="#{userBean.cerrarSesion()}" class="but" value="Salir"/>
             </div>
         </h:form>

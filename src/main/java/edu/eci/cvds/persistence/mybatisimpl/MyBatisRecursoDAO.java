@@ -14,7 +14,7 @@ public class MyBatisRecursoDAO implements RecursoDAO {
     @Override
     public String getRecurso(int id) throws PersistenceException {
         try {
-            return RecursosMapper.getRecurso(id).getNombre();
+            return RecursosMapper.consultarRecurso(id).getNombre();
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
         }
