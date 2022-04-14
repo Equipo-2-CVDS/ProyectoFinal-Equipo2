@@ -19,18 +19,27 @@ public class ProyectoTest {
     ProyectoServices serviciosProyecto;
 
     public ProyectoTest() {
-        serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyectoTesting();
+        serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
     }
 
     @Before
     public void setUp() {
-        serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyectoTesting();
+        serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
     }
 
     @Test
     public void deberiaEncontrarCliente(){
         try{
-            serviciosProyecto.buscarUsuario("prueba");
+            Assert.assertTrue(1==serviciosProyecto.buscarUsuario("admin").getId()); 
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    @Test
+    public void deberiaEncontrarRol(){
+        try{
+            Assert.assertEquals("Administrador",serviciosProyecto.getRol(1)); 
         }
         catch (Exception e){
             System.out.println(e.getMessage());

@@ -24,4 +24,5 @@
 		FROM USUARIOS u
 			WHERE u.nombre = #{nombre}
 	</select>
+
 </mapper>
