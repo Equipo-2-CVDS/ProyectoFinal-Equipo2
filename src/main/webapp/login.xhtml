@@ -2,6 +2,36 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
 xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+  <style>
+    body{
+      font-family: 'Courier New', Courier, monospace;
+      background-color: rgb(46, 46, 184);
+      color: white;
+      text-align: center;
+      padding: 3% 25%;
+      border-radius: 3%;
+    }
+    .titulo{
+      background-color: rgba(1, 1, 70, 0.623);
+      padding: 5% 15%;
+      border-radius: 3%;
+    }
+    .form{
+      background-color: rgba(4, 0, 8, 0.664);
+      padding: 5% 20%;
+      border-radius: 3%;
+      display:inline-block;
+    }
+    .but{
+      margin-top: 15px;
+      padding: 3% 10%;
+      
+    }
+    .inputText{
+      display:flow-root;
+      text-align: center;
+    }
+  </style>
     <h:head>
         <title>Login</title>
         <link rel="stylesheet" type="text/css" href="styles/global.css" />
@@ -12,27 +42,26 @@ xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
     </h:head>
     <body>
       <p:messages id="messages" showDetail="true" closable="true">
-                <p:autoUpdate />
-            </p:messages>
+        <p:autoUpdate />
+      </p:messages>
+      <img class = "logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
       <div class="titulo">
-        <h1>Plataforma Gestión de Recursos Biblioteca</h1>
-      </div>
-           <center>
-            <h:form>
-                
-            <div class="form">
-            <div class="subtitulo">
-             <h1>Usuario</h1>
-            </div>
-             <h:inputText  value="#{userBean.username}" class="inpu" required="true" placeholder="Usuario" name="login" />
-            <div class="subtitulo">
-            <h1>Contraseña</h1>
-            </div>
-             <h:inputSecret id="password" value="#{userBean.password}" class="inpu" required="true"  placeholder="Contraseña" name="password" />
+        <h1>Plataforma Gestión de Recursos Biblioteca</h1>      
+        <center><h:form>     
+          <div class="form">
+            <div class="inputText">
+              <h1>Usuario</h1>
+              <h:inputText  value="#{userBean.username}" class="input" required="true" placeholder="Usuario" name="login" />          
+            </div>           
+            <div class="inputText">
+              <h1>Contraseña</h1>              
+              <h:inputSecret id="password" value="#{userBean.password}" class="input" required="true"  placeholder="Contraseña" name="password" />
+            </div>            
+            <br/>
             <h:commandButton value="ACCEDER" action="#{userBean.ingresarSesion()}" class="but"/>
-             </div>
-            </h:form> </center>
-            <h:messages/>
-      </body>
-
-    </html>
+          </div>
+        </h:form> </center>
+        <h:messages/>
+      </div>
+    </body>
+</html>

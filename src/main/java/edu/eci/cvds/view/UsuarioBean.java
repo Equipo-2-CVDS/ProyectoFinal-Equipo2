@@ -39,7 +39,7 @@ public class UsuarioBean extends BasePageBean {
     private String username;
     private int rol;
     Subject subject;
-    private String redirectUrl = "/app/login.xhtml";
+    private String redirectUrl = "/faces/login.xhtml";
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
      * 

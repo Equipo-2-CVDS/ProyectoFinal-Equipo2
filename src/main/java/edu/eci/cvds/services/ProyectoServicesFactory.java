@@ -58,7 +58,7 @@ public class ProyectoServicesFactory {
    }
 
    public static void main(String a[]) throws ServicesException {
-    System.out.println(ProyectoServicesFactory.getInstance().getServiciosProyecto().buscarUsuario("prueba"));
+    System.out.println(ProyectoServicesFactory.getInstance().getServiciosProyecto().buscarUsuario("admin"));
 }
 
 }
