@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
+import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.RolesDAO;
 import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.services.ProyectoServices;
@@ -16,6 +17,9 @@ public class ProyectoServicesImpl implements ProyectoServices{
 
     @Inject
     private RolesDAO rolesDAO;
+
+    @Inject
+    private RecursoDAO recursoDAO;
 
     @Override
     public Usuario buscarUsuario(String nombre) throws ServicesException {
@@ -35,6 +39,14 @@ public class ProyectoServicesImpl implements ProyectoServices{
             throw new ServicesException("Error buscando rol:" + id, ex);
         }
         
+    }
+
+    public String getRecurso() throws ServicesException{
+        try{
+            return recursoDAO.getRecurso();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando recursos", ex);
+        }
     }
     
 }
