@@ -21,9 +21,14 @@
         r.tipo ,
         r.capacidad ,
         r.ubicacion ,
-        r.horario
+        r.estado
         FROM RECURSOS r
         WHERE r.estado = #{estado}
     </select>
+
+    <insert id="insertarRecurso" parameterType="map">
+        insert into RECURSOS (nombre, tipo, capacidad, ubicacion, estado) values
+        (#{r.nombre}, #{r.tipo}, #{r.capacidad}, #{r.ubicacion}, #{r.estado})
+    </insert>
 
 </mapper>

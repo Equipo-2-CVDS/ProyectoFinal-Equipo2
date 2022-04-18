@@ -22,6 +22,6 @@ public class NavigationController implements Serializable {
         return null;
     }
     public String paginaRegistroR(){
-        return null;
+        return "registrarRecurso";
     }
 }

@@ -6,4 +6,6 @@ import edu.eci.cvds.entities.Recurso;
 
 public interface RecursoMapper {
     public Recurso consultarRecurso(@Param("id")int id);
+
+    public void insertarCliente(@Param("r") Recurso r);
 }
