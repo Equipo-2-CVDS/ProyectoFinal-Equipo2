@@ -8,7 +8,7 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "navigationController", eager = true)
 @RequestScoped
 
-public class NavigationController implements Serializable {
+public class NavigationController extends BasePageBean {
     public String paginaHome(){
         return "home";
     }
@@ -18,9 +18,7 @@ public class NavigationController implements Serializable {
     public String paginaInicio(){
         return "index";
     }
-    public String paginaConsultaR(){
-        return null;
-    }
+    public String paginaConsultaR(){return "consultaR";}
     public String paginaRegistroR(){
         return null;
     }

@@ -20,4 +20,12 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public String getRol(int id) throws ServicesException;
+
+    /**
+     * Consulta los recursos de la biblioteca
+     *
+     * @return String
+     * @throws ServicesException
+     */
+    public String getRecurso() throws ServicesException;
 }
