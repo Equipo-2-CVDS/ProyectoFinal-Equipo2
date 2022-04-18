@@ -8,13 +8,13 @@ import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
 
 public class MyBatisRecursoDAO implements RecursoDAO {
     @Inject
-    RecursoMapper RecursosMapper;
+    RecursoMapper recursoMapper;
 
 
     @Override
-    public String getRecurso(int id) throws PersistenceException {
+    public String getRecurso() throws PersistenceException {
         try {
-            return RecursosMapper.consultarRecurso(id).getNombre();
+            return recursoMapper.consultarRecurso(15).getNombre();
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
         }

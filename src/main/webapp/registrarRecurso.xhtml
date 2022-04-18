@@ -121,13 +121,25 @@
                 <select class="select">
                 <option hidden="" >Seleccione ubicación</option>
                 <option class="select" id="ubicación" binding="#{ubication}">Edificio A</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio B</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio C</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio D</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio E</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio F</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio G</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio H</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio I</option>
+                <option class="select" id="ubicación" binding="#{ubication}">Edificio L</option>
                 </select>
                 <h1>Tipo</h1>
-                <p:inputText class="input" id="tipo" type="String" binding="#{type}" placeholder="S sala, E equipo y M multimedia"/>
+                <select class="select">
+                <option hidden="" >S sala, E equipo y M multimedia</option>
+                <option class="select" id="tipo"  binding="#{type}">S</option>
+                <option class="select" id="tipo"  binding="#{type}">E</option>
+                <option class="select" id="tipo"  binding="#{type}">M</option>
+                </select>
                 <h1>Capacidad</h1>
-                <p:inputText class="input" id="capacidad" type="String" binding="#{capacity}"  placeholder="Capacidad del recurso"/>
-                <h1>Id</h1>
-                <p:inputText class="input" id="id" type="String" binding="#{id}"  placeholder="Id del recurso"/>
+                <p:inputText class="input" id="capacidad" type="Integer" binding="#{capacity}"  placeholder="Capacidad del recurso"/>
                 <h1>Desde</h1>
                 <input class = "time" id="appt-time" type="time" name="since-time"></input>
                 <h1>Hasta</h1>

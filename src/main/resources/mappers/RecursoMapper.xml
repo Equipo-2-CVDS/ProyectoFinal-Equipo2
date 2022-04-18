@@ -21,7 +21,7 @@
         r.tipo ,
         r.capacidad ,
         r.ubicacion ,
-        r.estado
+        r.horario
         FROM RECURSOS r
         WHERE r.estado = #{estado}
     </select>
@@ -30,5 +30,4 @@
         insert into RECURSOS (nombre, tipo, capacidad, ubicacion, estado) values
         (#{r.nombre}, #{r.tipo}, #{r.capacidad}, #{r.ubicacion}, #{r.estado})
     </insert>
-
 </mapper>
