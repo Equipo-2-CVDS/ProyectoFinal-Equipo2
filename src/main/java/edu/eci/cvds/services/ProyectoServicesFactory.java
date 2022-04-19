@@ -71,9 +71,10 @@ public class ProyectoServicesFactory {
     Recurso r = new Recurso("Asus","Equipo de Computo",64,"Edificio A",true);
     Horario h = new Horario(1, 1, new Time(7, 0, 0), new Time(19, 0, 0));
     servicio.getHorariosDisponibles(1);
-    System.out.println(servicio.buscarUsuario("admin"));
+
     System.out.println(servicio.getRecursosDisponibles());
-    System.out.println(servicio.getHorariosDisponibles(1));
+//    System.out.println(servicio.buscarUsuario("admin"));
+//    System.out.println(servicio.getHorariosDisponibles(1));
     
 }
 

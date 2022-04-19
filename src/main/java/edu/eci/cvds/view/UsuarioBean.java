@@ -105,7 +105,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Asigna el customerId
-     * @param id
+     * @param userId
      */
     public void setcustomerId(int userId) {
         this.userId = userId;
