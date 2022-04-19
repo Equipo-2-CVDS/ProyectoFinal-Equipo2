@@ -1,7 +1,10 @@
 package edu.eci.cvds.persistence.mybatisimpl;
 
+import java.util.List;
+
 import com.google.inject.Inject;
 
+import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.RecursoMapper;
@@ -12,11 +15,22 @@ public class MyBatisRecursoDAO implements RecursoDAO {
 
 
     @Override
-    public String getRecurso() throws PersistenceException {
+    public List<Recurso> getRecursosDisponibles() throws PersistenceException {
         try {
-            return recursoMapper.consultarRecurso(15).getNombre();
+            return recursoMapper.getRecursosDisponibles();
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
         }
+    }
+
+
+    @Override
+    public void insertarRecurso(Recurso r) throws PersistenceException {
+        try {
+            recursoMapper.insertarRecurso(r);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al insertar recurso", e);
+        }
+        
     }
 }

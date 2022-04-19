@@ -6,22 +6,29 @@ public class Recurso {
     private String tipo;
     private int capacidad;
     private String ubicacion;
-    private String horario;
     private boolean estado;
 
     public Recurso() {
         super();
     }
 
-    public Recurso(int id, String nombre, String tipo, int capacidad, String ubicacion, String horario, boolean estado) {
+    public Recurso(int id, String nombre, String tipo, int capacidad, String ubicacion, boolean estado) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.ubicacion = ubicacion;
-        this.horario = horario;
         this.estado = estado;
     }
+
+    public Recurso(String nombre, String tipo, int capacidad, String ubicacion, boolean estado) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.capacidad = capacidad;
+        this.ubicacion = ubicacion;
+        this.estado = estado;
+    }
+
 
     public int getId() {
         return id;
@@ -59,11 +66,6 @@ public class Recurso {
         this.ubicacion = ubicacion;
     }
 
-    public String getHorario() {return horario;}
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
 
     public boolean getEstado() {return estado;}
 
@@ -74,7 +76,7 @@ public class Recurso {
 
     @Override
     public String toString() {
-        return "Recurso: [id=" + id + ", nombre=" + nombre + ", ubicacion=" + ubicacion + "]";
+        return "Recurso: [id=" + id + ", nombre=" + nombre + ", ubicacion=" + ubicacion +  ", Estado=" + estado +"]";
     }
 }
 

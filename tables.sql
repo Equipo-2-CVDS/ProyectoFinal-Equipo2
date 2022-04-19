@@ -20,11 +20,20 @@ CREATE TABLE IF NOT EXISTS USUARIOS (
 CREATE TABLE IF NOT EXISTS RECURSOS (
   id INT NOT NULL DEFAULT nextval('RECURSOS_ID_SEQ'),
   nombre VARCHAR(45) NOT NULL UNIQUE,
-  tipo CHAR(1) NOT NULL,
+  tipo VARCHAR(45) NOT NULL,
   capacidad INT NOT NULL,
   ubicacion VARCHAR(20) NOT NULL,
   estado BOOLEAN NOT NULL,
   PRIMARY KEY (id))
+;
+
+CREATE TABLE IF NOT EXISTS HORARIOS (
+  idRecurso INT NOT NULL,
+  idDia INT NOT NULL,
+  desde time NOT NULL,
+  hasta time NOT NULL,
+  PRIMARY KEY (idRecurso,idDia),
+  FOREIGN KEY(idRecurso) REFERENCES RECURSOS(id))
 ;
 
 insert into ROLES (ID,nombre) VALUES ( 1,'Administrador');

@@ -3,12 +3,19 @@ package edu.eci.cvds.services;
 import com.google.inject.Injector;
 import org.mybatis.guice.XMLMyBatisModule;
 
+import edu.eci.cvds.entities.Horario;
+import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.persistence.HorarioDAO;
+import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.RolesDAO;
 import edu.eci.cvds.persistence.UsuarioDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisHorarioDAO;
+import edu.eci.cvds.persistence.mybatisimpl.MyBatisRecursoDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisRolesDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisUsuarioDAO;
 import edu.eci.cvds.services.impl.ProyectoServicesImpl;
 
+import java.sql.Time;
 import java.util.Optional;
 
 import static com.google.inject.Guice.createInjector;
@@ -29,6 +36,8 @@ public class ProyectoServicesFactory {
                bind(UsuarioDAO.class).to(MyBatisUsuarioDAO.class);
                bind(RolesDAO.class).to(MyBatisRolesDAO.class);
 			   bind(ProyectoServices.class).to(ProyectoServicesImpl.class);
+               bind(RecursoDAO.class).to(MyBatisRecursoDAO.class);
+               bind(HorarioDAO.class).to(MyBatisHorarioDAO.class);
            }
        });
    }
@@ -58,7 +67,14 @@ public class ProyectoServicesFactory {
    }
 
    public static void main(String a[]) throws ServicesException {
-    System.out.println(ProyectoServicesFactory.getInstance().getServiciosProyecto().buscarUsuario("admin"));
+    ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
+    Recurso r = new Recurso("Asus","Equipo de Computo",64,"Edificio A",true);
+    Horario h = new Horario(1, 1, new Time(7, 0, 0), new Time(19, 0, 0));
+    servicio.getHorariosDisponibles(1);
+    System.out.println(servicio.buscarUsuario("admin"));
+    System.out.println(servicio.getRecursosDisponibles());
+    System.out.println(servicio.getHorariosDisponibles(1));
+    
 }
 
 }

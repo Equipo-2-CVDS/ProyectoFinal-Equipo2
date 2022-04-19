@@ -1,153 +1,192 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 
-      <style>
-        body{
-            font-family: 'Courier New';
-            background-color: rgb(46, 46, 184);
-            color: white;
-            text-align: center;
-            padding: 1% 3%;
-            align-content: center ;
-        }
-        .divBody{
-            background-color: rgba(1, 1, 70, 0.623);
-            border-radius: 15px;
-            height: auto;
-            width: auto;
-            padding: 3% 10% ;
-        }
-        .titulo{
-            font-size: 40px;
-        }
-        .formbox{
-            border-radius: 15px ;
-            background-color: rgba(1, 1, 70, 0.623);
-            padding: 3%;
-            text-align: center;
-            align-items: center;
-            align-content: center;
-        }
-        .botn{
-            width: 22%;
-            height: 40px;
-            margin: 10px;
-            border-radius: 15px;
-            background: rgb(248, 248, 248);
-            color: black;
-            text-align: center;
-            align-self: center;
-            align-items: center;
-        }
+<style>
+    body {
+        font-family: 'Courier New';
+        background-color: rgb(46, 46, 184);
+        color: white;
+        text-align: center;
+        padding: 1% 3%;
+        align-content: center;
+    }
 
-        h1{
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-align:left;
-            margin-left: 50%;
-            margin-right: auto;
-        }
+    .divBody {
+        background-color: rgba(1, 1, 70, 0.623);
+        border-radius: 15px;
+        height: auto;
+        width: auto;
+        padding: 3% 10%;
+    }
 
-        .input{
-            border-radius: 10px;
-            margin-bottom: 10px;
-            text-align: left;
-            align-items: center;
-            
+    .titulo {
+        font-size: 40px;
+    }
 
-        }
+    .formbox {
+        border-radius: 15px;
+        background-color: rgba(1, 1, 70, 0.623);
+        padding: 3%;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
 
-        .gri{
-            background: rgba(4, 0, 8, 0.664);
-            display: grid;
-            border-radius: 15px;
-            text-align: center;
-            grid-template-columns: 50% 35%;
-            padding: 10% 8%;
-            margin: 3%;
+    .botn {
+        width: 22%;
+        height: 40px;
+        margin: 10px;
+        border-radius: 15px;
+        background: rgb(248, 248, 248);
+        color: black;
+        text-align: center;
+        align-self: center;
+        align-items: center;
+    }
 
-        }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: left;
+        margin-left: 50%;
+        margin-right: auto;
+    }
 
-        .table{
-            align-self: center;
-            text-align: center;
-            align-items: center;
-            align-content: center;
-        }
+    .input {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
 
-        .select{
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
 
-        .logo{
-            margin-left: auto;
-        }
+    }
 
-        .time{
-            border-radius: 10px;
-            margin-bottom: 10px;
-            text-align: left;
-            align-items: center;
+    .gri {
+        background: rgba(4, 0, 8, 0.664);
+        display: grid;
+        border-radius: 15px;
+        text-align: center;
+        grid-template-columns: 50% 35%;
+        padding: 10% 8%;
+        margin: 3%;
 
-        }
+    }
 
-        .bodylogo{
-            background-color: rgb(46, 46, 184);
-            color:rgb(46, 46, 184);
-        }
+    .table {
+        align-self: center;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
 
-    </style>
+    .select {
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        margin-left: auto;
+    }
+
+    .time {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+
+    }
+
+    .bodylogo {
+        background-color: rgb(46, 46, 184);
+        color: rgb(46, 46, 184);
+    }
+
+    .check {
+        padding: 1%;
+        align-self: center;
+        align-items: center;
+    }
+
+    .dividendo {
+        margin-top: 3%;
+    }
+</style>
 <title>Registro Cliente</title>
-    <body class= "page">
-        <div class="bodylogo">
-            <img class = "logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
-        </div>
-        
-        
 
-        <div class="divBody">
+<body class="page">
+    <div class="bodylogo">
+        <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+    </div>
+
+
+
+    <div class="divBody">
         <p class="titulo">Registrar Recurso</p>
 
         <h:form id="formRegisterRecurso" class="formbox">
             <div class="gri">
                 <h1>Nombre</h1>
-                <p:inputText class="input" id="Nombre" type="long" binding="#{name}" placeholder="Nombre del recurso" />
+                <p:inputText class="input" id="Nombre" type="long" value="#{recursoBean.nombre}"
+                    placeholder="Nombre del recurso" />
                 <h1>Ubicación</h1>
-                <select class="select">
-                <option hidden="" >Seleccione ubicación</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio A</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio B</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio C</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio D</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio E</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio F</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio G</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio H</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio I</option>
-                <option class="select" id="ubicación" binding="#{ubication}">Edificio L</option>
-                </select>
+                <h:selectOneMenu value="#{recursoBean.ubicacion}" class="select">
+                    <f:selectItem hidden="" itemLabel="Seleccione ubicacion" itemValue="" />
+                    <f:selectItem class="select" itemLabel="Edificio A" itemValue="Edificio A" />
+                    <f:selectItem class="select" itemLabel="Edificio B" itemValue="Edificio B" />
+                    <f:selectItem class="select" itemLabel="Edificio C" itemValue="Edificio C" />
+                    <f:selectItem class="select" itemLabel="Edificio D" itemValue="Edificio D" />
+                    <f:selectItem class="select" itemLabel="Edificio E" itemValue="Edificio E" />
+                    <f:selectItem class="select" itemLabel="Edificio F" itemValue="Edificio F" />
+                    <f:selectItem class="select" itemLabel="Edificio G" itemValue="Edificio G" />
+                    <f:selectItem class="select" itemLabel="Edificio H" itemValue="Edificio H" />
+                    <f:selectItem class="select" itemLabel="Edificio I" itemValue="Edificio I" />
+                    <f:selectItem class="select" itemLabel="Edificio L" itemValue="Edificio J" />
+                </h:selectOneMenu>
                 <h1>Tipo</h1>
-                <select class="select">
-                <option hidden="" >S sala, E equipo y M multimedia</option>
-                <option class="select" id="tipo"  binding="#{type}">S</option>
-                <option class="select" id="tipo"  binding="#{type}">E</option>
-                <option class="select" id="tipo"  binding="#{type}">M</option>
-                </select>
+                <h:selectOneMenu value="#{recursoBean.tipo}" class="select">
+                    <f:selectItem hidden="" itemLabel="Seleccione tipo" itemValue="" />
+                    <f:selectItem class="select" itemLabel="Sala de Estudio" itemValue="Sala de Estudio" />
+                    <f:selectItem class="select" itemLabel="Equipo multimedia" itemValue="Equipo multimedia" />
+                    <f:selectItem class="select" itemLabel="Equipo de Computo" itemValue="Equipo de Computo" />
+                </h:selectOneMenu>
                 <h1>Capacidad</h1>
-                <p:inputText class="input" id="capacidad" type="Integer" binding="#{capacity}"  placeholder="Capacidad del recurso"/>
+                <p:inputText class="input" id="capacidad" type="Integer" value="#{recursoBean.capacidad}"
+                    placeholder="Capacidad del recurso" />
+                <p>
                 <h1>Desde</h1>
-                <input class = "time" id="appt-time" type="time" name="since-time"></input>
+                <pe:timePicker value="#{recursoBean.desde}" mode="popup" widgetVar="popupTimeWidget"
+                    label="Popup time picker" />
+                </p>
+
+                <p>
                 <h1>Hasta</h1>
-                <input class = "time" id="appt-time" type="time" name="till-time"></input>
+                <pe:timePicker value="#{recursoBean.hasta}" mode="popup" widgetVar="popupTimeWidget"
+                     />
+                </p>
+                <h1>Dias</h1>
+
+                <div class="dividendo">
+                    <p:selectManyCheckbox id="checkboxDias" value="#{recursoBean.dias}">
+                        <f:selectItem class="check" itemLabel="Lunes" itemValue="1"></f:selectItem>
+                        <f:selectItem class="check" itemLabel="Martes" itemValue="2"></f:selectItem>
+                        <f:selectItem class="check" itemLabel="Miercoles" itemValue="3"></f:selectItem>
+                        <f:selectItem class="check" itemLabel="Jueves" itemValue="4"></f:selectItem>
+                        <f:selectItem class="check" itemLabel="Viernes" itemValue="5"></f:selectItem>
+                    </p:selectManyCheckbox>
+                </div>
             </div>
-            <p:commandButton update="formRegisterRecurso" class="botn" value="Registrar" actionListener="#{Recurso.insertarRecurso(name.value, type.value, capacity.value, ubication.value)}"/>
-            <br><p:commandButton update="formRegisterRecurso" class="botn" value="Volver" action="#{navigationController.paginaHome()}"/></br>
+            <p:commandButton update="formRegisterRecurso" class="botn" value="Registrar"
+                actionListener="#{recursoBean.insertarRecurso(name.value, type.value, capacity.value, ubication.value)}" />
+            <br>
+            <p:commandButton update="formRegisterRecurso" class="botn" value="Volver"
+                actionListener="#{navigationController.paginaHome()}" /></br>
         </h:form>
-        </div>
-    </body>
+    </div>
+</body>
+
 </html>

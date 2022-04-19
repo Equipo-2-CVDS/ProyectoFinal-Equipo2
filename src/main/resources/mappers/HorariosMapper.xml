@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.HorarioMapper">
+    <resultMap type='Horario' id='HorarioResult'>
+        <id property='idRecurso' column='idRecurso' />
+        <id property='idDia' column='idDia' />
+        <result property='desde' column='desde' />
+        <result property='hasta' column='hasta' />
+    </resultMap>
+
+    <select id="getHorariosDisponibles" resultMap="HorarioResult"
+            parameterType="map">
+        SELECT
+            h.idRecurso ,
+            h.idDia ,
+            h.desde ,
+            h.hasta 
+        FROM HORARIOS as h
+            WHERE h.idRecurso=#{idRecurso}
+    </select>
+
+    <insert id="insertarHorario" parameterType="map">
+        insert into HORARIOS (idRecurso, idDia, desde, hasta) values
+        (#{h.idRecurso}, #{h.idDia}, #{h.desde}, #{h.hasta})
+    </insert>
+
+</mapper>
