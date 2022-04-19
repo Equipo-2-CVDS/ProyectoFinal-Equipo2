@@ -54,4 +54,13 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public void insertarHorario(Horario h) throws ServicesException; 
+
+    /**
+     * Consulta el recurso segun el nombre
+     * 
+     * @param nombre nombre del recurso
+     * @return Recurso
+     * @throws ServicesException
+     */
+    public Recurso getRecurso(String nombre) throws ServicesException;
 }

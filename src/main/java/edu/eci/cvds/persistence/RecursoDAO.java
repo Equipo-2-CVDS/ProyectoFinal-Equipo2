@@ -7,5 +7,7 @@ import edu.eci.cvds.entities.Recurso;
 public interface RecursoDAO {
     List<Recurso> getRecursosDisponibles() throws PersistenceException;
 
+    Recurso getRecurso(String nombre) throws PersistenceException;
+
     void insertarRecurso(Recurso r) throws PersistenceException;
 }

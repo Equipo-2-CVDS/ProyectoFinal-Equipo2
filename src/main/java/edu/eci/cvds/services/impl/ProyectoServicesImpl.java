@@ -84,4 +84,13 @@ public class ProyectoServicesImpl implements ProyectoServices{
         }
     }
 
+    @Override
+    public Recurso getRecurso(String nombre) throws ServicesException {
+        try{
+            return recursoDAO.getRecurso(nombre);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando recurso con nombre: "+nombre, ex);
+        }
+    }
+
 }

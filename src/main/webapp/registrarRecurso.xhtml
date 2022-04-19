@@ -119,6 +119,9 @@
 <title>Registro Cliente</title>
 
 <body class="page">
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
     <div class="bodylogo">
         <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
     </div>
@@ -157,17 +160,41 @@
                 <h1>Capacidad</h1>
                 <p:inputText class="input" id="capacidad" type="Integer" value="#{recursoBean.capacidad}"
                     placeholder="Capacidad del recurso" />
-                <p>
                 <h1>Desde</h1>
-                <pe:timePicker value="#{recursoBean.desde}" mode="popup" widgetVar="popupTimeWidget"
-                    label="Popup time picker" />
-                </p>
+                <h:selectOneMenu value="#{recursoBean.desde}" class="select">
+                    <f:selectItem hidden="" itemLabel="Seleccione hora" itemValue="" />
+                    <f:selectItem class="select" itemLabel="7:00 AM" itemValue="7" />
+                    <f:selectItem class="select" itemLabel="8:00 AM" itemValue="8" />
+                    <f:selectItem class="select" itemLabel="9:00 AM" itemValue="9" />
+                    <f:selectItem class="select" itemLabel="10:00 AM" itemValue="10" />
+                    <f:selectItem class="select" itemLabel="11:00 AM" itemValue="11" />
+                    <f:selectItem class="select" itemLabel="12:00 PM" itemValue="12" />
+                    <f:selectItem class="select" itemLabel="1:00 PM" itemValue="13" />
+                    <f:selectItem class="select" itemLabel="2:00 PM" itemValue="14" />
+                    <f:selectItem class="select" itemLabel="3:00 PM" itemValue="15" />
+                    <f:selectItem class="select" itemLabel="4:00 PM" itemValue="16" />
+                    <f:selectItem class="select" itemLabel="5:00 PM" itemValue="17" />
+                    <f:selectItem class="select" itemLabel="6:00 PM" itemValue="18" />
+                    <f:selectItem class="select" itemLabel="7:00 PM" itemValue="19" />
+                </h:selectOneMenu>
 
-                <p>
                 <h1>Hasta</h1>
-                <pe:timePicker value="#{recursoBean.hasta}" mode="popup" widgetVar="popupTimeWidget"
-                     />
-                </p>
+                <h:selectOneMenu value="#{recursoBean.hasta}" class="select">
+                    <f:selectItem hidden="" itemLabel="Seleccione hora" itemValue="" />
+                    <f:selectItem class="select" itemLabel="7:00 AM" itemValue="7" />
+                    <f:selectItem class="select" itemLabel="8:00 AM" itemValue="8" />
+                    <f:selectItem class="select" itemLabel="9:00 AM" itemValue="9" />
+                    <f:selectItem class="select" itemLabel="10:00 AM" itemValue="10" />
+                    <f:selectItem class="select" itemLabel="11:00 AM" itemValue="11" />
+                    <f:selectItem class="select" itemLabel="12:00 PM" itemValue="12" />
+                    <f:selectItem class="select" itemLabel="1:00 PM" itemValue="13" />
+                    <f:selectItem class="select" itemLabel="2:00 PM" itemValue="14" />
+                    <f:selectItem class="select" itemLabel="3:00 PM" itemValue="15" />
+                    <f:selectItem class="select" itemLabel="4:00 PM" itemValue="16" />
+                    <f:selectItem class="select" itemLabel="5:00 PM" itemValue="17" />
+                    <f:selectItem class="select" itemLabel="6:00 PM" itemValue="18" />
+                    <f:selectItem class="select" itemLabel="7:00 PM" itemValue="19" />
+                </h:selectOneMenu>
                 <h1>Dias</h1>
 
                 <div class="dividendo">
@@ -181,7 +208,7 @@
                 </div>
             </div>
             <p:commandButton update="formRegisterRecurso" class="botn" value="Registrar"
-                actionListener="#{recursoBean.insertarRecurso(name.value, type.value, capacity.value, ubication.value)}" />
+                actionListener="#{recursoBean.insertarRecurso()}" />
             <br>
             <p:commandButton update="formRegisterRecurso" class="botn" value="Volver"
                 actionListener="#{navigationController.paginaHome()}" /></br>

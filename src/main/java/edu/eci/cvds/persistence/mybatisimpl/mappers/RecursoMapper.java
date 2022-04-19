@@ -10,5 +10,7 @@ public interface RecursoMapper {
 
     public List<Recurso> getRecursosDisponibles();
 
+    public Recurso getRecurso(@Param("nombre") String nombre);
+
     public void insertarRecurso(@Param("r") Recurso r);
 }
