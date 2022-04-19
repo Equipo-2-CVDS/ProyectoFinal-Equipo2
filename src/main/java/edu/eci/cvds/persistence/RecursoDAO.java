@@ -1,5 +1,13 @@
 package edu.eci.cvds.persistence;
 
+import java.util.List;
+
+import edu.eci.cvds.entities.Recurso;
+
 public interface RecursoDAO {
-    String getRecurso() throws PersistenceException;
+    List<Recurso> getRecursosDisponibles() throws PersistenceException;
+
+    Recurso getRecurso(String nombre) throws PersistenceException;
+
+    void insertarRecurso(Recurso r) throws PersistenceException;
 }
