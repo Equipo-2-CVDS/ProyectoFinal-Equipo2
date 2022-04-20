@@ -9,7 +9,7 @@ import org.apache.shiro.subject.Subject;
 
 import edu.eci.cvds.services.ServicesException;
 
-public class IniciarSesionImpl implements IniciarSesion {
+public class iniciarSesionImpl implements iniciarSesion {
 
     @Override
     public void login(String fullname, String password, boolean RememberMe) throws ServicesException {
