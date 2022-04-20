@@ -13,4 +13,6 @@ public interface RecursoMapper {
     public Recurso getRecurso(@Param("nombre") String nombre);
 
     public void insertarRecurso(@Param("r") Recurso r);
+
+    public List<Recurso> getRecursosFromTipo(@Param("tipo") String tipo);
 }

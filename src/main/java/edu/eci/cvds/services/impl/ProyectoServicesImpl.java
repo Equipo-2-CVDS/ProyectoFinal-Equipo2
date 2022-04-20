@@ -57,6 +57,13 @@ public class ProyectoServicesImpl implements ProyectoServices{
         }
     }
 
+    public List<Recurso> getRecursosFromTipo(String tipo) throws ServicesException{
+        try{
+            return recursoDAO.getRecursoFromTipo(tipo);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando recursos", ex);
+        }
+    }
     @Override
     public void insertarRecurso(Recurso r) throws ServicesException {
         try {

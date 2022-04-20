@@ -20,8 +20,11 @@ public class ConsultarRecursosBean extends BasePageBean{
     private ProyectoServices userServices;
 
     public List<Recurso> consultarRecursos() throws ServicesException {
-            return userServices.getRecursosDisponibles();
+        return userServices.getRecursosDisponibles();
     }
 
+    public List<Recurso> getRecursoFromTipo(String tipo) throws ServicesException {
+        return userServices.getRecursosFromTipo(tipo);
+    }
 
 }

@@ -10,4 +10,6 @@ public interface RecursoDAO {
     Recurso getRecurso(String nombre) throws PersistenceException;
 
     void insertarRecurso(Recurso r) throws PersistenceException;
+
+    List<Recurso> getRecursoFromTipo(String tipo) throws PersistenceException;
 }
