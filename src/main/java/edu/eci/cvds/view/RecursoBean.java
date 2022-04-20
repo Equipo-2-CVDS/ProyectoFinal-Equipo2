@@ -7,23 +7,12 @@ import javax.faces.context.FacesContext;
 
 import com.google.inject.Inject;
 
-import org.primefaces.event.SelectEvent;
-import org.slf4j.LoggerFactory;
-
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
-import java.io.IOException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 
 @ManagedBean(name = "recursoBean")
 @SessionScoped
