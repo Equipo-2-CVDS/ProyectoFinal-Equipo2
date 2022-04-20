@@ -54,6 +54,12 @@
     <div class="options">
         <h:form>
             <div>
+                <p:commandButton class="but" value="Registrar Recurso" actionListener="#{navigationController.paginaRegistroR()}"/>
+            </div>
+            <div>
+                <p:commandButton class="but" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>
+            </div>
+            <div>
                 <h:commandButton action="#{userBean.cerrarSesion()}" class="but" value="Salir"/>
             </div>
         </h:form>

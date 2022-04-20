@@ -34,6 +34,7 @@ public class UsuarioBean extends BasePageBean {
 
     @Inject
     private ProyectoServices userServices;
+
     private String password;
     public int userId;
     private String username;

@@ -13,6 +13,7 @@ import com.google.inject.Injector;
 public abstract class BasePageBean implements Serializable {
 
     private Injector injector;
+    private static final long serialVersionUID = 1L;
 
     public Injector getInjector() {
         if (injector == null) {

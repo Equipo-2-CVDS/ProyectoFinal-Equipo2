@@ -26,6 +26,16 @@ jobs:
       - run:
           name: Test
           command: mvn test
+    codacy:
+      title: "Pushing reports to codacy"
+      type: "freestyle"
+      working_directory: "${{clone}}"
+      arguments:
+        image: "alpine:3.8"
+        commands:
+          - "export CODACY_PROJECT_TOKEN=17fdf0b8d62b405a8cdf089ee0fda0df"
+          - "wget -qO - https://coverage.codacy.com/get.sh | sh"
+      stage: "test"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

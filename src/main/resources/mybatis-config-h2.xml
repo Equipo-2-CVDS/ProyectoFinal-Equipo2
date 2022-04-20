@@ -9,6 +9,8 @@
 	<typeAliases>
         <typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
 		<typeAlias type='edu.eci.cvds.entities.Rol' alias='Rol'/>
+		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
+		<typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario'/>
     </typeAliases>
 
 	<environments default="test">
@@ -25,6 +27,8 @@
 
 	<mappers>
         <mapper resource="mappers/UsuarioMapper.xml"></mapper>  
-		<mapper resource="mappers/RolesMapper.xml"></mapper>                  
+		<mapper resource="mappers/RolesMapper.xml"></mapper>     
+		<mapper resource="mappers/RecursoMapper.xml"></mapper>  
+		<mapper resource="mappers/HorariosMapper.xml"></mapper>          
     </mappers> 
 </configuration>
