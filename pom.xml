@@ -7,79 +7,79 @@
     <version>1.0</version>
     <packaging>war</packaging>
 
-	<name>Proyecto Final - Equipo 2</name>
+    <name>Proyecto Final - Equipo 2</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>        
-                
+    </properties>
+
     <dependencies>
         <!-- My Batis dependencies -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-guice</artifactId>
-			<version>3.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.4.6</version>
-		</dependency>
-<!-- 		TODO Required? -->
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-		</dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-guice</artifactId>
+            <version>3.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.6</version>
+        </dependency>
+        <!-- 		TODO Required? -->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+        </dependency>
 
-		<!-- Guice Dependencies -->
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>4.2.0</version>
-		</dependency>
+        <!-- Guice Dependencies -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.2.0</version>
+        </dependency>
 
-		<!-- Database connection dependencies -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.44</version>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.191</version>
-		</dependency>
+        <!-- Database connection dependencies -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.191</version>
+        </dependency>
 
-		<!-- Faces dependencies -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>8.0</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.2.18</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
-			<version>2.2.18</version>
-		</dependency>
-		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>6.2</version>
-		</dependency>
+        <!-- Faces dependencies -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-api</artifactId>
+            <version>2.2.18</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.faces</groupId>
+            <artifactId>jsf-impl</artifactId>
+            <version>2.2.18</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>6.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.shiro</groupId>
@@ -92,19 +92,19 @@
             <version>1.4.0</version>
         </dependency>
 
-		<!-- Test dependencies -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
             <scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.quicktheories</groupId>
-			<artifactId>quicktheories</artifactId>
-			<version>0.25</version>
-			<scope>test</scope>
-		</dependency>
+        </dependency>
+        <dependency>
+            <groupId>org.quicktheories</groupId>
+            <artifactId>quicktheories</artifactId>
+            <version>0.25</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
@@ -116,12 +116,30 @@
             <artifactId>postgresql</artifactId>
             <version>42.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.36</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- Test Coverage -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.8</version>
+        </dependency>
+
     </dependencies>
-    
+
     <build>
         <plugins>
-            
-            
+
+
             <!-- clean project (also local H2 database)-->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -136,7 +154,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- create local H2 database -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -145,7 +163,7 @@
                 <dependencies>
                     <dependency>
                         <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId> 
+                        <artifactId>h2</artifactId>
                         <version>1.4.184</version>
                     </dependency>
                 </dependencies>
@@ -165,16 +183,15 @@
                             <goal>execute</goal>
                         </goals>
                         <configuration>
-                            <srcFiles>                                
-                                <srcFile>tables.sql</srcFile>                                
+                            <srcFiles>
+                                <srcFile>tables.sql</srcFile>
                             </srcFiles>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -183,7 +200,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <compilerArguments>
-<!--                         <endorseddirs>${endorsed.dir}</endorseddirs> -->
+                        <!--                         <endorseddirs>${endorsed.dir}</endorseddirs> -->
                     </compilerArguments>
                 </configuration>
             </plugin>
@@ -206,7 +223,7 @@
                             <goal>copy</goal>
                         </goals>
                         <configuration>
-<!--                             <outputDirectory>${endorsed.dir}</outputDirectory> -->
+                            <!--                             <outputDirectory>${endorsed.dir}</outputDirectory> -->
                             <silent>true</silent>
                             <artifactItems>
                                 <artifactItem>
@@ -220,7 +237,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <!-- Tomcat embedded plugin. -->
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
@@ -231,8 +248,41 @@
                     <path>/</path>
                 </configuration>
             </plugin>
-
-            
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.8</version>
+                <executions>
+                    <!-- prepare agent for measuring integration tests -->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>target/jacoco-unit.exec</dataFile>
+                            <outputDirectory>target/my-reports</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>edu/eci/eci/cvds/entities/**</excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
