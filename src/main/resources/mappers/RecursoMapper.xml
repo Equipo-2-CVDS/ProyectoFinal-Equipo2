@@ -22,7 +22,7 @@
             r.ubicacion ,
             r.estado
         FROM RECURSOS as r
-            WHERE r.estado
+            WHERE r.estado=true
     </select>
 
     <select id="getRecursosFromTipo" resultMap="RescursosResult"
@@ -35,7 +35,34 @@
         r.ubicacion ,
         r.estado
         FROM RECURSOS as r
-        WHERE r.tipo=#{tipo}
+        WHERE r.tipo=#{tipo} and r.estado=true
+    </select>
+
+
+    <select id="getRecursosFromCapacidad" resultMap="RescursosResult"
+            parameterType="map">
+        SELECT
+        r.id ,
+        r.nombre ,
+        r.tipo ,
+        r.capacidad ,
+        r.ubicacion ,
+        r.estado
+        FROM RECURSOS as r
+        WHERE r.tipo=#{capacidad} and r.estado=true
+    </select>
+
+    <select id="getRecursosFromUbicacion" resultMap="RescursosResult"
+            parameterType="map">
+        SELECT
+        r.id ,
+        r.nombre ,
+        r.tipo ,
+        r.capacidad ,
+        r.ubicacion ,
+        r.estado
+        FROM RECURSOS as r
+        WHERE r.tipo=#{ubicacion} and r.estado=true
     </select>
 
     <select id="getRecurso" resultMap="RescursosResult"
