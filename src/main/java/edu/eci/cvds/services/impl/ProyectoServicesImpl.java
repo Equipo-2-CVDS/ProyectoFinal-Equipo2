@@ -57,30 +57,30 @@ public class ProyectoServicesImpl implements ProyectoServices{
         }
     }
 
-    public List<Recurso> getRecursosFromTipo(String tipo) throws ServicesException{
-        try{
-            return recursoDAO.getRecursoFromTipo(tipo);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recursos", ex);
-        }
-    }
-
-    @Override
-    public List<Recurso> getRecursosFromCapacidad(int capacidad) throws ServicesException {
-        try{
-            return recursoDAO.getRecursoFromCapacidad(capacidad);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recursos", ex);
-        }
-    }
-
-    public List<Recurso> getRecursosFromUbicacion(String tipo) throws ServicesException{
-        try{
-            return recursoDAO.getRecursoFromUbicacion(tipo);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recursos", ex);
-        }
-    }
+//    public List<Recurso> getRecursosFromTipo(String tipo) throws ServicesException{
+//        try{
+//            return recursoDAO.getRecursoFromTipo(tipo);
+//        } catch (PersistenceException ex) {
+//            throw new ServicesException("Error buscando recursos", ex);
+//        }
+//    }
+//
+//    @Override
+//    public List<Recurso> getRecursosFromCapacidad(int capacidad) throws ServicesException {
+//        try{
+//            return recursoDAO.getRecursoFromCapacidad(capacidad);
+//        } catch (PersistenceException ex) {
+//            throw new ServicesException("Error buscando recursos", ex);
+//        }
+//    }
+//
+//    public List<Recurso> getRecursosFromUbicacion(String tipo) throws ServicesException{
+//        try{
+//            return recursoDAO.getRecursoFromUbicacion(tipo);
+//        } catch (PersistenceException ex) {
+//            throw new ServicesException("Error buscando recursos", ex);
+//        }
+//    }
 
     @Override
     public void insertarRecurso(Recurso r) throws ServicesException {

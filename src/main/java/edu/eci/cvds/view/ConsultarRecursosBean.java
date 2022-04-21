@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,17 +26,18 @@ public class ConsultarRecursosBean extends BasePageBean{
     private int capacidad;
     private String ubicacion;
     private boolean estado=true;
+    private static ArrayList<Recurso> filtro = new ArrayList<>();
 
     public List<Recurso> consultarRecursos() throws ServicesException {
-        if (!Objects.equals(tipo, "")){
-            return userServices.getRecursosFromTipo(tipo);
-        }
-//        else if (capacidad != 0){
-//            return userServices.getRecursosFromCapacidad(capacidad);
+//        if (!Objects.equals(tipo, "")){
+//            return userServices.getRecursosFromTipo(tipo);
 //        }
-        else if (!Objects.equals(ubicacion, "")){
-            return userServices.getRecursosFromUbicacion(ubicacion);
-        }
+////        else if (capacidad != 0){
+////            return userServices.getRecursosFromCapacidad(capacidad);
+////        }
+//        else if (!Objects.equals(ubicacion, "")){
+//            return userServices.getRecursosFromUbicacion(ubicacion);
+//        }
         return userServices.getRecursosDisponibles();
     }
 
