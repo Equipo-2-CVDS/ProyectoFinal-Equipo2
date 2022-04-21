@@ -158,7 +158,7 @@
                     <f:selectItem class="select" itemLabel="Equipo de Computo" itemValue="Equipo de Computo" />
                 </h:selectOneMenu>
                 <h1>Capacidad</h1>
-                <p:inputText class="input" id="capacidad" type="Integer" value="#{recursoBean.capacidad}"
+                <p:inputText class="input" id="capacidad" value="#{recursoBean.capacidad}"
                     placeholder="Capacidad del recurso" />
                 <h1>Desde</h1>
                 <h:selectOneMenu value="#{recursoBean.desde}" class="select">
@@ -198,7 +198,7 @@
                 <h1>Dias</h1>
 
                 <div class="dividendo">
-                    <p:selectManyCheckbox id="checkboxDias" value="#{recursoBean.dias}">
+                    <p:selectManyCheckbox required="" id="checkboxDias" value="#{recursoBean.dias}">
                         <f:selectItem class="check" itemLabel="Lunes" itemValue="1"></f:selectItem>
                         <f:selectItem class="check" itemLabel="Martes" itemValue="2"></f:selectItem>
                         <f:selectItem class="check" itemLabel="Miercoles" itemValue="3"></f:selectItem>
