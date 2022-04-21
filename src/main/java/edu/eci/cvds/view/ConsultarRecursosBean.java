@@ -27,13 +27,13 @@ public class ConsultarRecursosBean extends BasePageBean{
     private boolean estado=true;
 
     public List<Recurso> consultarRecursos() throws ServicesException {
-        if (!Objects.equals(tipo, "Seleccione tipo")){
+        if (!Objects.equals(tipo, "")){
             return userServices.getRecursosFromTipo(tipo);
         }
-        else if (capacidad != 0){
-            return userServices.getRecursosFromCapacidad(capacidad);
-        }
-        else if (!Objects.equals(ubicacion, "Seleccione ubicacion")){
+//        else if (capacidad != 0){
+//            return userServices.getRecursosFromCapacidad(capacidad);
+//        }
+        else if (!Objects.equals(ubicacion, "")){
             return userServices.getRecursosFromUbicacion(ubicacion);
         }
         return userServices.getRecursosDisponibles();
