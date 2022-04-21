@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.sql.Time;
 import java.util.List;
+import java.util.Objects;
 
 @ManagedBean(name = "consultarRecursosBean")
 @SessionScoped
@@ -26,12 +27,18 @@ public class ConsultarRecursosBean extends BasePageBean{
     private boolean estado=true;
 
     public List<Recurso> consultarRecursos() throws ServicesException {
+        if (!Objects.equals(tipo, "Seleccione tipo")){
+            return userServices.getRecursosFromTipo(tipo);
+        }
+        if (capacidad != 0){
+            return userServices.getRecursosFromCapacidad(capacidad);
+        }
+        if (!Objects.equals(ubicacion, "Seleccione ubicacion")){
+            return userServices.getRecursosFromUbicacion(ubicacion);
+        }
         return userServices.getRecursosDisponibles();
     }
 
-    public List<Recurso> getRecursoPorFiltro(String tipo, int capacidad, String ubicacion) throws ServicesException {
-        return userServices.getRecursosFromTipo(tipo);
-    }
     public int getId() {
         return id;
     }

@@ -41,6 +41,20 @@ public interface ProyectoServices {
     public List<Recurso> getRecursosFromTipo(String tipo) throws ServicesException;
 
     /**
+     * Consulta los recursos con el filtro capacidad
+     *
+     * @return List<Recurso>
+     */
+    public List<Recurso> getRecursosFromCapacidad(int capacidad) throws ServicesException;
+
+    /**
+     * Consulta los recursos con el filtro ubicacion
+     *
+     * @return List<Recurso>
+     */
+    public List<Recurso> getRecursosFromUbicacion(String ubicacion) throws ServicesException;
+
+    /**
      * Inserta recurso en la base de datos
      * @param r Recurso a insertar
      * @throws ServicesException
@@ -70,5 +84,4 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public Recurso getRecurso(String nombre) throws ServicesException;
-
 }
