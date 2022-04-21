@@ -17,7 +17,7 @@ public class MyBatisRecursoDAO implements RecursoDAO {
     @Override
     public List<Recurso> getRecursosDisponibles() throws PersistenceException {
         try {
-            return recursoMapper.getRecursosDisponibles();
+            return recursoMapper.getRecursosDisponibles(true);
         } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
         }
@@ -32,6 +32,33 @@ public class MyBatisRecursoDAO implements RecursoDAO {
             throw new PersistenceException("Error al insertar recurso", e);
         }
         
+    }
+
+    @Override
+    public List<Recurso> getRecursoFromTipo(String tipo) throws PersistenceException {
+        try {
+            return recursoMapper.getRecursosFromTipo(tipo);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<Recurso> getRecursoFromUbicacion(String ubicacion) throws PersistenceException {
+        try {
+            return recursoMapper.getRecursoFromUbicacion(ubicacion);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<Recurso> getRecursoFromCapacidad(int capacidad) throws PersistenceException {
+        try {
+            return recursoMapper.getRecursoFromCapacidad(capacidad);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
     }
 
     @Override
