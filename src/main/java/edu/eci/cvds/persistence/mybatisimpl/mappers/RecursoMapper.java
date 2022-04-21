@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import edu.eci.cvds.entities.Recurso;
 
 public interface RecursoMapper {
-
-    public List<Recurso> getRecursosDisponibles();
+    public List<Recurso> getRecursosDisponibles(@Param("estado") boolean estado);
 
     public Recurso getRecurso(@Param("nombre") String nombre);
 

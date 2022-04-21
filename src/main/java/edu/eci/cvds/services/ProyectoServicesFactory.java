@@ -72,7 +72,7 @@ public class ProyectoServicesFactory {
     Horario h = new Horario(1, 1, new Time(7, 0, 0), new Time(19, 0, 0));
     servicio.getHorariosDisponibles(1);
 
-    System.out.println(servicio.getRecursosDisponibles());
+//    System.out.println(servicio.getRecursosDisponibles());
 //    System.out.println(servicio.buscarUsuario("admin"));
 //    System.out.println(servicio.getHorariosDisponibles(1));
     

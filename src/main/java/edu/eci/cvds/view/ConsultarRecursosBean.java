@@ -30,10 +30,10 @@ public class ConsultarRecursosBean extends BasePageBean{
         if (!Objects.equals(tipo, "Seleccione tipo")){
             return userServices.getRecursosFromTipo(tipo);
         }
-        if (capacidad != 0){
+        else if (capacidad != 0){
             return userServices.getRecursosFromCapacidad(capacidad);
         }
-        if (!Objects.equals(ubicacion, "Seleccione ubicacion")){
+        else if (!Objects.equals(ubicacion, "Seleccione ubicacion")){
             return userServices.getRecursosFromUbicacion(ubicacion);
         }
         return userServices.getRecursosDisponibles();
