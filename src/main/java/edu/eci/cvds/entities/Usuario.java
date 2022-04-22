@@ -5,13 +5,13 @@ public class Usuario {
 	private String nombre;
 	private String contrasena;
     private String programa;
-    private char rol;
+    private int rol;
 
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(int id, String nombre, String contrasena, String programa, char rol) {
+	public Usuario(int id, String nombre, String contrasena, String programa, int rol) {
 		this.id = id;
 		this.nombre = nombre;
 		this.contrasena = contrasena;
@@ -51,11 +51,11 @@ public class Usuario {
         this.programa = programa;
     }
 
-    public char getRol() {
+    public int getRol() {
         return rol;
     }
 
-    public void setRol(char rol) {
+    public void setRol(int rol) {
         this.rol = rol;
     }
 
