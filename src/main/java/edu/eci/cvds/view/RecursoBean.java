@@ -3,9 +3,7 @@ package edu.eci.cvds.view;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 import com.google.inject.Inject;
 
@@ -35,26 +33,18 @@ public class RecursoBean extends BasePageBean {
 
     public void insertarRecurso() throws ServicesException{
         try {
-
             if(nombre.isEmpty() || tipo.isEmpty() || capacidad.isEmpty() || ubicacion.isEmpty() || desde.isEmpty() || hasta.isEmpty() || dias.length < 1){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ningun campo puede ser vacio","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                messageError("Ningun campo puede ser vacio"); 
             }else if(!nombre.matches("[a-zA-Z].*")){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El nombre debe iniciar con una letra","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                messageError("El nombre debe iniciar con una letra"); 
             }else if(Integer.parseInt(desde) > Integer.parseInt(hasta)){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La hora hasta debe ser mayor a la hora desde","");
-                FacesContext.getCurrentInstance().addMessage(null, message);      
+                messageError("La hora hasta debe ser mayor a la hora desde");       
             }else if(!(capacidad.matches("[1-9][0-9]*"))){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La capacidad debe ser un numero entero ","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                messageError("La capacidad debe ser un numero entero");  
             }else if(Integer.parseInt(capacidad) >= 10000){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La capacidad debe ser un numero menor a 10000 ","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-                
+                messageError("La capacidad debe ser un numero menor a 10000");               
             }else if((userServices.getRecurso(nombre) != null)){
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El nombre del recurso ya existe ","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                messageError("El nombre del recurso ya existe");
             }else{
                 int inicio = Integer.parseInt(desde);
                 int fin = Integer.parseInt(hasta);
@@ -64,15 +54,20 @@ public class RecursoBean extends BasePageBean {
                 for(String i : dias){
                     userServices.insertarHorario(new Horario(idRecurso, Integer.parseInt(i), new Time(inicio, 0, 0), new Time(fin, 0, 0)));
                 }
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se Agrego de forma exitosa la Oferta","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
+                messageError("Se Agrego de forma exitosa la Oferta");
             }        
         }catch(ServicesException e){
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Verifique los datos ingresados", "");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            messageError("Verifique los datos ingresados");
         }
-        clear();
-        
+        clear();      
+    }
+
+    /**
+     * Lanza el mensaje de error
+     * @param message
+     */
+    private void messageError(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message,""));
     }
 
 

@@ -50,7 +50,7 @@
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
     <error-page>
-        <error-code>401</error-code>
-        <location>/faces/error401.xhtml</location>
+      <error-code>401</error-code>
+      <location>/faces/permiso.html</location>
     </error-page>
 </web-app>

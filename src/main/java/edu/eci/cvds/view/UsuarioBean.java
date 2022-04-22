@@ -53,10 +53,14 @@ public class UsuarioBean extends BasePageBean {
         subject = SecurityUtils.getSubject();
         try {
             Usuario usuario = userServices.buscarUsuario(username);
-            userId = usuario.getId();
-            rol = usuario.getRol();
-            subject.login(token);//crear token activo
-            FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            if(usuario!=null){
+                userId = usuario.getId();
+                rol = usuario.getRol();
+                subject.login(token);
+                FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+            } else {
+                messageError("El usuario no existe");
+            }
         }catch (UnknownAccountException ex) {
                 messageError("Esta cuenta no existe");
                 log.error(ex.getMessage(), ex);
@@ -87,12 +91,23 @@ public class UsuarioBean extends BasePageBean {
         }
     }
 
+    public String visible(){
+        String res="";
+        try{
+            res = (userServices.buscarUsuario(username).getRol()==1)?"True":"None";
+        } catch(ServicesException e) {
+            res="None";
+        }
+
+        return res;
+    }
+
     /**
      * Lanza el mensaje de error
      * @param message
      */
     private void messageError(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", message));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", message));
     }
 
     /**

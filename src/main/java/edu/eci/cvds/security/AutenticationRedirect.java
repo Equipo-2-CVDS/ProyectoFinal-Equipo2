@@ -9,7 +9,7 @@ import org.apache.shiro.web.util.WebUtils;
 
 public class AutenticationRedirect extends AccessControlFilter  {
 
-    String welcomeurl="/app/home.xhtml";
+    String welcomeurl="/faces/home.xhtml";
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue)throws Exception {
             Subject subject = getSubject(request, response);
