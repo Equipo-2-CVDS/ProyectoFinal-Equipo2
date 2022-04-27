@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 
 public interface ProyectoServices {
@@ -32,27 +33,6 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public List<Recurso> getRecursosDisponibles() throws ServicesException;
-
-//    /**
-//     * Consulta los recursos con el filtro tipo
-//     *
-//     * @return List<Recurso>
-//     */
-//    public List<Recurso> getRecursosFromTipo(String tipo) throws ServicesException;
-//
-//    /**
-//     * Consulta los recursos con el filtro capacidad
-//     *
-//     * @return List<Recurso>
-//     */
-//    public List<Recurso> getRecursosFromCapacidad(int capacidad) throws ServicesException;
-//
-//    /**
-//     * Consulta los recursos con el filtro ubicacion
-//     *
-//     * @return List<Recurso>
-//     */
-//    public List<Recurso> getRecursosFromUbicacion(String ubicacion) throws ServicesException;
 
     /**
      * Inserta recurso en la base de datos
@@ -84,4 +64,19 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public Recurso getRecurso(String nombre) throws ServicesException;
+
+    /**
+     * Inserta reserva en la base de datos
+     * @param re Reserva a insertar
+     * @throws ServicesException
+     */
+    public void insertarReserva(Reserva re) throws ServicesException; 
+
+    /**
+     * Consulta las reservas de un usuario
+     * @param idUsuario usuario a consultar las reservas
+     * @return
+     * @throws ServicesException
+     */
+    public List<Reserva> getReservasUsuario(int idUsuario) throws ServicesException;
 }
