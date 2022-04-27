@@ -6,86 +6,43 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @ManagedBean(name = "consultarRecursosBean")
 @SessionScoped
 public class ConsultarRecursosBean extends BasePageBean{
     @Inject
     private ProyectoServices userServices;
-    private int id;
-    private String nombre;
-    private String tipo;
-    private int capacidad;
-    private String ubicacion;
-    private boolean estado=true;
-    private static ArrayList<Recurso> filtro = new ArrayList<>();
 
-    public List<Recurso> consultarRecursos() throws ServicesException {
-//        if (!Objects.equals(tipo, "")){
-//            return userServices.getRecursosFromTipo(tipo);
-//        }
-////        else if (capacidad != 0){
-////            return userServices.getRecursosFromCapacidad(capacidad);
-////        }
-//        else if (!Objects.equals(ubicacion, "")){
-//            return userServices.getRecursosFromUbicacion(ubicacion);
-//        }
-        return userServices.getRecursosDisponibles();
+    private ArrayList<Recurso> filtro = new ArrayList<>();
+    private List<Recurso> recursos;
+
+    public void inicializar(){
+        try{
+            recursos = userServices.getRecursosDisponibles();
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
-    public int getId() {
-        return id;
+    public List<Recurso> getRecursos() {
+        inicializar();
+        return recursos;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRecursos(List<Recurso> recursos) {
+        this.recursos = recursos;
     }
 
-    public String getNombre() {
-        return nombre;
+    public ArrayList<Recurso> getFiltro() {
+        return filtro;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setFiltro(ArrayList<Recurso> filtro) {
+        System.out.println("silas");
+        this.filtro = filtro;
     }
 }
