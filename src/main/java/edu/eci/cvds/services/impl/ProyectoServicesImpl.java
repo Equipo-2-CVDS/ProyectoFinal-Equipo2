@@ -6,9 +6,11 @@ import com.google.inject.Inject;
 
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.RecursoDAO;
+import edu.eci.cvds.persistence.ReservaDAO;
 import edu.eci.cvds.persistence.RolesDAO;
 import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.HorarioDAO;
@@ -28,6 +30,9 @@ public class ProyectoServicesImpl implements ProyectoServices{
 
     @Inject
     private HorarioDAO horarioDAO;
+    
+    @Inject
+    private ReservaDAO reservaDAO;
 
     @Override
     public Usuario buscarUsuario(String nombre) throws ServicesException {
@@ -115,6 +120,24 @@ public class ProyectoServicesImpl implements ProyectoServices{
             return recursoDAO.getRecurso(nombre);
         } catch (PersistenceException ex) {
             throw new ServicesException("Error buscando recurso con nombre: "+nombre, ex);
+        }
+    }
+
+    @Override
+    public void insertarReserva(Reserva re) throws ServicesException {
+        try {
+            reservaDAO.insertarReserva(re);
+        } catch (Exception e) {
+            throw new ServicesException("Error al insertar Reserva", e);
+        }        
+    }
+
+    @Override
+    public List<Reserva> getReservasUsuario(int idUsuario) throws ServicesException {
+        try{
+            return reservaDAO.getReservasUsuario(idUsuario);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando reservas con id: "+idUsuario, ex);
         }
     }
 
