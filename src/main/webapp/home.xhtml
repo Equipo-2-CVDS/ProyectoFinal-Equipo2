@@ -51,7 +51,7 @@
     <div class="options">
         <h:form>
             <div>
-                <p:commandButton class="but" value="Registrar Recurso" actionListener="#{navigationController.paginaRegistroR()}"/>
+                <p:commandButton class="but" value="Registrar Recurso" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaRegistroR()}"/>
             </div>
             <div>
                 <p:commandButton class="but" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>

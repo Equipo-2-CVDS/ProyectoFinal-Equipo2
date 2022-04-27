@@ -25,43 +25,60 @@ public class RecursoBean extends BasePageBean {
     private int id;
     private String nombre;
     private String tipo;
-    private int capacidad;
+    private String capacidad;
     private String ubicacion;
-    private boolean estado=true;
+    private boolean estado = true;
     private String desde;
     private String hasta;
 
     public void insertarRecurso() throws ServicesException{
         try {
-            int inicio = Integer.parseInt(desde);
-            int fin = Integer.parseInt(hasta);
-            if(inicio < fin){
-                userServices.insertarRecurso(new Recurso(nombre,tipo,capacidad,ubicacion,estado));
+            if(nombre.isEmpty() || tipo.isEmpty() || capacidad.isEmpty() || ubicacion.isEmpty() || desde.isEmpty() || hasta.isEmpty() || dias.length < 1){
+                messageError("Ningun campo puede ser vacio"); 
+            }else if(!nombre.matches("[a-zA-Z].*")){
+                messageError("El nombre debe iniciar con una letra"); 
+            }else if(Integer.parseInt(desde) > Integer.parseInt(hasta)){
+                messageError("La hora hasta debe ser mayor a la hora desde");       
+            }else if(!(capacidad.matches("[1-9][0-9]*"))){
+                messageError("La capacidad debe ser un numero entero");  
+            }else if(Integer.parseInt(capacidad) >= 10000){
+                messageError("La capacidad debe ser un numero menor a 10000");               
+            }else if((userServices.getRecurso(nombre) != null)){
+                messageError("El nombre del recurso ya existe");
+            }else{
+                int inicio = Integer.parseInt(desde);
+                int fin = Integer.parseInt(hasta);
+                int capacity = Integer.parseInt(capacidad);
+                userServices.insertarRecurso(new Recurso(nombre,tipo,capacity,ubicacion,estado));
                 int idRecurso = userServices.getRecurso(nombre).getId();
                 for(String i : dias){
                     userServices.insertarHorario(new Horario(idRecurso, Integer.parseInt(i), new Time(inicio, 0, 0), new Time(fin, 0, 0)));
                 }
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se Agrego de forma exitosa la Oferta","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            } else{
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "La hora hasta debe ser mayor a la hora desde","");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }     
+                messageError("Se Agrego de forma exitosa la Oferta");
+            }        
         }catch(ServicesException e){
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "" + e.getMessage(),"");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+            messageError("Verifique los datos ingresados");
         }
-        clear();
+        clear();      
     }
 
-    public void clear(){
-        dias=new String[5];
-        nombre="";
-        tipo="";
-        capacidad=0;
-        ubicacion="";
-        desde="";
-        hasta="";
+    /**
+     * Lanza el mensaje de error
+     * @param message
+     */
+    private void messageError(String message) {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message,""));
+    }
+
+
+    public void clear() {
+        dias = new String[5];
+        nombre = "";
+        tipo = "";
+        capacidad = "";
+        ubicacion = "";
+        desde = "";
+        hasta = "";
     }
 
     public String getDesde() {
@@ -104,11 +121,11 @@ public class RecursoBean extends BasePageBean {
         this.tipo = tipo;
     }
 
-    public int getCapacidad() {
+    public String getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
+    public void setCapacidad(String capacidad) {
         this.capacidad = capacidad;
     }
 
