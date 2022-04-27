@@ -42,7 +42,6 @@ public class ConsultarRecursosBean extends BasePageBean{
     }
 
     public void setFiltro(ArrayList<Recurso> filtro) {
-        System.out.println("silas");
         this.filtro = filtro;
     }
 }
