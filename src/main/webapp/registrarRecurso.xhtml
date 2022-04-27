@@ -5,8 +5,13 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
     xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
-
+<link rel="stylesheet" href="style.css"></link>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&amp;family=Orbitron:wght@900&amp;family=Poppins:wght@300;700&amp;family=Righteous&amp;display=swap');
+    * {
+        font-family: 'Poppins', sans-serif;
+        text-shadow: 0 0 10px #599bff;
+    }
     body {
         font-family: 'Courier New';
         background-color: rgb(46, 46, 184);
@@ -41,12 +46,10 @@
         width: 22%;
         height: 40px;
         margin: 10px;
-        border-radius: 15px;
-        background: rgb(248, 248, 248);
-        color: black;
         text-align: center;
         align-self: center;
         align-items: center;
+        position: relative;
     }
 
     h1 {
@@ -208,10 +211,10 @@
                     </p:selectManyCheckbox>
                 </div>
             </div>
-            <p:commandButton update="formRegisterRecurso" class="botn" value="Registrar"
+            <p:commandButton update="formRegisterRecurso" class="botn but-style" value="Registrar"
                 actionListener="#{recursoBean.insertarRecurso()}" />
             <br>
-            <p:commandButton update="formRegisterRecurso" class="botn" value="Volver"
+            <p:commandButton update="formRegisterRecurso" class="botn but-style" value="Volver"
                 actionListener="#{navigationController.paginaHome()}" /></br>
         </h:form>
     </div>
