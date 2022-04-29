@@ -2,14 +2,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
   xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:jsf="http://xmlns.jcp.org/jsf"
   xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<link rel="stylesheet" href="style.css"></link>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&amp;family=Orbitron:wght@900&amp;family=Poppins:wght@300;700&amp;family=Righteous&amp;display=swap');
+  * {
+      font-family: 'Poppins', sans-serif;
+  }
   body {
-    font-family: 'Courier New', Courier, monospace;
     background-color: rgb(46, 46, 184);
     color: white;
     text-align: center;
     padding: 3% 25%;
     border-radius: 3%;
+    text-shadow: 0 0 10px #599bff;
   }
 
   .titulo {
@@ -28,7 +33,7 @@
   .but {
     margin-top: 15px;
     padding: 3% 10%;
-
+    position: relative;
   }
 
   .inputText {
@@ -55,16 +60,15 @@
         <div class="form">
           <div class="inputText">
             <h1>Usuario</h1>
-            <h:inputText value="#{userBean.username}" class="input" required="true" placeholder="Usuario"
-              name="login" />
+              <h:inputText value="#{userBean.username}" class="input input-style" required="true" name="login" />
           </div>
           <div class="inputText">
             <h1>Contraseña</h1>
-            <h:inputSecret id="password" value="#{userBean.password}" class="input" required="true"
+            <h:inputSecret id="password" value="#{userBean.password}" class="input input-style" required="true"
               placeholder="Contraseña" name="password" />
           </div>
           <br />
-          <h:commandButton value="ACCEDER" action="#{userBean.ingresarSesion()}" class="but" />
+          <h:commandButton value="ACCEDER" action="#{userBean.ingresarSesion()}" class="but but-style" />
         </div>
       </h:form>
     </center>

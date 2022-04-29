@@ -3,14 +3,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+<link rel="stylesheet" href="style.css"></link>
+<link rel="icon" type="image/ico" href="/IconDispatcher/favicon.ico"/>
       <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&amp;family=Orbitron:wght@900&amp;family=Poppins:wght@300;700&amp;family=Righteous&amp;display=swap');
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
         body{
-            font-family: 'Courier New', Courier, monospace;
             background-color: rgb(46, 46, 184);
             color: white;
             text-align: center;
             padding: 3% 25%;
             border-radius: 3%;
+            text-shadow: 0 0 10px #599bff;
         }
 
         .div{
@@ -26,9 +32,10 @@
             display:inline-block;
         }
 
-        .botn{
+        .but{
             margin-top: 15px;
             padding: 3% 10%;
+            position: relative;
         }
 
         .texto{
@@ -40,12 +47,12 @@
         <img class = "logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
         <div class="div">
             <div>
-                <p:outputLabel class="texto" value="Plataforma Gestión de Recursos Biblioteca"/>
+                <h1>Plataforma Gestión de Recursos Biblioteca</h1>
             </div>
             <div class="form">
                 <h:form id="form1">
-                    <p:commandButton class="botn" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>
-                    <p:commandButton class="botn" value="Log In" actionListener="#{navigationController.paginaLogin()}"/>
+                    <p:commandButton class="but but-style" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>
+                    <p:commandButton class="but but-style" value="Log In" actionListener="#{navigationController.paginaLogin()}"/>
                 </h:form>
             </div>
         </div>
