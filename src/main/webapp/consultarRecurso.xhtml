@@ -98,7 +98,6 @@
         margin-bottom: 10px;
         text-align: left;
         align-items: center;
-
     }
 
     .bodylogo {
@@ -117,7 +116,8 @@
     }
 </style>
 <h:head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+    </script>
 </h:head>
 <title>Consultar Recurso</title>
 
@@ -157,13 +157,13 @@
                         <h:outputText value="#{recurso.estado}" />
                     </p:column>
                     <p:column headerText="Consultar Horario">
-                        <p:calendar value="calendario"/>
-                        <br><p:commandButton class="botn" value="Consultar" style = "text-align: center"
-                                             actionListener="#{horarioBean.consultarHorario(calendario)}"/></br>
+                        <p:calendar value="fecha"/>
+                        <p:button value = "Consultar" oncomplete = "requestDialog();" ajax = "false"
+                                  action = "#{horarioBean.consultarHorario()}"/>
                     </p:column>
                 </p:dataTable>
             </center>
-            <br><p:commandButton update="formConsultarRecursos" class="botn" value="Volver"
+            <br><p:commandButton class="botn" value="Volver"
                                  actionListener="#{navigationController.paginaInicio()}"/></br>
         </h:form>
 </div>

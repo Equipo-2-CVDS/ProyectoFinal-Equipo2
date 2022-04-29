@@ -28,4 +28,7 @@ public class NavigationController implements Serializable {
     public void paginaRegistroR() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/registrarRecurso.xhtml");
     }
+    public void paginaConsultaH() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/consultarHorarios.xhtml");
+    }
 }
