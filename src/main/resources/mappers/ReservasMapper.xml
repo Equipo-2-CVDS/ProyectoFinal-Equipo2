@@ -9,6 +9,7 @@
         <result property='idRecurso' column='idRecurso' />
         <result property='desde' column='desde' />
         <result property='hasta' column='hasta' />
+        <result property='recurrencia' column='recurrencia' />
     </resultMap>
 
     <select id="getReservasUsuario" resultMap="ReservaResult"
@@ -18,13 +19,14 @@
             re.idUsuario ,
             re.idRecurso ,
             re.desde ,
-            re.hasta
+            re.hasta ,
+            re.recurrencia
         FROM RESERVAS as re
             WHERE re.idUsuario=#{idUsuario}
     </select>
 
     <insert id="insertarReserva" parameterType="map">
-        insert into RESERVAS (idUsuario, idRecurso, desde, hasta) values
-        (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta})
+        insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia) values
+        (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia})
     </insert>
 </mapper>
