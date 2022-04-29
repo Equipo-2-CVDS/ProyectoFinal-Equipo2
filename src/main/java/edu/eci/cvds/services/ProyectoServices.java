@@ -79,4 +79,12 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public List<Reserva> getReservasUsuario(int idUsuario) throws ServicesException;
+
+        /**
+     * Consulta las reservas de un usuario
+     * @param idUsuario usuario a consultar las reservas
+     * @return
+     * @throws ServicesException
+     */
+    public List<Reserva> getReservas() throws ServicesException;
 }

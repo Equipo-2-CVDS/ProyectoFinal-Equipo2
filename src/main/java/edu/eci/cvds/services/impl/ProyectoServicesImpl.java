@@ -141,6 +141,15 @@ public class ProyectoServicesImpl implements ProyectoServices{
         }
     }
 
+    @Override
+    public List<Reserva> getReservas() throws ServicesException {
+        try{
+            return reservaDAO.getReservas();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando reservas", ex);
+            }
+    }
+
 
 
 }
