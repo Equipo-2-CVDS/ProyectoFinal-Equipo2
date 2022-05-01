@@ -141,6 +141,24 @@ public class ProyectoServicesImpl implements ProyectoServices{
         }
     }
 
+    @Override
+    public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException {
+        try{
+            return horarioDAO.getHorarioDia(idRecurso,idDia);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando Horario", ex);
+        }
+    }
+
+    @Override
+    public List<Reserva> getReservasRecurso(int idRecurso) throws ServicesException {
+        try{
+            return reservaDAO.getReservasRecurso(idRecurso);
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando reservas con id: "+idRecurso, ex);
+        }
+    }
+
 
 
 }

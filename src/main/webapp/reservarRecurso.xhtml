@@ -6,6 +6,7 @@
 <h:head>
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
 </h:head>
 <link rel="stylesheet" href="style.css">
 </link>
@@ -103,14 +104,14 @@
                               <h:outputLabel value="Fecha:" />
                         </b>
                         <!--Aqui enlace con pagina horarios -->
-                        <h:outputLabel value="Mayo 22, 2022" />
+                        <h:outputLabel value="Mayo 2, 2022" />
                   </div>
                   <div class="divText separador">
                         <b>
                               <h:outputLabel value=" Hora:" />
                         </b>
                         <!--Aqui enlace con pagina horarios -->
-                        <h:outputLabel value="10:00 AM - 11:00 AM" />
+                        <h:outputLabel value="11:00 AM - 12:00 PM" />
                   </div>
                   <div class="separador">
                         <h:outputLabel for="selectRecurrencia" value="Recurrencia: " />
@@ -129,12 +130,23 @@
                         <p:calendar class="calendario" id="calendario" value="#{reservarBean.fechaFinal}"
                               required="true" disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
                   </div>
+                  <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Reservar"
-                        actionListener="#{reservarBean.reservar()}" />
+                        actionListener="#{reservarBean.reservar(userBean.userId)}"
+                        oncomplete="PF('dlgRedirect').show();" />
                   <br>
+                  <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Volver"
                         actionListener="#" />
                   </br>
+
+                  <p:dialog widgetVar="dlgRedirect" modal="true" closable="false" minHeight="60">
+                        <h:outputText value="#{reservarBean.fallos}" />
+                        <p:commandButton actionListener="#{navigationController.paginaMisReservas()}"
+                              class="botn but-style" value="Ir a Mis reservas" />
+                        <p:commandButton actionListener="#{navigationController.paginaHome()}" class="botn but-style"
+                              value="Ir a Home" />
+                  </p:dialog>
             </h:form>
       </div>
 </body>

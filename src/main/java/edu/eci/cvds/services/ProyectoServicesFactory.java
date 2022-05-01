@@ -70,12 +70,13 @@ public class ProyectoServicesFactory {
 
    public static void main(String a[]) throws ServicesException {
     ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-    servicio.getHorariosDisponibles(1);
+    System.out.println(servicio.getHorarioDia(1,2));
+    System.out.println(servicio.getReservasRecurso(1));
 //    System.out.println(servicio.getRecursosDisponibles());
 //    System.out.println(servicio.buscarUsuario("admin"));   
 //    Reserva reserva = new Reserva(1, 1, Timestamp.valueOf("2022-05-02 09:00:00"), Timestamp.valueOf("2022-05-02 10:00:00"),0);
 //    servicio.insertarReserva(reserva);
-    System.out.println(servicio.getReservasUsuario(1));
+//    System.out.println(servicio.getReservasUsuario(1));
 }
 
 }
