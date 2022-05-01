@@ -37,7 +37,7 @@
         align-content: center;
     }
 
-    .botn{
+    .botn {
         width: 22%;
         height: 40px;
         margin: 10px;
@@ -135,10 +135,11 @@
             <center>
                 <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
                     filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                    emptyMessage="Not Found" class = "table"
+                    emptyMessage="Not Found" class="table"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
+                    <p:column headerText="Nombre" sortBy="#{recurso.nombre}" filterBy="#{recurso.nombre}"
+                        filterMatchMode="contains">
                         <h:outputText value="#{recurso.nombre}" />
                     </p:column>
                     <p:column headerText="Tipo" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
@@ -157,16 +158,18 @@
                         <h:outputText value="#{recurso.estado}" />
                     </p:column>
                     <p:column headerText="Consultar Horario">
-                        <p:calendar value="calendario"/>
-                        <br><p:commandButton class="botn" value="Consultar" style = "text-align: center"
-                                             actionListener="#{horarioBean.consultarHorario(calendario)}"/></br>
+                        <p:calendar value="calendario" />
+                        <br>
+                        <p:commandButton class="botn" value="Consultar" style="text-align: center"
+                            actionListener="#{horarioBean.consultarHorario(calendario)}" /></br>
                     </p:column>
                 </p:dataTable>
             </center>
-            <br><p:commandButton update="formConsultarRecursos" class="botn" value="Volver"
-                                 actionListener="#{navigationController.paginaInicio()}"/></br>
+            <br>
+            <p:commandButton update="formConsultarRecursos" class="botn" value="Volver"
+                actionListener="#{navigationController.paginaInicio()}" /></br>
         </h:form>
-</div>
+    </div>
 </body>
 
 </html>
