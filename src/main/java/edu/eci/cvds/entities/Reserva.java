@@ -8,20 +8,23 @@ public class Reserva {
     private int idRecurso;
     private Timestamp desde;
     private Timestamp hasta;
+    private int recurrencia;
 
-    public Reserva(int id, int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta) {
+    public Reserva(int id, int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, int recurrencia) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.desde = desde;
         this.hasta = hasta;
+        this.recurrencia = recurrencia;
     }
 
-    public Reserva(int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta) {
+    public Reserva(int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, int recurrencia) {
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.desde = desde;
         this.hasta = hasta;
+        this.recurrencia = recurrencia;
     }
 
     public int getId() {
@@ -64,6 +67,14 @@ public class Reserva {
         this.hasta = hasta;
     }
     
+    public int getRecurrencia() {
+        return recurrencia;
+    }
+
+    public void setRecurrencia(int recurrencia) {
+        this.recurrencia = recurrencia;
+    }
+
     @Override
     public String toString() {
         return "Reserva: [id=" + id + ", idUsuario=" + idUsuario + 

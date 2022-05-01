@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+<h:head>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+</h:head>
+<link rel="stylesheet" href="style.css">
+</link>
+<style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&amp;family=Orbitron:wght@900&amp;family=Poppins:wght@300;700&amp;family=Righteous&amp;display=swap');
+
+      * {
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 0 0 10px #599bff;
+      }
+
+      body {
+            font-family: 'Courier New';
+            background-color: rgb(46, 46, 184);
+            color: white;
+            text-align: center;
+            padding: 1% 3%;
+            align-content: center;
+            font-size: 24px;
+      }
+
+      .divBody {
+            background-color: rgba(1, 1, 70, 0.623);
+            border-radius: 15px;
+            height: auto;
+            width: auto;
+            padding: 3% 10%;
+      }
+
+      .titulo {
+            font-size: 40px;
+      }
+
+      .formbox {
+            border-radius: 15px;
+            background-color: rgba(1, 1, 70, 0.623);
+            padding: 3%;
+            text-align: center;
+            align-items: center;
+            align-content: center;
+      }
+
+      .bodylogo {
+            background-color: rgb(46, 46, 184);
+            color: rgb(46, 46, 184);
+      }
+
+      .botn {
+            width: 22%;
+            height: 40px;
+            margin: 10px;
+            text-align: center;
+            align-self: center;
+            align-items: center;
+            position: relative;
+            font-size: 18px;
+      }
+
+      .divCheck {
+            display: inline-flex;
+            text-align: center;
+            align-self: center;
+            align-items: center;
+      }
+
+      .separador {
+            margin-bottom: 15px;
+      }
+
+      .calendario {
+            font-size: 18px;
+            size-adjust: auto;
+      }
+
+      .ui-datepicker.ui-widget-content {
+            font-weight: normal;
+            font-size: 16px;
+      }
+</style>
+<title>Reservar Recurso</title>
+
+<body class="page">
+      <p:messages class="msgs" id="messages" showDetail="true" closable="true">
+            <p:autoUpdate />
+      </p:messages>
+      <div class="bodylogo">
+            <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+      </div>
+      <div class="divBody">
+            <p class="titulo">Reservar Recurso</p>
+
+            <h:form id="formReservarRecurso" class="formbox">
+                  <div class="divText separador">
+                        <b>
+                              <h:outputLabel value="Fecha:" />
+                        </b>
+                        <!--Aqui enlace con pagina horarios -->
+                        <h:outputLabel value="Mayo 2, 2022" />
+                  </div>
+                  <div class="divText separador">
+                        <b>
+                              <h:outputLabel value=" Hora:" />
+                        </b>
+                        <!--Aqui enlace con pagina horarios -->
+                        <h:outputLabel value="11:00 AM - 12:00 PM" />
+                  </div>
+                  <div class="separador">
+                        <h:outputLabel for="selectRecurrencia" value="Recurrencia: " />
+                        <h:selectOneMenu id="selectRecurrencia" value="#{reservarBean.recurrencia}">
+                              <p:ajax event="change" render="formReservarRecurso" execute="selectRecurrencia"
+                                    update="formReservarRecurso" listener="#{reservarBean.cambioEstado}" />
+                              <f:selectItem class="select" itemLabel="Ninguna" itemValue="0"></f:selectItem>
+                              <f:selectItem class="select" itemLabel="Diariamente" itemValue="1"></f:selectItem>
+                              <f:selectItem class="select" itemLabel="Semanalmente" itemValue="2"></f:selectItem>
+                              <f:selectItem class="select" itemLabel="Mensualmente" itemValue="3"></f:selectItem>
+                        </h:selectOneMenu>
+                  </div>
+                  <div id="divCalendar" class="separador">
+                        <h:outputLabel for="calendario" value="Fecha final: "
+                              style="display: #{reservarBean.mostrar}" />
+                        <p:calendar class="calendario" id="calendario" value="#{reservarBean.fechaFinal}"
+                              required="true" disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
+                  </div>
+                  <!--Aqui enlace con pagina horarios -->
+                  <p:commandButton update="formReservarRecurso" class="botn but-style" value="Reservar"
+                        actionListener="#{reservarBean.reservar(userBean.userId)}"
+                        oncomplete="PF('dlgRedirect').show();" />
+                  <br>
+                  <!--Aqui enlace con pagina horarios -->
+                  <p:commandButton update="formReservarRecurso" class="botn but-style" value="Volver"
+                        actionListener="#" />
+                  </br>
+
+                  <p:dialog widgetVar="dlgRedirect" modal="true" closable="false" minHeight="60">
+                        <h:outputText value="#{reservarBean.fallos}" />
+                        <p:commandButton actionListener="#{navigationController.paginaMisReservas()}"
+                              class="botn but-style" value="Ir a Mis reservas" />
+                        <p:commandButton actionListener="#{navigationController.paginaHome()}" class="botn but-style"
+                              value="Ir a Home" />
+                  </p:dialog>
+            </h:form>
+      </div>
+</body>
+
+</html>
