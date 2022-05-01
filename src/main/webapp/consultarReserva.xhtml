@@ -133,34 +133,32 @@
 
     <div class="divBody">
         <p class="titulo">Consultar Reserva</p>
-        <h:form id="formConsultarRecursos" class="formbox">
+        <h:form id="formConsultarReserva" class="formbox">
             <center>
-                <p:dataTable id="table" var="recurso" value="#{consultarReservaBean.reserva}"
-                    filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
+                <p:dataTable id="table" var="reserva" value="#{consultarReservaBean.reserva}"
+                    filteredValue="#{consultarReservaBean.filtro}" rows="10" width="100%" paginator="true"
                     emptyMessage="Not Found"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{reserva.nombre}" filterBy="#{recurso.nombre}"
+                    <p:column headerText="Nombre" sortBy="#{reserva.nombre}" filterBy="#{reserva.nombre}"
                         filterMatchMode="contains">
-                        <h:outputText value="#{recurso.nombre}" />
+                        <h:outputText value="#{reserva.nombre}" />
                     </p:column>
-                    <p:column headerText="Informacion" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
+                    <p:column headerText="Informacion" sortBy="#{reserva.desde}" filterBy="#{reserva.desde}"
                         filterMatchMode="contains">
-                        <h:outputText value="#{recurso.tipo}" />
+                        <h:outputText value="#{reserva.tipo}" />
                     </p:column>
-                    <p:column headerText="Fecha de solicitud" sortBy="#{recurso.capacidad}" filterBy="#{recurso.capacidad}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{recurso.capacidad}" />
-                    </p:column>
-                    <p:column headerText="Fecha inicial" sortBy="#{recurso.ubicacion}" filterBy="#{recurso.ubicacion}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{recurso.ubicacion}" />
+                    <p:column headerText="Fecha inicial" sortBy="#{reserva.desde}">
+                        <h:outputText value="#{reserva.desde}" />
                     </p:column>
                     <p:column headerText="Fecha Final">
-                        <h:outputText value="#{recurso.estado}" />
+                        <h:outputText value="#{reserva.hasta}" />
                     </p:column>
                 </p:dataTable>
             </center>
+            <br>
+            <p:commandButton update="formConsultarReserva" class="botn" value="Volver"
+                actionListener="#{navigationController.paginaHome()}"/></br>
         </h:form>
     </div>
 </body>

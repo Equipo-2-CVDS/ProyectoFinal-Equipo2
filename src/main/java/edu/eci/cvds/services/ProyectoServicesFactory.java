@@ -70,11 +70,11 @@ public class ProyectoServicesFactory {
 
    public static void main(String a[]) throws ServicesException {
     ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-    servicio.getHorariosDisponibles(1);
-    System.out.println(servicio.getReservasUsuario(1));
+    //servicio.getHorariosDisponibles(1);
+    //System.out.println(servicio.getReservasUsuario(1));
     System.out.println(servicio.getReservas());
 //    System.out.println(servicio.buscarUsuario("admin"));
-    System.out.println(servicio.getHorariosDisponibles(1));
+   // System.out.println(servicio.getHorariosDisponibles(1));
     
 }
 

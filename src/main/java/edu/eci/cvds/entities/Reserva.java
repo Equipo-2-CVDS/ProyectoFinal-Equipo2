@@ -66,7 +66,7 @@ public class Reserva {
     
     @Override
     public String toString() {
-        return "Recurso: [id=" + id + ", idUsuario=" + idUsuario + 
-        ", idRecurso=" + idRecurso +  ", desde=" + desde + ", hasta=" + hasta +"]";
+        return "Reserva: [id=" + id + ", idUsuario=" + idUsuario + 
+        ", idReserva=" + idRecurso +  ", desde=" + desde + ", hasta=" + hasta +"]";
     }
 }

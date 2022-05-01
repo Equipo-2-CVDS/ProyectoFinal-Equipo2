@@ -1,7 +1,6 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.Usuario;
@@ -19,6 +18,7 @@ public class ConsultarReservaBean extends BasePageBean{
     @Inject
     private ProyectoServices userServices;
     private List<Reserva> reserva;
+    private ArrayList<Recurso> filtro = new ArrayList<>();
 
 
     public void consultarReservas(){
@@ -49,5 +49,13 @@ public class ConsultarReservaBean extends BasePageBean{
 
     public void setReserva(List<Reserva> reserva) {
         this.reserva = reserva;
+    }
+
+    public ArrayList<Recurso> getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(ArrayList<Recurso> filtro) {
+        this.filtro = filtro;
     }
 }
