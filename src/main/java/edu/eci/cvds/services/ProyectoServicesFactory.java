@@ -74,7 +74,7 @@ public class ProyectoServicesFactory {
     System.out.println(servicio.getReservasUsuario(1));
     System.out.println(servicio.getReservas());
 //    System.out.println(servicio.buscarUsuario("admin"));
-//    System.out.println(servicio.getHorariosDisponibles(1));
+    System.out.println(servicio.getHorariosDisponibles(1));
     
 }
 
