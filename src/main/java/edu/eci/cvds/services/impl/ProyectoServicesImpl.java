@@ -148,6 +148,8 @@ public class ProyectoServicesImpl implements ProyectoServices{
         } catch (PersistenceException ex) {
             throw new ServicesException("Error buscando reservas", ex);
             }
+        }
+        
     public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException {
         try{
             return horarioDAO.getHorarioDia(idRecurso,idDia);

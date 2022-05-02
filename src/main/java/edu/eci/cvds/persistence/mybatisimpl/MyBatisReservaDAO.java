@@ -36,6 +36,11 @@ public class MyBatisReservaDAO implements ReservaDAO{
     public List<Reserva> getReservas() throws PersistenceException {
         try {
             return reservaMapper.getReservas();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
     public List<Reserva> getReservasRecurso(int idRecurso) throws PersistenceException {
         try {
             return reservaMapper.getReservasRecurso(idRecurso);
