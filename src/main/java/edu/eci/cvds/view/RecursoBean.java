@@ -34,7 +34,7 @@ public class RecursoBean extends BasePageBean {
     public void insertarRecurso() throws ServicesException{
         try {
             if(nombre.isEmpty() || tipo.isEmpty() || capacidad.isEmpty() || ubicacion.isEmpty() || desde.isEmpty() || hasta.isEmpty() || dias.length < 1){
-                messageError("Ningun campo puede ser vacio"); 
+                messageError("Ningún campo puede ser vacio");
             }else if(!nombre.matches("[a-zA-Z].*")){
                 messageError("El nombre debe iniciar con una letra"); 
             }else if(Integer.parseInt(desde) > Integer.parseInt(hasta)){

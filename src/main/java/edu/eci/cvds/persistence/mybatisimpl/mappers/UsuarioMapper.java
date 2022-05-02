@@ -6,5 +6,6 @@ import org.apache.ibatis.annotations.Param;
 public interface UsuarioMapper {
 
 	public Usuario getUsuario(@Param("nombre") String nombre);
+	public Usuario getUsuarioPorId(@Param("id") int id);
 
 }

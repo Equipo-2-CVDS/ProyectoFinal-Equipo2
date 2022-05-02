@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper">
+    <resultMap type='Reserva' id='ReservaResult'>
+        <id property='id' column='id' />
+        <result property='idUsuario' column='idUsuario' />
+        <result property='idRecurso' column='idRecurso' />
+        <result property='desde' column='desde' />
+        <result property='hasta' column='hasta' />
+        <result property='fechaSolicitado' column='fechaSolicitado' />
+        <result property='recurrencia' column='recurrencia' />
+    </resultMap>
+
+    <select id="getReservasUsuario" resultMap="ReservaResult"
+            parameterType="map">
+        SELECT
+            re.id ,
+            re.idUsuario ,
+            re.idRecurso ,
+            re.desde ,
+            re.hasta ,
+            re.fechaSolicitado,
+            re.recurrencia
+        FROM RESERVAS as re
+            WHERE re.idUsuario=#{idUsuario}
+    </select>
+    <select id="getReservas" resultMap="ReservaResult" parameterType="map">
+        SELECT
+            re.id ,
+            re.idUsuario ,
+            re.idRecurso ,
+            re.desde ,
+            re.hasta ,
+            re.fechaSolicitado,
+            re.recurrencia
+        FROM RESERVAS as re         
+    </select>
+    <select id="getReservasRecurso" resultMap="ReservaResult"
+    parameterType="map">
+        SELECT
+            re.id ,
+            re.idUsuario ,
+            re.idRecurso ,
+            re.desde ,
+            re.hasta ,
+            re.fechaSolicitado,
+            re.recurrencia
+        FROM RESERVAS as re
+            WHERE re.idRecurso=#{idRecurso}
+    </select>
+
+    <insert id="insertarReserva" parameterType="map">
+        insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia) values
+        (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia})
+    </insert>
+</mapper>

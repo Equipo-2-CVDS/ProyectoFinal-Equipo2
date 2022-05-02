@@ -25,4 +25,16 @@
 			WHERE u.nombre = #{nombre}
 	</select>
 
+	<select id="getUsuarioPorId" resultMap="UsuarioResult"
+	parameterType="map">
+		SELECT
+			u.id ,
+			u.nombre ,
+			u.contrasena ,
+			u.programa ,
+			u.rol
+		FROM USUARIOS u
+			WHERE u.id = #{id}
+	</select>
+
 </mapper>

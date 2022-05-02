@@ -1,6 +1,5 @@
 package edu.eci.cvds.view;
 
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -9,7 +8,6 @@ import javax.faces.context.FacesContext;
 import com.google.inject.Inject;
 
 import org.slf4j.LoggerFactory;
-
 
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ProyectoServices;
@@ -27,7 +25,6 @@ import java.util.logging.Level;
 
 import java.io.IOException;
 
-
 @ManagedBean(name = "userBean")
 @SessionScoped
 public class UsuarioBean extends BasePageBean {
@@ -40,7 +37,9 @@ public class UsuarioBean extends BasePageBean {
     private String username;
     private int rol;
     Subject subject;
-    private String redirectUrl = "/faces/login.xhtml";
+    private String redirectUrl = "/faces/home.xhtml";
+    private String home = "/faces/home.xhtml";
+
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
      * 
@@ -49,38 +48,38 @@ public class UsuarioBean extends BasePageBean {
      */
     public void ingresarSesion() throws Exception {
         Logger log = LoggerFactory.getLogger(ProyectoServices.class);
-        UsernamePasswordToken token = new UsernamePasswordToken(username,password);
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject = SecurityUtils.getSubject();
         try {
             Usuario usuario = userServices.buscarUsuario(username);
-            if(usuario!=null){
+            if (usuario != null) {
                 userId = usuario.getId();
                 rol = usuario.getRol();
                 subject.login(token);
-                FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
             } else {
                 messageError("El usuario no existe");
             }
-        }catch (UnknownAccountException ex) {
-                messageError("Esta cuenta no existe");
-                log.error(ex.getMessage(), ex);
-        }catch (IncorrectCredentialsException ex) {
-                messageError("Contraseña incorrecta");
-                log.error(ex.getMessage(), ex);
+        } catch (UnknownAccountException ex) {
+            messageError("Esta cuenta no existe");
+            log.error(ex.getMessage(), ex);
+        } catch (IncorrectCredentialsException ex) {
+            messageError("Contraseña incorrecta");
+            log.error(ex.getMessage(), ex);
         } catch (LockedAccountException ex) {
-                messageError("La Cuenta esta Bloqueada");
-                log.error(ex.getMessage(), ex);
+            messageError("La Cuenta esta Bloqueada");
+            log.error(ex.getMessage(), ex);
         } catch (AuthenticationException ex) {
-                messageError("Error desconocido: " + ex.getMessage());
-                log.error(ex.getMessage(), ex);
+            messageError("Error desconocido: " + ex.getMessage());
+            log.error(ex.getMessage(), ex);
         } finally {
-                token.clear();
+            token.clear();
         }
 
     }
 
     /**
-     * Cierra la sesion 
+     * Cierra la sesion
      */
     public void cerrarSesion() {
         SecurityUtils.getSubject().logout();
@@ -91,12 +90,28 @@ public class UsuarioBean extends BasePageBean {
         }
     }
 
-    public String visible(){
-        String res="";
-        try{
-            res = (userServices.buscarUsuario(username).getRol()==1)?"True":"None";
-        } catch(ServicesException e) {
-            res="None";
+    public String visible() {
+        String res = "";
+        try {
+            res = (userServices.buscarUsuario(username).getRol() == 1) ? "True" : "None";
+        } catch (ServicesException e) {
+            res = "None";
+        }
+
+        return res;
+    }
+
+    /**
+     * Devuelve un valor si el estudiante
+     * 
+     * @return
+     */
+    public String isEstudiante() {
+        String res = "";
+        try {
+            res = (userServices.buscarUsuario(username).getRol() == 2) ? "True" : "None";
+        } catch (ServicesException e) {
+            res = "None";
         }
 
         return res;
@@ -104,14 +119,17 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Lanza el mensaje de error
+     * 
      * @param message
      */
     private void messageError(String message) {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", message));
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", message));
     }
 
     /**
      * Devuelve el customerId
+     * 
      * @return
      */
     public int getUserId() {
@@ -120,6 +138,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Asigna el customerId
+     * 
      * @param userId
      */
     public void setcustomerId(int userId) {
@@ -128,6 +147,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Devuelve el username
+     * 
      * @return
      */
     public String getUsername() {
@@ -136,6 +156,7 @@ public class UsuarioBean extends BasePageBean {
 
     /***
      * Asigna el username
+     * 
      * @param username
      */
     public void setUsername(String username) {
@@ -144,6 +165,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Devuelve el rol
+     * 
      * @return
      */
     public int getRol() {
@@ -152,6 +174,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Asigna el rol
+     * 
      * @param rol
      */
     public void setRol(int rol) {
@@ -160,6 +183,7 @@ public class UsuarioBean extends BasePageBean {
 
     /***
      * Devuelve el userServices
+     * 
      * @return
      */
     public ProyectoServices getUserServices() {
@@ -168,6 +192,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Asigna el userServices
+     * 
      * @param userServices
      */
     public void setUserServices(ProyectoServices userServices) {
@@ -176,6 +201,7 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Devuelve la contraseña
+     * 
      * @return
      */
     public String getPassword() {
@@ -184,12 +210,27 @@ public class UsuarioBean extends BasePageBean {
 
     /**
      * Asigna la contraseña
+     * 
      * @param password
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
 
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
+    }
+    
 }
-

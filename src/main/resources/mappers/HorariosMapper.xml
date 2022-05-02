@@ -21,6 +21,17 @@
             WHERE h.idRecurso=#{idRecurso}
     </select>
 
+    <select id="getHorarioDia" resultMap="HorarioResult"
+            parameterType="map">
+        SELECT
+            h.idRecurso ,
+            h.idDia ,
+            h.desde ,
+            h.hasta 
+        FROM HORARIOS as h
+            WHERE h.idRecurso=#{idRecurso} and h.idDia=#{idDia}
+    </select>
+
     <insert id="insertarHorario" parameterType="map">
         insert into HORARIOS (idRecurso, idDia, desde, hasta) values
         (#{h.idRecurso}, #{h.idDia}, #{h.desde}, #{h.hasta})

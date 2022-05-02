@@ -18,4 +18,6 @@ public interface RecursoMapper {
     public List<Recurso> getRecursoFromUbicacion(@Param("ubicacion") String ubicacion);
 
     public List<Recurso> getRecursoFromCapacidad(@Param("ubicacion") int ubicacion);
+
+    public Recurso getRecursoPorId(@Param("id") int id);
 }
