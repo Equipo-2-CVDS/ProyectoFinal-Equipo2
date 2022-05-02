@@ -3,6 +3,7 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
@@ -17,13 +18,14 @@ import java.util.List;
 public class ConsultarReservaBean extends BasePageBean{
     @Inject
     private ProyectoServices userServices;
-    private List<Reserva> reserva;
-    private ArrayList<Recurso> filtro = new ArrayList<>();
+
+    private ArrayList<UsuRecuRese> filtro = new ArrayList<>();
+    private List<UsuRecuRese> usuRecuRese;
 
 
     public void consultarReservas(){
         try{
-            reserva = userServices.getReservas();
+            usuRecuRese = userServices.getUsuRecuRese();
         } catch(Exception e){
             System.out.println(e);
         }
@@ -34,28 +36,29 @@ public class ConsultarReservaBean extends BasePageBean{
             Usuario user = userServices.buscarUsuario(usuario);
             if(user.getRol() == 1){
                 consultarReservas();
-            }else{
-                reserva = userServices.getReservasUsuario(user.getId());
-            }
+            }//else{
+                //usuRecuRese = userServices.getReservasUsuario(user.getId());
+           // }
             
         } catch(Exception e){
             System.out.println(e);
         }
     }
 
-    public List<Reserva> getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(List<Reserva> reserva) {
-        this.reserva = reserva;
-    }
-
-    public ArrayList<Recurso> getFiltro() {
+    public ArrayList<UsuRecuRese> getFiltro() {
         return filtro;
     }
 
-    public void setFiltro(ArrayList<Recurso> filtro) {
+    public void setFiltro(ArrayList<UsuRecuRese> filtro) {
         this.filtro = filtro;
+    }
+
+    public List<UsuRecuRese> getUsuRecuRese() {
+        consultarReservas();
+        return usuRecuRese;
+    }
+
+    public void setUsuRecuRese(List<UsuRecuRese> usuRecuRese) {
+        this.usuRecuRese = usuRecuRese;
     }
 }

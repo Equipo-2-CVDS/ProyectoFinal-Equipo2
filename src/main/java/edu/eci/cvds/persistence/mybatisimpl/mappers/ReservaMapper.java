@@ -11,7 +11,6 @@ public interface ReservaMapper {
     public void insertarReserva(@Param("re") Reserva re);
     
     public List<Reserva> getReservasUsuario(@Param("idUsuario") int idUsuario);
-
     public List<Reserva> getReservas();
     public List<Reserva> getReservasRecurso(@Param("idRecurso") int idRecurso);
     

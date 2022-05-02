@@ -37,10 +37,10 @@ public class MisReservasBean extends BasePageBean {
         java.sql.Timestamp timestamp2 = java.sql.Timestamp.valueOf("2022-04-23 11:10:10.0");
         if (this.filter == 0) {
             reservas = new ArrayList<>();
-            Reserva r1 = new Reserva(1, 1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(2, 1, 14, timestamp1, timestamp2,0);
-            Reserva r3 = new Reserva(3, 2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(4, 2, 1, timestamp1, timestamp2,0);
+            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
+            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
+            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
+            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
             for (int i = 0; i < 6; i++) {
                 reservas.add(r1);
                 reservas.add(r2);
@@ -48,13 +48,13 @@ public class MisReservasBean extends BasePageBean {
                 reservas.add(r4);
             }
         } else if (this.filter == 1) {
-            Reserva r1 = new Reserva(1, 1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(2, 1, 14, timestamp1, timestamp2,0);
+            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
+            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
             reservas.add(r1);
             reservas.add(r2);
         } else if (this.filter == 2) {
-            Reserva r3 = new Reserva(3, 2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(4, 2, 1, timestamp1, timestamp2,0);
+            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
+            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
             reservas.add(r3);
             reservas.add(r4);
         }

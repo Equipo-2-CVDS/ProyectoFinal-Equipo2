@@ -16,4 +16,6 @@ public interface RecursoDAO {
     List<Recurso> getRecursoFromUbicacion(String ubicacion) throws PersistenceException;
 
     List<Recurso> getRecursoFromCapacidad(int capacidad) throws PersistenceException;
+
+    public Recurso getRecursoPorId(int id) throws PersistenceException;
 }

@@ -78,6 +78,19 @@
             WHERE r.estado and r.nombre=#{nombre}
     </select>
 
+    <select id="getRecursoPorId" resultMap="RescursosResult"
+    parameterType="map">
+        SELECT
+            r.id ,
+            r.nombre ,
+            r.tipo ,
+            r.capacidad ,
+            r.ubicacion ,
+            r.estado
+        FROM RECURSOS as r
+            WHERE r.estado and r.id=#{id}
+    </select>
+
     <insert id="insertarRecurso" parameterType="map">
         insert into RECURSOS (nombre, tipo, capacidad, ubicacion, estado) values
         (#{r.nombre}, #{r.tipo}, #{r.capacidad}, #{r.ubicacion}, #{r.estado})

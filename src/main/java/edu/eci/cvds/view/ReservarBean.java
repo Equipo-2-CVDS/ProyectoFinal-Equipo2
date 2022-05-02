@@ -31,6 +31,7 @@ public class ReservarBean extends BasePageBean {
     public void reservar(int idUsuario) {
         try {
             Timestamp fechaInicial = Timestamp.valueOf("2022-05-02 11:00:00");
+
             int horas = 1;
             int idRecurso = 1;
             LocalDateTime fechaInsercion = fechaInicial.toLocalDateTime();

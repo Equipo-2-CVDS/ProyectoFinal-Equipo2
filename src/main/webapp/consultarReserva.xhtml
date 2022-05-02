@@ -135,24 +135,23 @@
         <p class="titulo">Consultar Reserva</p>
         <h:form id="formConsultarReserva" class="formbox">
             <center>
-                <p:dataTable id="table" var="reserva" value="#{consultarReservaBean.reserva}"
+                <p:dataTable id="table" var="usuRecuRese" value="#{consultarReservaBean.usuRecuRese}"
                     filteredValue="#{consultarReservaBean.filtro}" rows="10" width="100%" paginator="true"
                     emptyMessage="Not Found"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{reserva.nombre}" filterBy="#{reserva.nombre}"
+                    <p:column headerText="Nombre" sortBy="#{usuRecuRese.nombreRecurso}" filterBy="#{usuRecuRese.nombreRecurso}"
                         filterMatchMode="contains">
-                        <h:outputText value="#{reserva.nombre}" />
+                        <h:outputText value="#{usuRecuRese.nombreRecurso}" />
                     </p:column>
-                    <p:column headerText="Informacion" sortBy="#{reserva.desde}" filterBy="#{reserva.desde}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{reserva.tipo}" />
+                    <p:column headerText="Informacion"  >
+                        <h:outputText value="#{usuRecuRese.infoRecurso}" />
                     </p:column>
-                    <p:column headerText="Fecha inicial" sortBy="#{reserva.desde}">
-                        <h:outputText value="#{reserva.desde}" />
+                    <p:column headerText="Fecha inicial" >
+                        <h:outputText value="#{usuRecuRese.fechaDesde}" />
                     </p:column>
                     <p:column headerText="Fecha Final">
-                        <h:outputText value="#{reserva.hasta}" />
+                        <h:outputText value="#{usuRecuRese.fechaHasta}" />
                     </p:column>
                 </p:dataTable>
             </center>

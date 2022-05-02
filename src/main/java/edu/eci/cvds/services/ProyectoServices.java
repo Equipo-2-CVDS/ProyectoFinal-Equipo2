@@ -5,6 +5,7 @@ import java.util.List;
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.entities.Usuario;
 
 public interface ProyectoServices {
@@ -17,6 +18,14 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public Usuario buscarUsuario(String nombre) throws ServicesException;
+
+        /**
+     * Consulta el usuario dado su id
+     * 
+     * @return Usuario
+     * @throws ServicesException
+     */
+    public Usuario buscarUsuarioPorId(int id) throws ServicesException;
 
     /**
      * Retorna el rol correspondiente al id
@@ -76,6 +85,15 @@ public interface ProyectoServices {
      */
     public Recurso getRecurso(String nombre) throws ServicesException;
 
+        /**
+     * Consulta el recurso segun el id
+     * 
+     * @param id id del recurso
+     * @return Recurso
+     * @throws ServicesException
+     */
+    public Recurso getRecursoPorId(int id) throws ServicesException;
+
     /**
      * Inserta reserva en la base de datos
      * @param re Reserva a insertar
@@ -105,4 +123,11 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public List<Reserva> getReservasRecurso(int idRecurso) throws ServicesException;
+
+    /**
+     * Consulta informacion detallada de reservas
+     * @return
+     * @throws ServicesException
+     */
+    public List<UsuRecuRese> getUsuRecuRese() throws ServicesException;
 }

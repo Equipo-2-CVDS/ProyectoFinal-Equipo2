@@ -9,6 +9,7 @@
         <result property='idRecurso' column='idRecurso' />
         <result property='desde' column='desde' />
         <result property='hasta' column='hasta' />
+        <result property='fechaSolicitado' column='fechaSolicitado' />
         <result property='recurrencia' column='recurrencia' />
     </resultMap>
 
@@ -20,35 +21,36 @@
             re.idRecurso ,
             re.desde ,
             re.hasta ,
+            re.fechaSolicitado,
             re.recurrencia
         FROM RESERVAS as re
             WHERE re.idUsuario=#{idUsuario}
     </select>
-<<<<<<< HEAD
-    <select id="getReservas" resultMap="ReservaResult"
-=======
-
-    <select id="getReservasRecurso" resultMap="ReservaResult"
->>>>>>> 36f7ce8cd63eeb92517550888a7e5bf908015631
-            parameterType="map">
+    <select id="getReservas" resultMap="ReservaResult" parameterType="map">
         SELECT
             re.id ,
             re.idUsuario ,
             re.idRecurso ,
             re.desde ,
-<<<<<<< HEAD
-            re.hasta
-        FROM RESERVAS as re
-            
-    </select>
-=======
             re.hasta ,
+            re.fechaSolicitado,
+            re.recurrencia
+        FROM RESERVAS as re         
+    </select>
+    <select id="getReservasRecurso" resultMap="ReservaResult"
+    parameterType="map">
+        SELECT
+            re.id ,
+            re.idUsuario ,
+            re.idRecurso ,
+            re.desde ,
+            re.hasta ,
+            re.fechaSolicitado,
             re.recurrencia
         FROM RESERVAS as re
             WHERE re.idRecurso=#{idRecurso}
     </select>
 
->>>>>>> 36f7ce8cd63eeb92517550888a7e5bf908015631
     <insert id="insertarReserva" parameterType="map">
         insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia) values
         (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia})
