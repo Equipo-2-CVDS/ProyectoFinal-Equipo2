@@ -1,6 +1,7 @@
 package edu.eci.cvds.services;
 
 import com.google.inject.Injector;
+import edu.eci.cvds.entities.Recurso;
 import org.mybatis.guice.XMLMyBatisModule;
 import edu.eci.cvds.persistence.HorarioDAO;
 import edu.eci.cvds.persistence.RecursoDAO;
@@ -64,10 +65,13 @@ public class ProyectoServicesFactory {
 
    public static void main(String a[]) throws ServicesException {
     ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-    servicio.getHorariosDisponibles(1);
+//    servicio.getHorariosDisponibles(1);
 //    System.out.println(servicio.getRecursosDisponibles());
+    for (Recurso r:servicio.getRecursos()){
+        System.out.println(r);
+    }
 //    System.out.println(servicio.buscarUsuario("admin"));
-    System.out.println(servicio.getHorariosDisponibles(1));
+//    System.out.println(servicio.getHorariosDisponibles(1));
     
 }
 
