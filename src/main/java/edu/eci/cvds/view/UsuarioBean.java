@@ -37,7 +37,8 @@ public class UsuarioBean extends BasePageBean {
     private String username;
     private int rol;
     Subject subject;
-    private String redirectUrl = "/faces/login.xhtml";
+    private String redirectUrl = "/faces/home.xhtml";
+    private String home = "/faces/home.xhtml";
 
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
@@ -55,7 +56,7 @@ public class UsuarioBean extends BasePageBean {
                 userId = usuario.getId();
                 rol = usuario.getRol();
                 subject.login(token);
-                FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect(redirectUrl);
             } else {
                 messageError("El usuario no existe");
             }
@@ -216,4 +217,20 @@ public class UsuarioBean extends BasePageBean {
         this.password = password;
     }
 
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
+    }
+    
 }

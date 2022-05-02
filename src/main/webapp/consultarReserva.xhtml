@@ -38,6 +38,9 @@
     }
 
     .botn {
+        font-weight: bold;
+        font-size: 25px;
+        font-family: 'Courier New';
         width: 22%;
         height: 40px;
         margin: 10px;
@@ -45,7 +48,6 @@
         background: rgb(248, 248, 248);
         color: black;
         text-align: center;
-        font-size: 50%;
         align-self: center;
         align-items: center;
 
@@ -119,7 +121,7 @@
 <h:head>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
 </h:head>
-<title>Consultar Recurso</title>
+<title>Consultar Reserva</title>
 
 <body class="page">
     <p:messages id="messages" showDetail="true" closable="true">
@@ -130,44 +132,32 @@
     </div>
 
     <div class="divBody">
-        <p class="titulo">Consultar Recurso</p>
-        <h:form id="formConsultarRecursos" class="formbox">
+        <p class="titulo">Consultar Reserva</p>
+        <h:form id="formConsultarReserva" class="formbox">
             <center>
-                <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
-                    filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                    emptyMessage="Not Found" class="table"
+                <p:dataTable id="table" var="usuRecuRese" value="#{consultarReservaBean.usuRecuRese}"
+                    filteredValue="#{consultarReservaBean.filtro}" rows="10" width="100%" paginator="true"
+                    emptyMessage="Not Found"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{recurso.nombre}" filterBy="#{recurso.nombre}"
+                    <p:column headerText="Nombre" sortBy="#{usuRecuRese.nombreRecurso}" filterBy="#{usuRecuRese.nombreRecurso}"
                         filterMatchMode="contains">
-                        <h:outputText value="#{recurso.nombre}" />
+                        <h:outputText value="#{usuRecuRese.nombreRecurso}" />
                     </p:column>
-                    <p:column headerText="Tipo" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{recurso.tipo}" />
+                    <p:column headerText="Informacion"  >
+                        <h:outputText value="#{usuRecuRese.infoRecurso}" />
                     </p:column>
-                    <p:column headerText="Capacidad" sortBy="#{recurso.capacidad}" filterBy="#{recurso.capacidad}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{recurso.capacidad}" />
+                    <p:column headerText="Fecha inicial" >
+                        <h:outputText value="#{usuRecuRese.fechaDesde}" />
                     </p:column>
-                    <p:column headerText="Ubicacion" sortBy="#{recurso.ubicacion}" filterBy="#{recurso.ubicacion}"
-                        filterMatchMode="contains">
-                        <h:outputText value="#{recurso.ubicacion}" />
-                    </p:column>
-                    <p:column headerText="Estado">
-                        <h:outputText value="#{recurso.estado}" />
-                    </p:column>
-                    <p:column headerText="Consultar Horario">
-                        <p:calendar value="calendario" />
-                        <br>
-                        <p:commandButton class="botn" value="Consultar" style="text-align: center"
-                            actionListener="#{horarioBean.consultarHorario(calendario)}" /></br>
+                    <p:column headerText="Fecha Final">
+                        <h:outputText value="#{usuRecuRese.fechaHasta}" />
                     </p:column>
                 </p:dataTable>
             </center>
             <br>
-            <p:commandButton update="formConsultarRecursos" class="botn" value="Volver"
-                actionListener="#{navigationController.paginaInicio()}" /></br>
+            <p:commandButton update="formConsultarReserva" class="botn" value="Volver"
+                actionListener="#{navigationController.paginaHome()}"/></br>
         </h:form>
     </div>
 </body>
