@@ -122,8 +122,8 @@
         <h1>#{misReservasBean.title}</h1>
         <div class="table">
             <h:form  id="formConsultarMisReservas" class="formbox">
-                <p:dataTable class="table-cont" id="table" var="reserva" borde="10px" value="#{misReservasBean.consultarReservas()}"
-                     tableStyle="table-dark table-striped table-bordered justify-content-center" emptyMessage="No tienes reservaciones activas"
+                <p:dataTable class="table-cont" id="table" var="reserva" borde="10px" value="#{misReservasBean.consultarReservas(userBean.userId)}"
+                     tableStyle="table-dark table-striped table-bordered justify-content-center" emptyMessage="No tienes reservaciones para esta busqueda"
                      scrollable="true"  draggableRows="false"  cellSeparator="true"  scrollHeight="330" >
                     <p:column class="column">
                         <f:facet name="header"> Id </f:facet>
@@ -141,20 +141,20 @@
                         <f:facet name = "header"> Fecha Hasta </f:facet>
                         #{reserva.hasta}
                     </p:column>
-                    <p:column class="column" style="display: #{misReservasBean.showTableButtons()};">
-                        <p:commandButton update="formConsultarMisReservas" class="but but-table but-style-detail" value="Detallar"
+                    <p:column class="column">
+                        <p:commandButton style="display: #{misReservasBean.showTableButtonDetail()};" update="formConsultarMisReservas" class="but but-table but-style-detail" value="Detallar"
                             actionListener="#{misReservasBean.detailBooking(reserva.id)}" />
-                        <p:commandButton update="formConsultarMisReservas" class="but but-table but-style-delete" value="Eliminar"
+                        <p:commandButton style="display: #{misReservasBean.showTableButtonDelete(userBean.userId)};" update="formConsultarMisReservas" class="but but-table but-style-delete" value="Eliminar"
                             actionListener="#{misReservasBean.deleteBooking(reserva.id)}" />
                     </p:column>
                 </p:dataTable>
                 <div class="buttons">
-                    <p:commandButton style="display: #{misReservasBean.showFilterOld()}" update="formConsultarMisReservas" class="but but-style" value="Reservas Anteriores"
-                        actionListener="#{misReservasBean.setfilterOld()}" />
-                    <p:commandButton style="display: #{misReservasBean.showFilterCancelled()}" update="formConsultarMisReservas" class="but but-style" value="Reservas Canceladas"
-                        actionListener="#{misReservasBean.setfilterCancelled()}" />
+                    <p:commandButton style="display: #{misReservasBean.showFilterOld(userBean.userId)}" update="formConsultarMisReservas" class="but but-style" value="Reservas Anteriores"
+                        actionListener="#{misReservasBean.setfilterOld(userBean.userId)}" />
+                    <p:commandButton style="display: #{misReservasBean.showFilterCancelled(userBean.userId)}" update="formConsultarMisReservas" class="but but-style" value="Reservas Canceladas"
+                        actionListener="#{misReservasBean.setfilterCancelled(userBean.userId)}" />
                     <p:commandButton style="display: #{misReservasBean.showAll()}" update="formConsultarMisReservas" class="but but-style" value="Reservas Actuales"
-                        actionListener="#{misReservasBean.removeFilters()}" />
+                        actionListener="#{misReservasBean.removeFilters(userBean.userId)}" />
                 </div>
             </h:form>
         </div>

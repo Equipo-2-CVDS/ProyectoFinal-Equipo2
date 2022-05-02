@@ -10,12 +10,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import java.sql.Time;
-import java.text.DateFormat;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @ManagedBean(name = "misReservasBean")
 @SessionScoped
@@ -29,76 +26,79 @@ public class MisReservasBean extends BasePageBean {
 
     public String title = "Mis reservas";
 
-    private static ArrayList<Reserva> reservas = new ArrayList<>();
+    public final static char filterNewest = 'n';
 
-    public List<Reserva> consultarReservas() {
-        reservas = new ArrayList<>();
-        java.sql.Timestamp timestamp1 = java.sql.Timestamp.valueOf("2022-04-23 10:10:10.0");
-        java.sql.Timestamp timestamp2 = java.sql.Timestamp.valueOf("2022-04-23 11:10:10.0");
-        if (this.filter == 0) {
-            reservas = new ArrayList<>();
-            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
-            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
-            for (int i = 0; i < 6; i++) {
-                reservas.add(r1);
-                reservas.add(r2);
-                reservas.add(r3);
-                reservas.add(r4);
+    public final static char filterOlders = 'o';
+
+    private static List<Reserva> reservas = new ArrayList<>();
+
+    public List<Reserva> consultarReservas(int id) {
+        Timestamp today = new Timestamp(System.currentTimeMillis());
+        try {
+            List<Reserva> refreshReserva = userServices.getReservasUsuario(id);
+            if (userServices.getRol(id).equals("Administrador")) {
+                title = "Todas las reservas";
+                reservas = userServices.getReservas();
+            } else if (this.filter == 0) {
+                reservas = filterByDate(refreshReserva, today, filterNewest);
+            } else if (this.filter == 1) {
+                reservas = filterByDate(refreshReserva, today, filterOlders);
+            } else if (this.filter == 2) {
+                reservas = new ArrayList<>();
             }
-        } else if (this.filter == 1) {
-            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
-            reservas.add(r1);
-            reservas.add(r2);
-        } else if (this.filter == 2) {
-            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
-            reservas.add(r3);
-            reservas.add(r4);
+        } catch (ServicesException e) {
+            e.printStackTrace();
         }
         return reservas;
     }
 
-    public void setfilterOld() {
+    public void setfilterOld(int id) {
         this.title = "Mis reservas pasadas";
         this.filter = 1;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void setfilterCancelled() {
-        this.title = "Mis reservas canceladas";
+    public void setfilterCancelled(int id) {
+        this.title = "Mis reservas canceladas (¡Funcionalidad en construcción!)";
         this.filter = 2;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void removeFilters() {
+    public void removeFilters(int id) {
         this.title = "Mis reservas";
         this.filter = 0;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void callFilters() {
-        this.showFilterOld();
-        this.showFilterCancelled();
+    public void callFilters(int id) {
+        try {
+            this.showFilterCancelled(id);
+            this.showTableButtonDelete(id);
+            this.showFilterOld(id);
+        } catch (ServicesException e) {
+            e.printStackTrace();
+        }
         this.showAll();
-        this.showTableButtons();
+        this.showTableButtonDetail();
     }
 
-    public String showFilterOld() {
-        return (this.filter != 1) ? "" : "none";
+    public String showFilterOld(int id) throws ServicesException {
+        return (this.filter != 1 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
-    public String showFilterCancelled() {
-        return (this.filter != 2) ? "" : "none";
+    public String showFilterCancelled(int id) throws ServicesException {
+        return (this.filter != 2 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
-    public String showTableButtons() {
+    public String showTableButtonDetail() {
         return (this.filter == 0) ? "" : "none";
+    }
+
+    public String showTableButtonDelete(int id) throws ServicesException {
+        return (this.filter == 0 && userServices.getRol(id).equals("Comunidad")) ? "" : "none"; // here
     }
 
     public String showAll() {
@@ -118,6 +118,21 @@ public class MisReservasBean extends BasePageBean {
     public void detailBooking(int idReserva) {
         System.out.println(idReserva);
         messageError("la funcionalidad de detalles está en construcción.");
+    }
+
+    public List<Reserva> filterByDate(List<Reserva> initialArray, Timestamp date, char filterType) {
+        List<Reserva> filteredList = new ArrayList<>();
+
+        for (Reserva reserva : initialArray) {
+            int comparation = reserva.getHasta().compareTo(date);
+            if (comparation > 0 && filterType == filterNewest) {
+                filteredList.add(reserva);
+            }
+            if (comparation < 0 && filterType == filterOlders) {
+                filteredList.add(reserva);
+            }
+        }
+        return filteredList;
     }
 
     /**
