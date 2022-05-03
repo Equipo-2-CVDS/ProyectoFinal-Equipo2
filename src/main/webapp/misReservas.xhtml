@@ -50,6 +50,19 @@
     .buttons {
         margin-top: 20px;
     }
+    .admin-search{
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .admin-search > *{
+        margin-bottom: 10px;
+        margin-right: 20px;
+    }
+    .admin-search > input{
+        background-color: white;
+        color: black;
+    }
     /* Tabla */
     /* -- Padign filas */
     .ui-datatable thead th,.ui-datatable tbody td,.ui-datatable tfoot td{
@@ -121,7 +134,13 @@
     <div class="divPrimer">
         <h1>#{misReservasBean.title}</h1>
         <div class="table">
-            <h:form  id="formConsultarMisReservas" class="formbox">
+            <h:form id="formConsultarMisReservas" class="formbox">
+                <div class="admin-search" style="display: #{misReservasBean.isAdmin(userBean.userId)}">
+                    <h:inputText class="input-style" update="formConsultarMisReservas" value="#{misReservasBean.idUsuario}"/>
+                    <p:commandButton update="formConsultarMisReservas" class="but but-style" value="Buscar"/>
+                    <p:commandButton update="formConsultarMisReservas" class="but but-style" value="Reiniciar"
+                        actionListener="#{misReservasBean.reset()}" />
+                </div>
                 <p:dataTable class="table-cont" id="table" var="reserva" borde="10px" value="#{misReservasBean.consultarReservas(userBean.userId)}"
                      tableStyle="table-dark table-striped table-bordered justify-content-center" emptyMessage="No tienes reservaciones para esta busqueda"
                      scrollable="true"  draggableRows="false"  cellSeparator="true"  scrollHeight="330" >
@@ -131,7 +150,7 @@
                     </p:column>
                     <p:column class="column">
                         <f:facet name="header"> Id Recurso </f:facet>
-                        #{reserva.id}
+                        #{reserva.idRecurso}
                     </p:column>
                     <p:column class="column">
                         <f:facet name = "header"> Fecha Desde </f:facet>
