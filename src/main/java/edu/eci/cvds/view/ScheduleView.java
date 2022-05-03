@@ -1,17 +1,18 @@
 package edu.eci.cvds.view;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.google.inject.Inject;
+import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.services.ProyectoServices;
+import edu.eci.cvds.services.ServicesException;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -21,8 +22,8 @@ import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
 @ManagedBean
-@ViewScoped
-public class ScheduleView implements Serializable {
+@SessionScoped
+public class ScheduleView extends BasePageBean {
 
     @Inject
     private ProyectoServices userServices;
@@ -32,12 +33,11 @@ public class ScheduleView implements Serializable {
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     @PostConstruct
-    public void init() {
+    public void init() throws ServicesException {
         this.eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("Champions League Match", previousDay8Pm(), previousDay11Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Birthday Party", today1Pm(), today6Pm()));
-        eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys", nextDay9Am(), nextDay11Am()));
-        eventModel.addEvent(new DefaultScheduleEvent("Plant the new garden stuff", theDayAfter3Pm(), fourDaysLater3pm()));
+        for (Recurso r : userServices.getRecursos()){
+            eventModel.addEvent(new DefaultScheduleEvent(r.getNombre(), previousDay8Pm(), previousDay11Pm()));
+        }
     }
 
 
