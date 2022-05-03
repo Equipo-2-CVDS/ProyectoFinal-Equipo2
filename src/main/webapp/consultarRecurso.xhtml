@@ -1,12 +1,32 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
-    xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:jsf="http://xmlns.jcp.org/jsf">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <style>
+
+    .ui-paginator-page{
+        background-color: #CADAF7 !important;
+      }
+    .ui-paginator{
+        background-color: #2255D5 !important;
+        color: black;
+    }
+
+    .rows {
+        background: #CADAF7  !important ;
+    }
+
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+        color: blue;
+    }
+
+
     body {
         font-family: 'Courier New';
         background-color: rgb(46, 46, 184);
@@ -66,31 +86,29 @@
 
     }
 
-    .gri {
-        background: rgba(4, 0, 8, 0.664);
-        display: grid;
-        border-radius: 15px;
-        text-align: center;
-        grid-template-columns: 50% 35%;
-        padding: 10% 8%;
-        margin: 3%;
-
-    }
-
     .table {
         align-self: center;
         text-align: center;
         align-items: center;
         align-content: center;
+        color: black;
     }
 
-    .select {
-        border-radius: 10px;
-        margin-bottom: 10px;
+
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
     }
 
-    .logo {
-        margin-left: auto;
+    .ui-datatable thead th {
+        background-image: none !important;
+        background-color: blue !important;
+        color: white !important;
+        align: center;
+    }
+
+    tr {
+        height: 50px;
     }
 
     .time {
@@ -98,7 +116,6 @@
         margin-bottom: 10px;
         text-align: left;
         align-items: center;
-
     }
 
     .bodylogo {
@@ -106,18 +123,10 @@
         color: rgb(46, 46, 184);
     }
 
-    .check {
-        padding: 1%;
-        align-self: center;
-        align-items: center;
-    }
-
-    .dividendo {
-        margin-top: 3%;
-    }
 </style>
 <h:head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+    </script>
 </h:head>
 <title>Consultar Recurso</title>
 
@@ -135,11 +144,11 @@
             <center>
                 <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
                     filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                    emptyMessage="Not Found" class="table"
+                    emptyMessage="Not Found" class = "table" rowStyleClass="rows" paginatorPosition="bottom"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                    currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{recurso.nombre}" filterBy="#{recurso.nombre}"
-                        filterMatchMode="contains">
+                    currentPageReportTemplate="pag {startRecord} de {endRecord}">
+                    <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
+
                         <h:outputText value="#{recurso.nombre}" />
                     </p:column>
                     <p:column headerText="Tipo" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
@@ -158,16 +167,18 @@
                         <h:outputText value="#{recurso.estado}" />
                     </p:column>
                     <p:column headerText="Consultar Horario">
-                        <p:calendar value="calendario" />
-                        <br>
-                        <p:commandButton class="botn" value="Consultar" style="text-align: center"
-                            actionListener="#{horarioBean.consultarHorario(calendario)}" /></br>
+<!--                        <p:calendar value="fecha"/>-->
+                        <p:button value = "Consultar" oncomplete = "requestDialog();" ajax = "false"
+                                  outcome = "consultarHorarios"/>
+
+
                     </p:column>
+
                 </p:dataTable>
             </center>
-            <br>
-            <p:commandButton update="formConsultarRecursos" class="botn" value="Volver"
-                actionListener="#{navigationController.paginaInicio()}" /></br>
+            <br><p:commandButton class="botn" value="Volver"
+                                 actionListener="#{navigationController.paginaInicio()}"/></br>
+
         </h:form>
     </div>
 </body>

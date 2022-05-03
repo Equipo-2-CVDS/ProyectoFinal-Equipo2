@@ -63,35 +63,6 @@ public class ProyectoServicesImpl implements ProyectoServices {
             throw new ServicesException("Error buscando recursos", ex);
         }
     }
-
-    // public List<Recurso> getRecursosFromTipo(String tipo) throws
-    // ServicesException{
-    // try{
-    // return recursoDAO.getRecursoFromTipo(tipo);
-    // } catch (PersistenceException ex) {
-    // throw new ServicesException("Error buscando recursos", ex);
-    // }
-    // }
-    //
-    // @Override
-    // public List<Recurso> getRecursosFromCapacidad(int capacidad) throws
-    // ServicesException {
-    // try{
-    // return recursoDAO.getRecursoFromCapacidad(capacidad);
-    // } catch (PersistenceException ex) {
-    // throw new ServicesException("Error buscando recursos", ex);
-    // }
-    // }
-    //
-    // public List<Recurso> getRecursosFromUbicacion(String tipo) throws
-    // ServicesException{
-    // try{
-    // return recursoDAO.getRecursoFromUbicacion(tipo);
-    // } catch (PersistenceException ex) {
-    // throw new ServicesException("Error buscando recursos", ex);
-    // }
-    // }
-
     @Override
     public void insertarRecurso(Recurso r) throws ServicesException {
         try {
@@ -155,6 +126,12 @@ public class ProyectoServicesImpl implements ProyectoServices {
         }
     }
 
+    @Override
+    public List<Recurso> getRecursos() throws ServicesException {
+        try{
+            return recursoDAO.getRecursos();
+        } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando los recursos", ex);
     public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException {
         try {
             return horarioDAO.getHorarioDia(idRecurso, idDia);
