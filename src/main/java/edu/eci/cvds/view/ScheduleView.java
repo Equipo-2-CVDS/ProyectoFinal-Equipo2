@@ -35,7 +35,7 @@ public class ScheduleView extends BasePageBean {
     @PostConstruct
     public void init() {
         this.eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("No se", previousDay8Pm(), previousDay11Pm()));
+//        eventModel.addEvent(new DefaultScheduleEvent("No se", previousDay8Pm(), previousDay11Pm()));
     }
 
 
@@ -156,21 +156,21 @@ public class ScheduleView extends BasePageBean {
         event = (ScheduleEvent) selectEvent.getObject();
     }
 
-    public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
-    }
-
-    public void onEventMove(ScheduleEntryMoveEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-
-        addMessage(message);
-    }
-
-    public void onEventResize(ScheduleEntryResizeEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-
-        addMessage(message);
-    }
+//    public void onDateSelect(SelectEvent selectEvent) {
+//        event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
+//    }
+//
+//    public void onEventMove(ScheduleEntryMoveEvent event) {
+//        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+//
+//        addMessage(message);
+//    }
+//
+//    public void onEventResize(ScheduleEntryResizeEvent event) {
+//        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event resized", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
+//
+//        addMessage(message);
+//    }
 
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);

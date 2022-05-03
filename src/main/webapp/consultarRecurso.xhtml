@@ -7,6 +7,26 @@
       xmlns:p="http://primefaces.org/ui">
 
 <style>
+
+    .ui-paginator-page{
+        background-color: #CADAF7 !important;
+      }
+    .ui-paginator{
+        background-color: #2255D5 !important;
+        color: black;
+    }
+
+    .rows {
+        background: #CADAF7  !important ;
+    }
+
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+        color: blue;
+    }
+
+
     body {
         font-family: 'Courier New';
         background-color: rgb(46, 46, 184);
@@ -66,31 +86,29 @@
 
     }
 
-    .gri {
-        background: rgba(4, 0, 8, 0.664);
-        display: grid;
-        border-radius: 15px;
-        text-align: center;
-        grid-template-columns: 50% 35%;
-        padding: 10% 8%;
-        margin: 3%;
-
-    }
-
     .table {
         align-self: center;
         text-align: center;
         align-items: center;
         align-content: center;
+        color: black;
     }
 
-    .select {
-        border-radius: 10px;
-        margin-bottom: 10px;
+
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
     }
 
-    .logo {
-        margin-left: auto;
+    .ui-datatable thead th {
+        background-image: none !important;
+        background-color: blue !important;
+        color: white !important;
+        align: center;
+    }
+
+    tr {
+        height: 50px;
     }
 
     .time {
@@ -105,15 +123,6 @@
         color: rgb(46, 46, 184);
     }
 
-    .check {
-        padding: 1%;
-        align-self: center;
-        align-items: center;
-    }
-
-    .dividendo {
-        margin-top: 3%;
-    }
 </style>
 <h:head>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
@@ -135,9 +144,9 @@
             <center>
                 <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
                     filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                    emptyMessage="Not Found" class = "table"
+                    emptyMessage="Not Found" class = "table" rowStyleClass="rows" paginatorPosition="bottom"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                    currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
+                    currentPageReportTemplate="pag {startRecord} de {endRecord}">
                     <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
                         <h:outputText value="#{recurso.nombre}" />
                     </p:column>
@@ -157,10 +166,11 @@
                         <h:outputText value="#{recurso.estado}" />
                     </p:column>
                     <p:column headerText="Consultar Horario">
-                        <p:calendar value="fecha"/>
+<!--                        <p:calendar value="fecha"/>-->
                         <p:button value = "Consultar" oncomplete = "requestDialog();" ajax = "false"
-                                  action = "#{horarioBean.consultarHorario()}"/>
+                                  outcome = "consultarHorarios"/>
                     </p:column>
+
                 </p:dataTable>
             </center>
             <br><p:commandButton class="botn" value="Volver"

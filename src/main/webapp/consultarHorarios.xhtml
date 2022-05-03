@@ -7,6 +7,25 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 <style>
+
+    .ui-paginator-page{
+        background-color: #CADAF7 !important;
+      }
+    .ui-paginator{
+        background-color: #2255D5 !important;
+        color: white;
+    }
+
+    .rows {
+        background: #CADAF7  !important ;
+    }
+
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+        color: blue;
+    }
+
     body {
         font-family: 'Courier New';
         background-color: rgb(46, 46, 184);
@@ -66,31 +85,29 @@
 
     }
 
-    .gri {
-        background: rgba(4, 0, 8, 0.664);
-        display: grid;
-        border-radius: 15px;
-        text-align: center;
-        grid-template-columns: 50% 35%;
-        padding: 10% 8%;
-        margin: 3%;
-
-    }
-
     .table {
         align-self: center;
         text-align: center;
         align-items: center;
         align-content: center;
+        color: black;
     }
 
-    .select {
-        border-radius: 10px;
-        margin-bottom: 10px;
+
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
     }
 
-    .logo {
-        margin-left: auto;
+    .ui-datatable thead th {
+        background-image: none !important;
+        background-color: blue !important;
+        color: white !important;
+
+    }
+
+    tr {
+        height: 50px;
     }
 
     .time {
@@ -104,19 +121,14 @@
         background-color: rgb(46, 46, 184);
         color: rgb(46, 46, 184);
     }
+    
 
-    .check {
-        padding: 1%;
-        align-self: center;
-        align-items: center;
-    }
+}
 
-    .dividendo {
-        margin-top: 3%;
-    }
 </style>
 <h:head>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+  </script>
 </h:head>
 <title>Consultar Recurso</title>
 
@@ -130,40 +142,34 @@
 
 <div class="divBody">
   <p class="titulo">Consultar Horario</p>
-  <h:form id="formConsultarHorario" class="formbox">
+  <h:form id="formConsultarRecursos" class="formbox">
     <center>
       <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
-                   filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                   emptyMessage="Not Found" class = "table"
+                   filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true" rowKey="#{recurso.id}" selectionMode="single"
+                   emptyMessage="Not Found" class = "table" rowStyleClass="rows" paginatorPosition="bottom"
                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                   currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
+                   currentPageReportTemplate="Pag {startRecord} de {endRecord}">
+        <p:column headerText="Id" sortBy="#{recurso.id}">
+          <h:outputText value="#{recurso.id}" />
+        </p:column>
         <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
           <h:outputText value="#{recurso.nombre}" />
         </p:column>
-        <p:column headerText="Tipo" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
-                  filterMatchMode="contains">
+        <p:column headerText="Tipo" sortBy="#{recurso.tipo}">
           <h:outputText value="#{recurso.tipo}" />
         </p:column>
-        <p:column headerText="Capacidad" sortBy="#{recurso.capacidad}" filterBy="#{recurso.capacidad}"
-                  filterMatchMode="contains">
+        <p:column headerText="Capacidad">
           <h:outputText value="#{recurso.capacidad}" />
         </p:column>
-        <p:column headerText="Ubicacion" sortBy="#{recurso.ubicacion}" filterBy="#{recurso.ubicacion}"
-                  filterMatchMode="contains">
-          <h:outputText value="#{recurso.ubicacion}" />
-        </p:column>
-        <p:column headerText="Estado">
-          <h:outputText value="#{recurso.estado}" />
-        </p:column>
-        <p:column headerText="Consultar Horario">
-          <p:calendar value="fecha" style = "text-align: center"/>
-          <br><p:commandButton class="botn" value="Consultar"
-                               actionListener="#{horarioBean.consultarHorario()}"/></br>
-        </p:column>
+        <f:facet name="footer">
+          <center><p:commandButton process="table"  icon="pi pi-search"
+                           value="View"
+                           oncomplete="PF('productDialog').show()"/></center>
+        </f:facet>
       </p:dataTable>
     </center>
     <br><p:commandButton class="botn" value="Volver"
-                         actionListener="#{navigationController.paginaInicio()}"/></br>
+                         actionListener="#{navigationController.paginaConsultaR()}"/></br>
   </h:form>
 </div>
 </body>

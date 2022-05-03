@@ -21,6 +21,7 @@ public class RecursoBean extends BasePageBean {
     @Inject
     private ProyectoServices userServices;
 
+    private int nose;
     private String[] dias;
     private int id;
     private String nombre;
