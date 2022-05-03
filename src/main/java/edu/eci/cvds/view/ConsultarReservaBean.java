@@ -36,9 +36,7 @@ public class ConsultarReservaBean extends BasePageBean{
             Usuario user = userServices.buscarUsuario(usuario);
             if(user.getRol() == 1){
                 consultarReservas();
-            }//else{
-                //usuRecuRese = userServices.getReservasUsuario(user.getId());
-           // }
+            }
             
         } catch(Exception e){
             System.out.println(e);

@@ -140,18 +140,30 @@
                     emptyMessage="Not Found"
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
-                    <p:column headerText="Nombre" sortBy="#{usuRecuRese.nombreRecurso}" filterBy="#{usuRecuRese.nombreRecurso}"
+                    <p:column headerText="Nombre" sortBy="#{usuRecuRese.nombreRecurso}"
                         filterMatchMode="contains">
                         <h:outputText value="#{usuRecuRese.nombreRecurso}" />
                     </p:column>
                     <p:column headerText="Informacion"  >
                         <h:outputText value="#{usuRecuRese.infoRecurso}" />
                     </p:column>
+                    <p:column headerText="Fecha Solicitud" >
+                        <h:outputText value="#{usuRecuRese.fechaSolicitado}" />
+                    </p:column>
                     <p:column headerText="Fecha inicial" >
                         <h:outputText value="#{usuRecuRese.fechaDesde}" />
                     </p:column>
                     <p:column headerText="Fecha Final">
                         <h:outputText value="#{usuRecuRese.fechaHasta}" />
+                    </p:column>
+                    <p:column headerText="Usuario que Solicita"  >
+                        <h:outputText value="#{usuRecuRese.nombreUsuario}" />
+                    </p:column>
+                    <p:column headerText="Programa usuario que solicita"  >
+                        <h:outputText value="#{usuRecuRese.programaUsuario}" />
+                    </p:column>
+                    <p:column headerText="Recurrencia"  >
+                        <h:outputText value="#{usuRecuRese.recurrencia}" />
                     </p:column>
                 </p:dataTable>
             </center>
