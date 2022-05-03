@@ -7,7 +7,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletContext;
 import com.google.inject.Injector;
-import edu.eci.cvds.services.ServicesException;
 
 @Named
 
@@ -29,5 +28,5 @@ public abstract class BasePageBean implements Serializable {
     }
 
     @PostConstruct
-    public void init() throws ServicesException { getInjector().injectMembers(this);}
+    public void init() { getInjector().injectMembers(this);}
 }

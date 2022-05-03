@@ -1,18 +1,18 @@
 package edu.eci.cvds.view;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -33,11 +33,9 @@ public class ScheduleView extends BasePageBean {
     private ScheduleEvent event = new DefaultScheduleEvent();
 
     @PostConstruct
-    public void init() throws ServicesException {
+    public void init() {
         this.eventModel = new DefaultScheduleModel();
-        for (Recurso r : userServices.getRecursos()){
-            eventModel.addEvent(new DefaultScheduleEvent(r.getNombre(), previousDay8Pm(), previousDay11Pm()));
-        }
+        eventModel.addEvent(new DefaultScheduleEvent("No se", previousDay8Pm(), previousDay11Pm()));
     }
 
 
