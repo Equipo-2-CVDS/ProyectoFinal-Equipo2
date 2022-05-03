@@ -14,4 +14,6 @@ public interface RecursoMapper {
     public void insertarRecurso(@Param("r") Recurso r);
 
     public List<Recurso> getRecursos();
+
+    public Recurso getRecursoPorId(@Param("id") int id);
 }

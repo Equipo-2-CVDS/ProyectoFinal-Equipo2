@@ -5,6 +5,7 @@ import edu.eci.cvds.entities.Usuario;
 public interface UsuarioDAO {
 
 	public Usuario buscarUsuario(String nombre) throws PersistenceException;
+	public Usuario getUsuarioPorId(int id) throws PersistenceException;
 	
 }
 

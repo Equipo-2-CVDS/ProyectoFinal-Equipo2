@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<style>
+    body {
+        font-family: 'Courier New';
+        background-color: rgb(46, 46, 184);
+        color: white;
+        text-align: center;
+        padding: 1% 3%;
+        align-content: center;
+    }
+
+    .divBody {
+        background-color: rgba(1, 1, 70, 0.623);
+        border-radius: 15px;
+        height: auto;
+        width: auto;
+        padding: 3% 2%;
+    }
+
+    .titulo {
+        font-size: 40px;
+    }
+
+    .formbox {
+        border-radius: 15px;
+        background-color: rgba(1, 1, 70, 0.623);
+        padding: 2%;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .botn {
+        font-weight: bold;
+        font-size: 25px;
+        font-family: 'Courier New';
+        width: 22%;
+        height: 40px;
+        margin: 10px;
+        border-radius: 15px;
+        background: rgb(248, 248, 248);
+        color: black;
+        text-align: center;
+        align-self: center;
+        align-items: center;
+
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .input {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+
+
+    }
+
+    .gri {
+        background: rgba(4, 0, 8, 0.664);
+        display: grid;
+        border-radius: 15px;
+        text-align: center;
+        grid-template-columns: 50% 35%;
+        padding: 10% 8%;
+        margin: 3%;
+
+    }
+
+    .table {
+        align-self: center;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .select {
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .logo {
+        margin-left: auto;
+    }
+
+    .time {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+
+    }
+
+    .bodylogo {
+        background-color: rgb(46, 46, 184);
+        color: rgb(46, 46, 184);
+    }
+
+    .check {
+        padding: 1%;
+        align-self: center;
+        align-items: center;
+    }
+
+    .dividendo {
+        margin-top: 3%;
+    }
+</style>
+<h:head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+</h:head>
+<title>Consultar Reserva</title>
+
+<body class="page">
+    <p:messages id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
+    <div class="bodylogo">
+        <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+    </div>
+
+    <div class="divBody">
+        <p class="titulo">Consultar Reserva</p>
+        <h:form id="formConsultarReserva" class="formbox">
+            <center>
+                <p:dataTable id="table" var="usuRecuRese" value="#{consultarReservaBean.usuRecuRese}"
+                    filteredValue="#{consultarReservaBean.filtro}" rows="10" width="100%" paginator="true"
+                    emptyMessage="Not Found"
+                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                    currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records ">
+                    <p:column headerText="Nombre" sortBy="#{usuRecuRese.nombreRecurso}" filterBy="#{usuRecuRese.nombreRecurso}"
+                        filterMatchMode="contains">
+                        <h:outputText value="#{usuRecuRese.nombreRecurso}" />
+                    </p:column>
+                    <p:column headerText="Informacion"  >
+                        <h:outputText value="#{usuRecuRese.infoRecurso}" />
+                    </p:column>
+                    <p:column headerText="Fecha inicial" >
+                        <h:outputText value="#{usuRecuRese.fechaDesde}" />
+                    </p:column>
+                    <p:column headerText="Fecha Final">
+                        <h:outputText value="#{usuRecuRese.fechaHasta}" />
+                    </p:column>
+                </p:dataTable>
+            </center>
+            <br>
+            <p:commandButton update="formConsultarReserva" class="botn" value="Volver"
+                actionListener="#{navigationController.paginaHome()}"/></br>
+        </h:form>
+    </div>
+</body>
+
+</html>

@@ -57,7 +57,7 @@
         align-content: center;
     }
 
-    .botn
+    .botn {
         width: 22%;
         height: 40px;
         margin: 10px;
@@ -148,6 +148,7 @@
                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
                     currentPageReportTemplate="pag {startRecord} de {endRecord}">
                     <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
+
                         <h:outputText value="#{recurso.nombre}" />
                     </p:column>
                     <p:column headerText="Tipo" sortBy="#{recurso.tipo}" filterBy="#{recurso.tipo}"
@@ -169,14 +170,17 @@
 <!--                        <p:calendar value="fecha"/>-->
                         <p:button value = "Consultar" oncomplete = "requestDialog();" ajax = "false"
                                   outcome = "consultarHorarios"/>
+
+
                     </p:column>
 
                 </p:dataTable>
             </center>
             <br><p:commandButton class="botn" value="Volver"
                                  actionListener="#{navigationController.paginaInicio()}"/></br>
+
         </h:form>
-</div>
+    </div>
 </body>
 
 </html>

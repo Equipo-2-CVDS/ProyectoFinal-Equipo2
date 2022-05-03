@@ -9,6 +9,8 @@ public interface HorarioDAO {
 
     public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException;
 
+    public Horario getHorarioDia(int idRecurso, int idDia) throws PersistenceException;
+
     public void insertarHorario(Horario h) throws PersistenceException;
     
 }

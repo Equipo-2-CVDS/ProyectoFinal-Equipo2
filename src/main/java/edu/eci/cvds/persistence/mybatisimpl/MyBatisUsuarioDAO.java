@@ -22,4 +22,13 @@ public class MyBatisUsuarioDAO implements UsuarioDAO {
 		}
 	}
 
+	@Override
+	public Usuario getUsuarioPorId(int id) throws edu.eci.cvds.persistence.PersistenceException {
+		try {
+			return usuarioMapper.getUsuarioPorId(id);
+		} catch (Exception e) {
+			throw new PersistenceException(e.getMessage());
+		}
+	}
+
 }

@@ -33,4 +33,14 @@ public class MyBatisHorarioDAO implements HorarioDAO {
         }
         
     }
+
+
+    @Override
+    public Horario getHorarioDia(int idRecurso, int idDia) throws PersistenceException {
+        try {
+            return horarioMapper.getHorarioDia(idRecurso,idDia);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
 }
