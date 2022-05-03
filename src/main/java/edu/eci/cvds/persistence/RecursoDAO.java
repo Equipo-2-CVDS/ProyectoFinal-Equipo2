@@ -12,4 +12,6 @@ public interface RecursoDAO {
     List<Recurso> getRecursos() throws PersistenceException;
 
     public Recurso getRecursoPorId(int id) throws PersistenceException;
+
+    public void insertarRecurso(Recurso r) throws PersistenceException;
 }

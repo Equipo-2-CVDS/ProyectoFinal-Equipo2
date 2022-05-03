@@ -128,10 +128,12 @@ public class ProyectoServicesImpl implements ProyectoServices {
 
     @Override
     public List<Recurso> getRecursos() throws ServicesException {
-        try{
+        try {
             return recursoDAO.getRecursos();
         } catch (PersistenceException ex) {
             throw new ServicesException("Error buscando los recursos", ex);
+        }
+    }
     public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException {
         try {
             return horarioDAO.getHorarioDia(idRecurso, idDia);
