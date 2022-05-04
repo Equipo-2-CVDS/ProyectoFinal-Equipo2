@@ -85,6 +85,13 @@ public interface ProyectoServices {
      */
     public Recurso getRecurso(String nombre) throws ServicesException;
 
+    /**
+     * Consulta los recursos
+     *
+     * @return Recurso
+     * @throws ServicesException
+     */
+    public List<Recurso> getRecursos() throws ServicesException;
         /**
      * Consulta el recurso segun el id
      * 
