@@ -8,6 +8,7 @@ import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -38,7 +39,7 @@ public class ConsultarReservaBean extends BasePageBean{
         try{
             usuRecuRese = userServices.getUsuRecuRese(id);
         } catch(Exception e){
-            System.out.println(e);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hubo un error, vuelve a intentarlo",""));
         }
     }
     
