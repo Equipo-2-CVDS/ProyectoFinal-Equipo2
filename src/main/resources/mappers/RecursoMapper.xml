@@ -25,44 +25,16 @@
             WHERE r.estado
     </select>
 
-    <select id="getRecursosFromTipo" resultMap="RescursosResult"
-            parameterType="map">
+    <select id="getRecursos" resultMap="RescursosResult"
+        parameterType="map">
         SELECT
-        r.id ,
-        r.nombre ,
-        r.tipo ,
-        r.capacidad ,
-        r.ubicacion ,
-        r.estado
+            r.id ,
+            r.nombre ,
+            r.tipo ,
+            r.capacidad ,
+            r.ubicacion ,
+            r.estado
         FROM RECURSOS as r
-        WHERE r.tipo=#{tipo} and r.estado
-    </select>
-
-
-    <select id="getRecursosFromCapacidad" resultMap="RescursosResult"
-            parameterType="map">
-        SELECT
-        r.id ,
-        r.nombre ,
-        r.tipo ,
-        r.capacidad ,
-        r.ubicacion ,
-        r.estado
-        FROM RECURSOS as r
-        WHERE r.tipo=#{capacidad} and r.estado
-    </select>
-
-    <select id="getRecursosFromUbicacion" resultMap="RescursosResult"
-            parameterType="map">
-        SELECT
-        r.id ,
-        r.nombre ,
-        r.tipo ,
-        r.capacidad ,
-        r.ubicacion ,
-        r.estado
-        FROM RECURSOS as r
-        WHERE r.tipo=#{ubicacion} and r.estado
     </select>
 
     <select id="getRecurso" resultMap="RescursosResult"

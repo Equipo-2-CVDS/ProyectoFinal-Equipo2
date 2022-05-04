@@ -13,11 +13,7 @@ public interface RecursoMapper {
 
     public void insertarRecurso(@Param("r") Recurso r);
 
-    public List<Recurso> getRecursosFromTipo(@Param("tipo") String tipo);
-
-    public List<Recurso> getRecursoFromUbicacion(@Param("ubicacion") String ubicacion);
-
-    public List<Recurso> getRecursoFromCapacidad(@Param("ubicacion") int ubicacion);
+    public List<Recurso> getRecursos();
 
     public Recurso getRecursoPorId(@Param("id") int id);
 }

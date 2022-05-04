@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+
+<style>
+
+    .ui-paginator-page{
+        background-color: #CADAF7 !important;
+      }
+    .ui-paginator{
+        background-color: #2255D5 !important;
+        color: white;
+    }
+
+    .rows {
+        background: #CADAF7  !important ;
+    }
+
+    .ui-filter-column .ui-column-customfilter .custom-filter {
+        width: 100%;
+        box-sizing: border-box;
+        color: blue;
+    }
+
+    body {
+        font-family: 'Courier New';
+        background-color: rgb(46, 46, 184);
+        color: white;
+        text-align: center;
+        padding: 1% 3%;
+        align-content: center;
+    }
+
+    .divBody {
+        background-color: rgba(1, 1, 70, 0.623);
+        border-radius: 15px;
+        height: auto;
+        width: auto;
+        padding: 3% 2%;
+    }
+
+    .titulo {
+        font-size: 40px;
+    }
+
+    .formbox {
+        border-radius: 15px;
+        background-color: rgba(1, 1, 70, 0.623);
+        padding: 2%;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .botn
+        width: 22%;
+        height: 40px;
+        margin: 10px;
+        border-radius: 15px;
+        background: rgb(248, 248, 248);
+        color: black;
+        text-align: center;
+        font-size: 50%;
+        align-self: center;
+        align-items: center;
+
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .input {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+
+
+    }
+
+    .table {
+        align-self: center;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+        color: black;
+    }
+
+
+    div.dataTables_wrapper {
+        width: 800px;
+        margin: 0 auto;
+    }
+
+    .ui-datatable thead th {
+        background-image: none !important;
+        background-color: blue !important;
+        color: white !important;
+
+    }
+
+    tr {
+        height: 50px;
+    }
+
+    .time {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+    }
+
+    .bodylogo {
+        background-color: rgb(46, 46, 184);
+        color: rgb(46, 46, 184);
+    }
+    
+
+}
+
+</style>
+<h:head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
+  </script>
+</h:head>
+<title>Consultar Recurso</title>
+
+<body class="page">
+<p:messages id="messages" showDetail="true" closable="true">
+  <p:autoUpdate />
+</p:messages>
+<div class="bodylogo">
+  <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+</div>
+
+<div class="divBody">
+  <p class="titulo">Consultar Horario</p>
+  <h:form id="formConsultarRecursos" class="formbox">
+    <center>
+      <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
+                   filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true" rowKey="#{recurso.id}" selectionMode="single"
+                   emptyMessage="Not Found" class = "table" rowStyleClass="rows" paginatorPosition="bottom"
+                   paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+                   currentPageReportTemplate="Pag {startRecord} de {endRecord}">
+        <p:column headerText="Id" sortBy="#{recurso.id}">
+          <h:outputText value="#{recurso.id}" />
+        </p:column>
+        <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
+          <h:outputText value="#{recurso.nombre}" />
+        </p:column>
+        <p:column headerText="Tipo" sortBy="#{recurso.tipo}">
+          <h:outputText value="#{recurso.tipo}" />
+        </p:column>
+        <p:column headerText="Capacidad">
+          <h:outputText value="#{recurso.capacidad}" />
+        </p:column>
+        <f:facet name="footer">
+          <center><p:commandButton process="table"  icon="pi pi-search"
+                           value="View"
+                           oncomplete="PF('productDialog').show()"/></center>
+        </f:facet>
+      </p:dataTable>
+    </center>
+    <br><p:commandButton class="botn" value="Volver"
+                         actionListener="#{navigationController.paginaConsultaR()}"/></br>
+  </h:form>
+</div>
+</body>
+
+</html>
