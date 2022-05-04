@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper">
     <resultMap type='Reserva' id='ReservaResult'>
         <id property='id' column='id' />
@@ -13,8 +11,7 @@
         <result property='recurrencia' column='recurrencia' />
     </resultMap>
 
-    <select id="getReservasUsuario" resultMap="ReservaResult"
-            parameterType="map">
+    <select id="getReservasUsuario" resultMap="ReservaResult" parameterType="map">
         SELECT
             re.id ,
             re.idUsuario ,
@@ -25,6 +22,7 @@
             re.recurrencia
         FROM RESERVAS as re
             WHERE re.idUsuario=#{idUsuario}
+            ORDER by re.desde ASC  
     </select>
     <select id="getReservas" resultMap="ReservaResult" parameterType="map">
         SELECT
@@ -35,10 +33,10 @@
             re.hasta ,
             re.fechaSolicitado,
             re.recurrencia
-        FROM RESERVAS as re         
+        FROM RESERVAS as re  
+        ORDER by re.desde ASC     
     </select>
-    <select id="getReservasRecurso" resultMap="ReservaResult"
-    parameterType="map">
+    <select id="getReservasRecurso" resultMap="ReservaResult" parameterType="map">
         SELECT
             re.id ,
             re.idUsuario ,
@@ -51,8 +49,7 @@
             WHERE re.idRecurso=#{idRecurso}
     </select>
 
-    <select id="getReservaPorId" resultMap="ReservaResult"
-    parameterType="map">
+    <select id="getReservaPorId" resultMap="ReservaResult" parameterType="map">
         SELECT
             re.id ,
             re.idUsuario ,
@@ -63,6 +60,7 @@
             re.recurrencia
         FROM RESERVAS as re
             WHERE re.id=#{id}
+            ORDER by re.desde ASC  
     </select>
 
     <insert id="insertarReserva" parameterType="map">
