@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import java.util.Date;
 import java.util.List;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -26,16 +27,16 @@ public class ReservarBean extends BasePageBean {
     private int recurrencia = 0;
     private Date fechaFinal;
     private String mostrar = "None";
-    private String fallos = "Hubo un error en las siguientes reservas: \n";
+    private String encabezado = "Hubo errores en las siguientes reservas: ";
+    private String fallos = "";
 
     public void reservar(int idUsuario) {
         try {
             Timestamp fechaInicial = Timestamp.valueOf("2022-05-02 11:00:00");
-
             int horas = 1;
             int idRecurso = 1;
             LocalDateTime fechaInsercion = fechaInicial.toLocalDateTime();
-            LocalDateTime fechaFinalInsercion = new Timestamp(fechaFinal.getTime()).toLocalDateTime().plusDays(1);
+            LocalDateTime fechaFinalInsercion = fechaFinal==null ? fechaInicial.toLocalDateTime():new Timestamp(fechaFinal.getTime()).toLocalDateTime().plusDays(1);
             while (fechaInsercion.isBefore(fechaFinalInsercion) || fechaInsercion.isEqual(fechaFinalInsercion)) {
                 if (userServices.getHorarioDia(idRecurso, fechaInsercion.getDayOfWeek().getValue()) != null) {
                     if(busquedaReservas(idRecurso, fechaInsercion, horas)){
@@ -43,19 +44,20 @@ public class ReservarBean extends BasePageBean {
                                 Timestamp.valueOf(fechaInsercion.plusHours(horas)), recurrencia);
                         userServices.insertarReserva(reserva);
                     } else{
-                        fallos = fallos + "Reserva con inicio en" + fechaInsercion.toString() + ": Debido a que ya existe una reserva del recurso en ese horario.\n";
+                        fallos = fallos + " " + fechaInsercion.toString();
                     }
-                } else {
-                    fallos = fallos + "Reserva con inicio en" + fechaInsercion.toString() + ": Debido a que no existe horario ese dia del recurso.\n";
+                } else {                  
+                    fallos = fallos + " " + fechaInsercion.toString();
                 }
                 fechaInsercion = sumarRecurrencia(fechaInsercion);
             }
             if (fallos.isEmpty()) {
-                fallos = "Se ha reservado correctamente";
+                encabezado = "Se ha reservado correctamente";
             }
             clear();
-        } catch (ServicesException e) {
-            fallos = "No se pudo reservar \nIntentelo de nuevo";
+        } catch (Exception e) {
+            encabezado = "No se pudo reservar";
+            fallos = "Intentelo de nuevo";
         }
     }
 
@@ -63,6 +65,19 @@ public class ReservarBean extends BasePageBean {
         this.recurrencia = 0;
         this.fechaFinal=new Date();
         this.mostrar = "None";
+    }
+
+    public void redirect(int opt) throws IOException{
+        clearText();
+        if (opt==0){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/misReservas.xhtml");
+        } else{
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/home.xhtml");
+        }
+    }
+    public void clearText(){
+        this.fallos="";
+        this.encabezado="Hubo errores en las siguientes reservas: ";
     }
 
     private boolean busquedaReservas(int idRecurso, LocalDateTime fechaInsercion, int horas)
@@ -83,6 +98,7 @@ public class ReservarBean extends BasePageBean {
     private LocalDateTime sumarRecurrencia(LocalDateTime fechaInsercion) {
         switch (recurrencia) {
             case 0:
+                fechaInsercion = fechaInsercion.plusMonths(1);
                 break;
             case 1:
                 fechaInsercion = fechaInsercion.plusDays(1);
@@ -97,11 +113,6 @@ public class ReservarBean extends BasePageBean {
                 break;
         }
         return fechaInsercion;
-    }
-
-    private void messageError(String info, String message) {
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, info, message));
     }
 
     public void cambioEstado() {
@@ -142,6 +153,14 @@ public class ReservarBean extends BasePageBean {
 
     public void setFallos(String fallos) {
         this.fallos = fallos;
+    }
+
+    public String getEncabezado() {
+        return encabezado;
+    }
+
+    public void setEncabezado(String encabezado) {
+        this.encabezado = encabezado;
     }  
 
 }

@@ -85,6 +85,37 @@
             font-weight: normal;
             font-size: 16px;
       }
+
+      .customDialog {
+            color: rgb(46, 46, 184);
+            background-color: rgb(46, 46, 184);
+            min-width: 60%;
+            max-width: 80%;
+            min-height: 20%;
+            max-height: 60%;
+      }
+
+      .customDialog .ui-dialog-titlebar.ui-widget-header {
+            background: rgb(46, 46, 184);
+      }
+
+      .encabezado {
+            font-size: 23px;
+            color: white;
+      }
+
+      .all {
+            background-color: rgba(1, 1, 70, 0.623);
+            font-size: 18px;
+            border-radius: 15px;
+            padding: 3%;
+            color: white;
+      }
+
+      .buttons {
+            width: 100%;
+            font-size: 15px;
+      }
 </style>
 <title>Reservar Recurso</title>
 
@@ -128,7 +159,7 @@
                         <h:outputLabel for="calendario" value="Fecha final: "
                               style="display: #{reservarBean.mostrar}" />
                         <p:calendar class="calendario" id="calendario" value="#{reservarBean.fechaFinal}"
-                              required="true" disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
+                              disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
                   </div>
                   <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Reservar"
@@ -140,12 +171,35 @@
                         actionListener="#" />
                   </br>
 
-                  <p:dialog widgetVar="dlgRedirect" modal="true" closable="false" minHeight="60">
-                        <h:outputText value="#{reservarBean.fallos}" />
-                        <p:commandButton actionListener="#{navigationController.paginaMisReservas()}"
-                              class="botn but-style" value="Ir a Mis reservas" />
-                        <p:commandButton actionListener="#{navigationController.paginaHome()}" class="botn but-style"
-                              value="Ir a Home" />
+                  <p:dialog id="dlgRedirect" widgetVar="dlgRedirect" modal="true" dynamic="false" resizable="false"
+                        styleClass="customDialog" closable="false">
+                        <style>
+                              * {
+                                    font-family: 'Poppins', sans-serif;
+                                    text-shadow: 0 0 10px #599bff;
+                              }
+                              .botn2{
+                                    background-color: rgba(0,35,255,1);
+                                    color: rgba(0,35,255,1);
+                                    border-radius: 30px;
+                              }
+                        </style>
+                        <b>
+                              <h:outputLabel class="encabezado" value="#{reservarBean.encabezado}" />
+                        </b>
+                        <div class="ui-grid ui-grid-responsive all">
+                              <div class="ui-grid-row-1">
+                                    <h:outputLabel value="#{reservarBean.fallos}" />
+                              </div>
+                              <div class="ui-grid-row-2 buttons">
+                                    <p:commandButton
+                                          actionListener="#{reservarBean.redirect(0)}"
+                                          class="botn botn2" value="Ir a Mis reservas" />
+                                    <p:commandButton
+                                          actionListener="#{reservarBean.redirect(1)}"
+                                          class="botn botn2" value="Ir a Home" />
+                              </div>
+                        </div>
                   </p:dialog>
             </h:form>
       </div>

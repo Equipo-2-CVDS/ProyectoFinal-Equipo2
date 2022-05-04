@@ -46,7 +46,7 @@ public class UsuarioBean extends BasePageBean {
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public void ingresarSesion() throws Exception {
+    public void ingresarSesion() {
         Logger log = LoggerFactory.getLogger(ProyectoServices.class);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject = SecurityUtils.getSubject();
@@ -70,7 +70,10 @@ public class UsuarioBean extends BasePageBean {
             messageError("La Cuenta esta Bloqueada");
             log.error(ex.getMessage(), ex);
         } catch (AuthenticationException ex) {
-            messageError("Error desconocido: " + ex.getMessage());
+            messageError("Revise sus credenciales");
+            log.error(ex.getMessage(), ex);
+        } catch (Exception ex) {
+            messageError("Revise sus credenciales");
             log.error(ex.getMessage(), ex);
         } finally {
             token.clear();
