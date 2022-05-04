@@ -102,7 +102,7 @@ public class MisReservasBean extends BasePageBean implements Serializable {
     }
 
     public String showTableButtonDetail() {
-        return (this.filter == 0) ? "" : "none";
+        return (this.filter == 0 || this.filter == 1) ? "" : "none";
     }
 
     public String showTableButtonDelete(int id) throws ServicesException {
