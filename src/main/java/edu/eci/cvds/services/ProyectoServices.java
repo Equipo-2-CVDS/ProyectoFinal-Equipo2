@@ -129,5 +129,5 @@ public interface ProyectoServices {
      * @return
      * @throws ServicesException
      */
-    public List<UsuRecuRese> getUsuRecuRese() throws ServicesException;
+    public UsuRecuRese getUsuRecuRese(int id) throws ServicesException;
 }
