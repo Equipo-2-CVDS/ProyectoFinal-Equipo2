@@ -162,7 +162,7 @@
                               <h:outputLabel value="Recurso:" />
                         </b>
                         <!--Aqui enlace con pagina horarios -->
-                        <h:outputLabel value="#{reservarBean.idRecurso}" />
+                        <h:outputLabel value="#{reservarBean.recurso}" />
                   </div>
                   <div class="divText separador">
                         <b>
@@ -203,7 +203,7 @@
                   <br>
                   <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Volver"
-                        actionListener="#" />
+                        actionListener="#{navigationController.paginaCalendario()}" />
                   </br>
 
                   <p:dialog id="dlgRedirect" widgetVar="dlgRedirect" modal="true" dynamic="false" resizable="false"

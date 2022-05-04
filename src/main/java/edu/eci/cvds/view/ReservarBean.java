@@ -29,6 +29,7 @@ public class ReservarBean extends BasePageBean {
     private Date fechaFinal;
     private int horas;
     private int idRecurso;
+    private String recurso;
     private LocalDateTime fechaInicial;
     private String mostrar = "None";
     private String encabezado = "Hubo errores en las siguientes reservas: ";
@@ -41,7 +42,7 @@ public class ReservarBean extends BasePageBean {
                 LocalTime horaReserva = fechaInicial.plusHours(horas).toLocalTime();
                 if(horaHorario.isAfter(horaReserva) || horaHorario.equals(horaReserva)){
                     this.fechaInicial=fechaInicial;
-                    this.idRecurso=idRecurso;
+                    setIdRecurso(idRecurso);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/reservarRecurso.xhtml");
                 }else{
                     messageError("Solo se puede reservar por una hora");
@@ -156,12 +157,25 @@ public class ReservarBean extends BasePageBean {
         this.horas = horas;
     }
 
+    public String getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(String recurso) {
+        this.recurso = recurso;
+    }
+
     public int getIdRecurso() {
         return idRecurso;
     }
 
     public void setIdRecurso(int idRecurso) {
         this.idRecurso = idRecurso;
+        try {
+            this.recurso=userServices.getRecursoPorId(idRecurso).getNombre();
+        } catch (ServicesException e) {
+            System.out.println(e);
+        }
     }
 
     public LocalDateTime getFechaInicial() {
