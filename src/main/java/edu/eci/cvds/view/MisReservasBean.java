@@ -9,17 +9,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.faces.component.UIComponent;
+import javax.faces.validator.FacesValidator;
+import javax.faces.validator.Validator;
 
-import java.sql.Time;
-import java.text.DateFormat;
+import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 @ManagedBean(name = "misReservasBean")
 @SessionScoped
-public class MisReservasBean extends BasePageBean {
+public class MisReservasBean extends BasePageBean implements Serializable {
     @Inject
     private ProyectoServices userServices;
 
@@ -27,78 +29,84 @@ public class MisReservasBean extends BasePageBean {
     // canceladas
     private Integer filter = 0;
 
-    public String title = "Mis reservas";
+    public String title = "Reservas";
 
-    private static ArrayList<Reserva> reservas = new ArrayList<>();
+    public final static char filterNewest = 'n';
 
-    public List<Reserva> consultarReservas() {
-        reservas = new ArrayList<>();
-        java.sql.Timestamp timestamp1 = java.sql.Timestamp.valueOf("2022-04-23 10:10:10.0");
-        java.sql.Timestamp timestamp2 = java.sql.Timestamp.valueOf("2022-04-23 11:10:10.0");
-        if (this.filter == 0) {
-            reservas = new ArrayList<>();
-            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
-            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
-            for (int i = 0; i < 6; i++) {
-                reservas.add(r1);
-                reservas.add(r2);
-                reservas.add(r3);
-                reservas.add(r4);
+    public final static char filterOlders = 'o';
+
+    private static List<Reserva> reservas = new ArrayList<>();
+
+    private int idUsuario;
+
+    public List<Reserva> consultarReservas(int id) {
+        Timestamp today = new Timestamp(System.currentTimeMillis());
+        try {
+            List<Reserva> refreshReserva = userServices.getReservasUsuario(id);
+            if (idUsuario != 0) {
+                reservas = userServices.getReservasRecurso(idUsuario);
+            } else if (userServices.getRol(id).equals("Administrador")) {
+                reservas = userServices.getReservas();
+            } else if (this.filter == 0) {
+                reservas = filterByDate(refreshReserva, today, filterNewest);
+            } else if (this.filter == 1) {
+                reservas = filterByDate(refreshReserva, today, filterOlders);
+            } else if (this.filter == 2) {
+                reservas = new ArrayList<>();
             }
-        } else if (this.filter == 1) {
-            Reserva r1 = new Reserva(1, 1, timestamp1, timestamp2,0);
-            Reserva r2 = new Reserva(1, 14, timestamp1, timestamp2,0);
-            reservas.add(r1);
-            reservas.add(r2);
-        } else if (this.filter == 2) {
-            Reserva r3 = new Reserva(2, 14, timestamp1, timestamp2,0);
-            Reserva r4 = new Reserva(2, 1, timestamp1, timestamp2,0);
-            reservas.add(r3);
-            reservas.add(r4);
+        } catch (ServicesException e) {
+            e.printStackTrace();
         }
         return reservas;
     }
 
-    public void setfilterOld() {
-        this.title = "Mis reservas pasadas";
+    public void setfilterOld(int id) {
+        this.title = "Reservas pasadas";
         this.filter = 1;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void setfilterCancelled() {
-        this.title = "Mis reservas canceladas";
+    public void setfilterCancelled(int id) {
+        this.title = "Reservas canceladas (¡Funcionalidad en construcción!)";
         this.filter = 2;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void removeFilters() {
-        this.title = "Mis reservas";
+    public void removeFilters(int id) {
+        this.title = "Reservas";
         this.filter = 0;
-        this.callFilters();
-        this.consultarReservas();
+        this.callFilters(id);
+        this.consultarReservas(id);
     }
 
-    public void callFilters() {
-        this.showFilterOld();
-        this.showFilterCancelled();
+    public void callFilters(int id) {
+        try {
+            this.showFilterCancelled(id);
+            this.showTableButtonDelete(id);
+            this.showFilterOld(id);
+        } catch (ServicesException e) {
+            e.printStackTrace();
+        }
         this.showAll();
-        this.showTableButtons();
+        this.showTableButtonDetail();
     }
 
-    public String showFilterOld() {
-        return (this.filter != 1) ? "" : "none";
+    public String showFilterOld(int id) throws ServicesException {
+        return (this.filter != 1 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
-    public String showFilterCancelled() {
-        return (this.filter != 2) ? "" : "none";
+    public String showFilterCancelled(int id) throws ServicesException {
+        return (this.filter != 2 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
-    public String showTableButtons() {
+    public String showTableButtonDetail() {
         return (this.filter == 0) ? "" : "none";
+    }
+
+    public String showTableButtonDelete(int id) throws ServicesException {
+        return (this.filter == 0 && userServices.getRol(id).equals("Comunidad")) ? "" : "none"; // here
     }
 
     public String showAll() {
@@ -109,15 +117,32 @@ public class MisReservasBean extends BasePageBean {
         return this.title;
     }
 
-    public void deleteBooking(int idReserva) {
+    public String isAdmin(int id) throws ServicesException {
+        return userServices.getRol(id).equals("Administrador") ? "" : "none";
+    }
+
+    public void deleteBooking(int idUsuario) {
         // Cambiar por desarrollo de la Historia #8
-        System.out.println(idReserva);
         messageError("la funcionalidad de cancelar está en construcción.");
     }
 
-    public void detailBooking(int idReserva) {
-        System.out.println(idReserva);
+    public void detailBooking(int idUsuario) {
         messageError("la funcionalidad de detalles está en construcción.");
+    }
+
+    public List<Reserva> filterByDate(List<Reserva> initialArray, Timestamp date, char filterType) {
+        List<Reserva> filteredList = new ArrayList<>();
+
+        for (Reserva reserva : initialArray) {
+            int comparation = reserva.getHasta().compareTo(date);
+            if (comparation > 0 && filterType == filterNewest) {
+                filteredList.add(reserva);
+            }
+            if (comparation < 0 && filterType == filterOlders) {
+                filteredList.add(reserva);
+            }
+        }
+        return filteredList;
     }
 
     /**
@@ -128,5 +153,35 @@ public class MisReservasBean extends BasePageBean {
     private void messageError(String message) {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "¡Lo sentimos!, ", message));
+    }
+
+    public int getidUsuario() {
+        return this.idUsuario;
+    }
+
+    public void setidUsuario(int event) {
+        idUsuario = event;
+    }
+
+    public void serchReservasById() throws ServicesException {
+        reservas = userServices.getReservasRecurso(idUsuario);
+    }
+
+    public void reset() throws ServicesException {
+        idUsuario = 0;
+    }
+
+    public void validate() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+                .getRequest();
+        String txtProperty = request.getParameter("formConsultarMisReservas:txtProperty");
+        String txtAnotherProperty = request.getParameter("txtAnotherProperty");
+        try {
+            String input = (String) txtAnotherProperty;
+            Integer.parseInt(input);
+            idUsuario = Integer.parseInt(input);
+        } catch (Exception ex) {
+            messageError("La entrada no es un número valido");
+        }
     }
 }

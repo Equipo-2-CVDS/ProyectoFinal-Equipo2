@@ -44,6 +44,7 @@
         padding: 3% 15%;
         border-radius: 3%;
     }
+    form > div { margin-bottom: 25px;}
  </style>
  
 <h:body>
@@ -63,6 +64,9 @@
             </div>
             <div>
                 <p:commandButton class="but but-style" value="Mis Reservas" style="display: #{userBean.isEstudiante()}" actionListener="#{navigationController.paginaMisReservas()}"/>
+            </div>
+            <div>
+                <p:commandButton class="but but-style" value="Consultar Reservas" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaMisReservas()}"/>
             </div>
             <div>
                 <h:commandButton action="#{userBean.cerrarSesion()}" class="but but-style" value="Salir"/>
