@@ -35,4 +35,7 @@ public class NavigationController implements Serializable {
     public void paginaMisReservas() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/misReservas.xhtml");
     }
+    public void paginaCalendario() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/calendario.xhtml");
+    }
 }
