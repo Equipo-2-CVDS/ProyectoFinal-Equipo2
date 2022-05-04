@@ -6,14 +6,12 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean; 
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.application.FacesMessage;
 
 
 @ManagedBean(name = "navigationController", eager = true)
 @RequestScoped
 
 public class NavigationController implements Serializable {
-    private ConsultarReservaBean c = new ConsultarReservaBean();
     public void paginaHome() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/home.xhtml");
     }

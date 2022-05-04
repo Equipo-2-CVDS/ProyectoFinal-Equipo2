@@ -10,9 +10,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.faces.component.UIComponent;
-import javax.faces.validator.FacesValidator;
-import javax.faces.validator.Validator;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -21,7 +18,7 @@ import java.util.List;
 
 @ManagedBean(name = "misReservasBean")
 @SessionScoped
-public class MisReservasBean extends BasePageBean implements Serializable {
+public class MisReservasBean extends BasePageBean{
     @Inject
     private ProyectoServices userServices;
 
