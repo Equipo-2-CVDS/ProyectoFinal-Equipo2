@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 @RequestScoped
 
 public class NavigationController implements Serializable {
+    private ConsultarReservaBean c = new ConsultarReservaBean();
     public void paginaHome() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/home.xhtml");
     }

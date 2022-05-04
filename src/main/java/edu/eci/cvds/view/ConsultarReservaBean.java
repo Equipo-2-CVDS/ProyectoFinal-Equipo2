@@ -8,8 +8,12 @@ import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,30 +24,31 @@ public class ConsultarReservaBean extends BasePageBean{
     private ProyectoServices userServices;
 
     private ArrayList<UsuRecuRese> filtro = new ArrayList<>();
-    private List<UsuRecuRese> usuRecuRese;
+    private UsuRecuRese usuRecuRese;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void consultarReservas(){
         try{
-            usuRecuRese = userServices.getUsuRecuRese();
+            usuRecuRese = userServices.getUsuRecuRese(id);
         } catch(Exception e){
-            System.out.println(e);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Hubo un error, vuelve a intentarlo",""));
         }
+    }
+    
+    public void load(int id) throws IOException{
+        setId(id);
+        consultarReservas();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/consultarReserva.xhtml");
     }
 
-    public void consultarReservasUsuario(String usuario){
-        try{
-            Usuario user = userServices.buscarUsuario(usuario);
-            if(user.getRol() == 1){
-                consultarReservas();
-            }//else{
-                //usuRecuRese = userServices.getReservasUsuario(user.getId());
-           // }
-            
-        } catch(Exception e){
-            System.out.println(e);
-        }
-    }
 
     public ArrayList<UsuRecuRese> getFiltro() {
         return filtro;
@@ -53,12 +58,12 @@ public class ConsultarReservaBean extends BasePageBean{
         this.filtro = filtro;
     }
 
-    public List<UsuRecuRese> getUsuRecuRese() {
+    public UsuRecuRese getUsuRecuRese() {
         consultarReservas();
         return usuRecuRese;
     }
 
-    public void setUsuRecuRese(List<UsuRecuRese> usuRecuRese) {
+    public void setUsuRecuRese(UsuRecuRese usuRecuRese) {
         this.usuRecuRese = usuRecuRese;
     }
 }

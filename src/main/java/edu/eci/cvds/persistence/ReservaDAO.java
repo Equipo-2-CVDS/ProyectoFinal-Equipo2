@@ -11,5 +11,8 @@ public interface ReservaDAO {
     List<Reserva> getReservasUsuario(int idUsuario) throws PersistenceException;
     
     List<Reserva> getReservas() throws PersistenceException;
+
+    Reserva getReservaPorId(int id) throws PersistenceException;
+
     List<Reserva> getReservasRecurso(int idRecurso) throws PersistenceException;
 }
