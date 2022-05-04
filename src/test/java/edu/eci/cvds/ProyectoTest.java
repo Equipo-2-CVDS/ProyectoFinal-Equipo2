@@ -1,5 +1,6 @@
 package edu.eci.cvds;
 
+import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
 
@@ -11,6 +12,7 @@ public class ProyectoTest {
 
     ProyectoServices serviciosProyecto;
     ProyectoServices serviciosProyectoTest;
+
 
     public ProyectoTest() {
         serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
@@ -54,9 +56,29 @@ public class ProyectoTest {
     }
 
     @Test
+    public void deberiaEncontrarUsuRecuRese(){
+        try{
+            Assert.assertEquals("Asus",serviciosProyecto.getUsuRecuRese(2).getNombreRecurso()); 
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
     public void deberiaEncontrarRecursos(){
         try{
             Assert.assertEquals("Asus",serviciosProyecto.getRecursosDisponibles().get(0).getNombre()); 
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaEncontrarReservaPorId(){
+        try{
+            Assert.assertEquals(2,serviciosProyecto.getReservaPorId(2).getId()); 
         }
         catch (Exception e){
             System.out.println(e.getMessage());

@@ -130,4 +130,13 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public UsuRecuRese getUsuRecuRese(int id) throws ServicesException;
+
+            /**
+     * Consulta el recurso segun el id
+     * 
+     * @param id id del recurso
+     * @return Recurso
+     * @throws ServicesException
+     */
+    public Reserva getReservaPorId(int id) throws ServicesException;
 }

@@ -204,4 +204,13 @@ public class ProyectoServicesImpl implements ProyectoServices {
         }
     }
 
+    @Override
+    public Reserva getReservaPorId(int id) throws ServicesException {
+        try {
+            return reservaDAO.getReservaPorId(id);
+        }catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando recurso con id: " + id, ex);
+        }
+    }
+
 }
