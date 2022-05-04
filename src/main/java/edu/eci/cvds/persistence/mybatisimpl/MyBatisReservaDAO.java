@@ -48,5 +48,13 @@ public class MyBatisReservaDAO implements ReservaDAO{
             throw new PersistenceException("Error al consultar", e);
         }
     }
-    
+
+    @Override
+    public Reserva getReservaPorId(int id) throws PersistenceException {
+        try {
+            return reservaMapper.getReservaPorId(id);
+        }catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
 }
