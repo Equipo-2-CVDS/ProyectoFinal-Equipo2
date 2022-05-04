@@ -57,16 +57,16 @@
     <div class="options">
         <h:form>
             <div>
-                <p:commandButton class="but but-style" value="Registrar Recurso" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaRegistroR()}"/>
+                <h:commandButton class="but but-style" value="Registrar Recurso" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaRegistroR()}"/>
             </div>
             <div>
-                <p:commandButton class="but but-style" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>
+                <h:commandButton class="but but-style" value="Consultar Recurso" actionListener="#{navigationController.paginaConsultaR()}"/>
             </div>
             <div>
-                <p:commandButton class="but but-style" value="Mis Reservas" style="display: #{userBean.isEstudiante()}" actionListener="#{navigationController.paginaMisReservas()}"/>
+                <h:commandButton class="but but-style" value="Mis Reservas" style="display: #{userBean.isEstudiante()}" actionListener="#{navigationController.paginaMisReservas()}"/>
             </div>
             <div>
-                <p:commandButton class="but but-style" value="Consultar Reservas" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaMisReservas()}"/>
+                <h:commandButton class="but but-style" value="Consultar Reservas" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaMisReservas()}"/>
             </div>
             <div>
                 <h:commandButton action="#{userBean.cerrarSesion()}" class="but but-style" value="Salir"/>

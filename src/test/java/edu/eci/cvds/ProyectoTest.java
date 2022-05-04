@@ -1,6 +1,6 @@
 package edu.eci.cvds;
 
-import edu.eci.cvds.entities.UsuRecuRese;
+import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
 
@@ -29,7 +29,7 @@ public class ProyectoTest {
         try {
             Assert.assertTrue(1 == serviciosProyecto.buscarUsuario("admin").getId());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -38,7 +38,7 @@ public class ProyectoTest {
         try {
             Assert.assertEquals("Administrador", serviciosProyecto.getRol(1));
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -47,7 +47,7 @@ public class ProyectoTest {
         try {
             Assert.assertEquals("Asus", serviciosProyecto.getRecurso("Asus").getNombre());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -56,7 +56,7 @@ public class ProyectoTest {
         try {
             Assert.assertEquals("Asus", serviciosProyecto.getUsuRecuRese(2).getNombreRecurso());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -65,7 +65,7 @@ public class ProyectoTest {
         try {
             Assert.assertEquals("Asus", serviciosProyecto.getRecursosDisponibles().get(0).getNombre());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -74,7 +74,7 @@ public class ProyectoTest {
         try {
             Assert.assertEquals(1, serviciosProyecto.getHorariosDisponibles(1).size());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -82,9 +82,9 @@ public class ProyectoTest {
 
     public void deberiaEncontrarReservaPorId() {
         try {
-            Assert.assertEquals(2, serviciosProyecto.getReservaPorId(2).getId());
+            Assert.assertEquals(2, serviciosProyecto.getReservaPorId(2).getIdUsuario());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
@@ -93,17 +93,27 @@ public class ProyectoTest {
         try {
             Assert.assertTrue(serviciosProyecto.getReservas().size() > 0);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
         }
     }
 
     @Test
     public void deberiaEncontrarReservaIdRecurso() {
         try {
-            Assert.assertEquals(8, serviciosProyecto.getReservasRecurso(1).get(0).getId());
-            Assert.assertEquals(9, serviciosProyecto.getReservasRecurso(14).get(0).getId());
+            Assert.assertTrue(serviciosProyecto.getReservasRecurso(1).size() > 0);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertFalse(true);
+        }
+    }
+
+    @Test
+    public void deberiaEncontrarHorarioPorIds() {
+        try {
+            Horario horario=serviciosProyecto.getHorarioDia(1, 1);
+            Assert.assertEquals(7, horario.getDesde().toLocalTime().getHour());
+            Assert.assertEquals(19, horario.getHasta().toLocalTime().getHour());
+        } catch (Exception e) {
+            Assert.assertFalse(true);
         }
     }
 }

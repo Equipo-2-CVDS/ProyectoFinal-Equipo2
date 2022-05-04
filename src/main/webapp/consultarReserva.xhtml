@@ -98,11 +98,8 @@
 
     .titulo {
         font-size: 45px;
-        margin-bottom: 10px;
-        text-align: left;
-        margin-top: 4%;
         margin-left: 38%;
-        margin-right: auto;
+        
     }
 
     .logo {
@@ -117,35 +114,37 @@
         <p:autoUpdate />
     </p:messages>
     <div class="bodylogo">
-        <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+        <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
     </div>
 
     <div class="divBody">
-        <h:form id="formConsultarReserva" class="formbox">
-            <h1 class="titulo">Consultar Reserva</h1>
-            <div class="gri">
-                <h1>Recurso:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.nombreRecurso}" class="text" />
-                <h1>Informacion Recurso:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.infoRecurso}" class="text" />
-                <h1>Fecha Solicitado:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaSolicitado}" class="text" />
-                <h1>Solicitado desde:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaDesde}" class="text" />
-                <h1>Solicitado hasta:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaHasta}" class="text" />
-                <h1>Usuario que solicita:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.nombreUsuario}" class="text" />
-                <h1>Programa usuario solicitante:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.programaUsuario}" class="text" />
-                <h1>Recurrencia de la reserva:</h1>
-                <h:outputText value="#{consultarReservaBean.usuRecuRese.recurrencia}" class="text" />
-            </div>
-            <br>
-            <p:commandButton update="formConsultarReserva" class="but but-style" value="Volver"
-                actionListener="#{navigationController.paginaMisReservas()}" /></br>
+        <center>
+            <h:form id="formConsultarReserva" class="formbox">
+                <h1 class="titulo">Consultar Reserva</h1>
+                <div class="gri">
+                    <h1>Recurso:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.nombreRecurso}" class="text" />
+                    <h1>Informacion Recurso:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.infoRecurso}" class="text" />
+                    <h1>Fecha Solicitado:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaSolicitado}" class="text" />
+                    <h1>Solicitado desde:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaDesde}" class="text" />
+                    <h1>Solicitado hasta:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.fechaHasta}" class="text" />
+                    <h1>Usuario que solicita:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.nombreUsuario}" class="text" />
+                    <h1>Programa usuario solicitante:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.programaUsuario}" class="text" />
+                    <h1>Recurrencia de la reserva:</h1>
+                    <h:outputText value="#{consultarReservaBean.usuRecuRese.recurrencia}" class="text" />
+                </div>
+                <br>
+                <p:commandButton update="formConsultarReserva" class="but but-style" value="Volver"
+                    actionListener="#{navigationController.paginaMisReservas()}" /></br>
 
-        </h:form>
+            </h:form>
+        </center>
     </div>
 </body>
 

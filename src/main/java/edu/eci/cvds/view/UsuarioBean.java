@@ -39,6 +39,7 @@ public class UsuarioBean extends BasePageBean {
     Subject subject;
     private String redirectUrl = "/faces/home.xhtml";
     private String home = "/faces/home.xhtml";
+    private String reservar = "/faces/reservarRecurso.xhtml";
 
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
@@ -46,7 +47,7 @@ public class UsuarioBean extends BasePageBean {
      * @return String
      * @throws ServicesException controlador de excepciones
      */
-    public void ingresarSesion() throws Exception {
+    public void ingresarSesion() {
         Logger log = LoggerFactory.getLogger(ProyectoServices.class);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         subject = SecurityUtils.getSubject();
@@ -70,7 +71,10 @@ public class UsuarioBean extends BasePageBean {
             messageError("La Cuenta esta Bloqueada");
             log.error(ex.getMessage(), ex);
         } catch (AuthenticationException ex) {
-            messageError("Error desconocido: " + ex.getMessage());
+            messageError("Revise sus credenciales");
+            log.error(ex.getMessage(), ex);
+        } catch (Exception ex) {
+            messageError("Revise sus credenciales");
             log.error(ex.getMessage(), ex);
         } finally {
             token.clear();
@@ -231,6 +235,14 @@ public class UsuarioBean extends BasePageBean {
 
     public void setHome(String home) {
         this.home = home;
+    }
+    
+    public String getReservar() {
+        return reservar;
+    }
+
+    public void setReservar(String reservar) {
+        this.reservar = reservar;
     }
     
 }

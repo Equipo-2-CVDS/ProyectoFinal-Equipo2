@@ -1,12 +1,8 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.UsuRecuRese;
-import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -15,7 +11,6 @@ import javax.faces.context.FacesContext;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 @ManagedBean(name = "consultarReservaBean")
 @SessionScoped
