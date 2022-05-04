@@ -4,26 +4,24 @@ import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.faces.component.UIComponent;
+import javax.faces.validator.FacesValidator;
+import javax.faces.validator.Validator;
 
-import com.mysql.fabric.xmlrpc.base.Value;
-
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @ManagedBean(name = "misReservasBean")
 @SessionScoped
-@ViewScoped
-public class MisReservasBean extends BasePageBean {
+public class MisReservasBean extends BasePageBean implements Serializable {
     @Inject
     private ProyectoServices userServices;
 
@@ -39,7 +37,7 @@ public class MisReservasBean extends BasePageBean {
 
     private static List<Reserva> reservas = new ArrayList<>();
 
-    private int idUsuario = 0;
+    private int idUsuario;
 
     public List<Reserva> consultarReservas(int id) {
         Timestamp today = new Timestamp(System.currentTimeMillis());
@@ -120,18 +118,15 @@ public class MisReservasBean extends BasePageBean {
     }
 
     public String isAdmin(int id) throws ServicesException {
-        System.out.println(userServices.getRol(id).equals("Administrador"));
         return userServices.getRol(id).equals("Administrador") ? "" : "none";
     }
 
     public void deleteBooking(int idUsuario) {
         // Cambiar por desarrollo de la Historia #8
-        System.out.println(idUsuario);
         messageError("la funcionalidad de cancelar está en construcción.");
     }
 
     public void detailBooking(int idUsuario) {
-        System.out.println(idUsuario);
         messageError("la funcionalidad de detalles está en construcción.");
     }
 
@@ -174,5 +169,19 @@ public class MisReservasBean extends BasePageBean {
 
     public void reset() throws ServicesException {
         idUsuario = 0;
+    }
+
+    public void validate() {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+                .getRequest();
+        String txtProperty = request.getParameter("formConsultarMisReservas:txtProperty");
+        String txtAnotherProperty = request.getParameter("txtAnotherProperty");
+        try {
+            String input = (String) txtAnotherProperty;
+            Integer.parseInt(input);
+            idUsuario = Integer.parseInt(input);
+        } catch (Exception ex) {
+            messageError("La entrada no es un número valido");
+        }
     }
 }

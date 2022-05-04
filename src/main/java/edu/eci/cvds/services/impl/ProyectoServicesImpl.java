@@ -152,17 +152,13 @@ public class ProyectoServicesImpl implements ProyectoServices {
     }
 
     @Override
-    public List<UsuRecuRese> getUsuRecuRese() throws ServicesException {
+    public UsuRecuRese getUsuRecuRese(int id) throws ServicesException {
         try {
-            List<UsuRecuRese> res = new ArrayList<>();
-            List<Reserva> reservas = reservaDAO.getReservas();
-            for(Reserva r: reservas){
-                Usuario u = buscarUsuarioPorId(r.getIdUsuario());
-                Recurso re = getRecursoPorId(r.getIdRecurso());
-                String infoRecurso = "Capacidad: " + Integer.toString(re.getCapacidad()) + ", Ubicacion: " + re.getUbicacion() +", Tipo: " + re.getTipo();
-                res.add(new UsuRecuRese(re.getNombre(), infoRecurso, r.getFechaSolicitado(), r.getDesde(), r.getHasta(), u.getNombre(), u.getPrograma(), r.getRecurrencia()));
-            }
-
+            Reserva reservas = reservaDAO.getReservaPorId(id);
+            Usuario u = buscarUsuarioPorId(reservas.getIdUsuario());
+            Recurso re = getRecursoPorId(reservas.getIdRecurso());
+            String infoRecurso = "Capacidad: " + Integer.toString(re.getCapacidad()) + ", Ubicacion: " + re.getUbicacion() +", Tipo: " + re.getTipo();
+            UsuRecuRese res = (new UsuRecuRese(re.getNombre(), infoRecurso, reservas.getFechaSolicitado(), reservas.getDesde(), reservas.getHasta(), u.getNombre(), u.getPrograma(), reservas.getRecurrencia()));
             return res;
         } catch (PersistenceException ex) {
             throw new ServicesException("Error buscando reservas", ex);
@@ -183,6 +179,15 @@ public class ProyectoServicesImpl implements ProyectoServices {
         try {
             return recursoDAO.getRecursoPorId(id);
         } catch (PersistenceException ex) {
+            throw new ServicesException("Error buscando recurso con id: " + id, ex);
+        }
+    }
+
+    @Override
+    public Reserva getReservaPorId(int id) throws ServicesException {
+        try {
+            return reservaDAO.getReservaPorId(id);
+        }catch (PersistenceException ex) {
             throw new ServicesException("Error buscando recurso con id: " + id, ex);
         }
     }

@@ -51,6 +51,20 @@
             WHERE re.idRecurso=#{idRecurso}
     </select>
 
+    <select id="getReservaPorId" resultMap="ReservaResult"
+    parameterType="map">
+        SELECT
+            re.id ,
+            re.idUsuario ,
+            re.idRecurso ,
+            re.desde ,
+            re.hasta ,
+            re.fechaSolicitado,
+            re.recurrencia
+        FROM RESERVAS as re
+            WHERE re.id=#{id}
+    </select>
+
     <insert id="insertarReserva" parameterType="map">
         insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia) values
         (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia})

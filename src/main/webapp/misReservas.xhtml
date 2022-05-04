@@ -136,8 +136,8 @@
         <div class="table">
             <h:form id="formConsultarMisReservas" class="formbox">
                 <div class="admin-search" style="display: #{misReservasBean.isAdmin(userBean.userId)}">
-                    <h:inputText class="input-style" update="formConsultarMisReservas" value="#{misReservasBean.idUsuario}"/>
-                    <p:commandButton update="formConsultarMisReservas" class="but but-style" value="Buscar"/>
+                    <input class="input-style" type="text" id="txtAnotherProperty" name="txtAnotherProperty" />
+                    <p:commandButton update="formConsultarMisReservas" class="but but-style" value="Buscar" action="#{misReservasBean.validate()}"/>
                     <p:commandButton update="formConsultarMisReservas" class="but but-style" value="Reiniciar"
                         actionListener="#{misReservasBean.reset()}" />
                 </div>
