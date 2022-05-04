@@ -26,18 +26,22 @@ public class ScheduleView extends BasePageBean {
     @Inject
     private ProyectoServices userServices;
 
+    private int idRecurso;
     private ScheduleModel eventModel;
     private ScheduleEvent<?> event = new DefaultScheduleEvent<>();
+    private LocalDateTime desde;
+    private LocalDateTime hasta;
 
     public void inicializar(int id) throws IOException{
+        this.idRecurso = id;
         eventModel = new DefaultScheduleModel();
-        loadEventos(id);
+        loadEventos();
         FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/calendario.xhtml");
     }
 
-    private void loadEventos(int id) {
+    private void loadEventos() {
         try {
-            List<Horario> horarios = userServices.getHorariosDisponibles(id);
+            List<Horario> horarios = userServices.getHorariosDisponibles(idRecurso);
             LocalDateTime hoy = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
             for (int i = 0; i < 30; i++) {
                 for (Horario horario : horarios) {
@@ -57,7 +61,7 @@ public class ScheduleView extends BasePageBean {
                     }
                 }
             }
-            List<Reserva> reservas = userServices.getReservasRecurso(id);
+            List<Reserva> reservas = userServices.getReservasRecurso(idRecurso);
             for (Reserva reserva : reservas) {
                 LocalDateTime desde = reserva.getDesde().toLocalDateTime();
                 LocalDateTime hasta = reserva.getHasta().toLocalDateTime();
@@ -95,10 +99,32 @@ public class ScheduleView extends BasePageBean {
 
     public void onEventSelect(SelectEvent selectEvent) {
         this.event = (ScheduleEvent<?>) selectEvent.getObject();
+        this.desde = event.getStartDate();
+        this.hasta = event.getStartDate();
     }
 
-    private void addMessage(FacesMessage message) {
-        PrimeFaces.current().dialog().showMessageDynamic(message);
+    public int getIdRecurso() {
+        return idRecurso;
+    }
+
+    public void setIdRecurso(int idRecurso) {
+        this.idRecurso = idRecurso;
+    }
+
+    public LocalDateTime getDesde() {
+        return desde;
+    }
+
+    public void setDesde(LocalDateTime desde) {
+        this.desde = desde;
+    }
+
+    public LocalDateTime getHasta() {
+        return hasta;
+    }
+
+    public void setHasta(LocalDateTime hasta) {
+        this.hasta = hasta;
     }
 
 }

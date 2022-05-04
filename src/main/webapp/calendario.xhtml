@@ -142,7 +142,7 @@
 <title>Consultar Recurso</title>
 
 <body>
-    <center><h:form>
+    <center><h:form id="formCalendario">
         <p:growl id="messages" showDetail="true" />
 
         <h:panelGrid columnClasses="value">
@@ -156,13 +156,17 @@
 
         <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
             <h:panelGrid id="eventDetails" columns="2">
-                <p:outputLabel value="Recurso:"/>
-                <br></br>
-                <p:outputLabel for="from" value="From:" />
-                <p:calendar id="from" value="" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
-
-                <p:outputLabel for="to" value="To:" />
-                <p:calendar id="to" value="" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+                <p:outputLabel for="from" value="Hora:" />
+                <p:calendar id="from" mindate="#{scheduleView.event.startDate}" maxdate="#{scheduleView.event.endDate.minusHours(1)}" value="#{scheduleView.desde}" pattern="MM/dd/yyyy HH"/>
+                <p:outputLabel for="tiempo" value="Tiempo:" />
+                <h:selectOneMenu id="tiempo" value="#{reservarBean.horas}">
+                        <f:selectItem class="select" itemLabel="1 Hora" itemValue="1"></f:selectItem>
+                        <f:selectItem class="select" itemLabel="2 Horas" itemValue="2"></f:selectItem>
+                </h:selectOneMenu>
+                <center>
+                    <p:commandButton update="formCalendario" value="Reservar" action="#{userBean.setRedirectUrl(userBean.reservar)}"
+                            actionListener="#{reservarBean.inicializar(scheduleView.idRecurso,scheduleView.desde)}"/>
+                </center>
             </h:panelGrid>
         </p:dialog>
     </h:form></center>

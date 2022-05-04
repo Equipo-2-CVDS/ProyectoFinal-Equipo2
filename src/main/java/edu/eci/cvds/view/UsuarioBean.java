@@ -39,6 +39,7 @@ public class UsuarioBean extends BasePageBean {
     Subject subject;
     private String redirectUrl = "/faces/home.xhtml";
     private String home = "/faces/home.xhtml";
+    private String reservar = "/faces/reservarRecurso.xhtml";
 
     /**
      * Es usado para controlar la funcionalidad de iniciar sesion desde la interfaz
@@ -234,6 +235,14 @@ public class UsuarioBean extends BasePageBean {
 
     public void setHome(String home) {
         this.home = home;
+    }
+    
+    public String getReservar() {
+        return reservar;
+    }
+
+    public void setReservar(String reservar) {
+        this.reservar = reservar;
     }
     
 }
