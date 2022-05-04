@@ -28,6 +28,24 @@
             font-size: 24px;
       }
 
+      body .ui-button {
+            text-shadow: 1px 1px 10px white;
+            overflow: hidden;
+            color: #fff;
+            border-radius: 30px;
+            border-color: blue;
+            border-width: 1px;
+            box-shadow: 0 0 0 0 rgba(143, 64, 248, 0.5), 0 0 0 0 rgba(39, 200, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            content: "";
+            position: relative;
+            background-color: #ff3cac;
+            background-image: linear-gradient(90deg, rgba(0,35,255,1) 0%, rgba(77,167,255,1) 50%);
+            width: 22%;
+            height: 40px;
+            margin: 10px;
+        }
+
       .divBody {
             background-color: rgba(1, 1, 70, 0.623);
             border-radius: 15px;
@@ -81,9 +99,49 @@
             size-adjust: auto;
       }
 
+      .ui-botton {
+            width: 22%;
+      }
+
       .ui-datepicker.ui-widget-content {
             font-weight: normal;
             font-size: 16px;
+      }
+
+      .customDialog {
+            color: rgb(46, 46, 184);
+            background-color: rgb(46, 46, 184);
+            min-width: 80%;
+            max-width: 90%;
+            min-height: 40%;
+            max-height: 60%;
+            padding: 2%;
+      }
+
+      .customDialog .ui-dialog-titlebar.ui-widget-header {
+            background-color: rgb(46, 46, 184);
+      }
+
+      body .ui-dialog .ui-dialog-content {
+            background-color: rgb(46, 46, 184);
+      }
+
+      .encabezado {
+            font-size: 23px;
+            color: white;
+      }
+
+      .all {
+            background-color: rgba(1, 1, 70, 0.623);
+            font-size: 18px;
+            border-radius: 15px;
+            padding: 3%;
+            color: white;
+      }
+
+      .buttons {
+            width: 100%;
+            font-size: 15px;
       }
 </style>
 <title>Reservar Recurso</title>
@@ -101,17 +159,25 @@
             <h:form id="formReservarRecurso" class="formbox">
                   <div class="divText separador">
                         <b>
+                              <h:outputLabel value="Recurso:" />
+                        </b>
+                        <!--Aqui enlace con pagina horarios -->
+                        <h:outputLabel value="#{reservarBean.recurso}" />
+                  </div>
+                  <div class="divText separador">
+                        <b>
                               <h:outputLabel value="Fecha:" />
                         </b>
                         <!--Aqui enlace con pagina horarios -->
-                        <h:outputLabel value="Mayo 2, 2022" />
+                        <h:outputLabel value="#{reservarBean.fechaInicial.toLocalDate()}" />
                   </div>
                   <div class="divText separador">
                         <b>
                               <h:outputLabel value=" Hora:" />
                         </b>
                         <!--Aqui enlace con pagina horarios -->
-                        <h:outputLabel value="11:00 AM - 12:00 PM" />
+                        <h:outputLabel
+                              value="#{reservarBean.fechaInicial.getHour()}:00 - #{reservarBean.fechaInicial.plusHours(reservarBean.horas).getHour()}:00" />
                   </div>
                   <div class="separador">
                         <h:outputLabel for="selectRecurrencia" value="Recurrencia: " />
@@ -128,7 +194,7 @@
                         <h:outputLabel for="calendario" value="Fecha final: "
                               style="display: #{reservarBean.mostrar}" />
                         <p:calendar class="calendario" id="calendario" value="#{reservarBean.fechaFinal}"
-                              required="true" disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
+                              disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
                   </div>
                   <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Reservar"
@@ -137,15 +203,32 @@
                   <br>
                   <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Volver"
-                        actionListener="#" />
+                        actionListener="#{navigationController.paginaCalendario()}" />
                   </br>
 
-                  <p:dialog widgetVar="dlgRedirect" modal="true" closable="false" minHeight="60">
-                        <h:outputText value="#{reservarBean.fallos}" />
-                        <p:commandButton actionListener="#{navigationController.paginaMisReservas()}"
-                              class="botn but-style" value="Ir a Mis reservas" />
-                        <p:commandButton actionListener="#{navigationController.paginaHome()}" class="botn but-style"
-                              value="Ir a Home" />
+                  <p:dialog id="dlgRedirect" widgetVar="dlgRedirect" modal="true" dynamic="false" resizable="false"
+                        styleClass="customDialog" closable="false">
+                        <style>
+                              * {
+                                    font-family: 'Poppins', sans-serif;
+                                    text-shadow: 0 0 10px #599bff;
+                              }
+                        </style>
+                        <b>
+                              <h:outputLabel class="encabezado" value="#{reservarBean.encabezado}" />
+                        </b>
+                        <div class="ui-grid ui-grid-responsive all">
+                              <div class="ui-grid-row-1">
+                                    <h:outputLabel value="#{reservarBean.fallos}" />
+                              </div>
+                              <br />
+                              <div class="ui-grid-row-3 buttons">
+                                    <h:commandButton class="botn but-style" actionListener="#{reservarBean.redirect(0)}"
+                                          value="Ir a Mis reservas" />
+                                    <h:commandButton class="botn but-style" actionListener="#{reservarBean.redirect(1)}"
+                                          value="Ir a Home" />
+                              </div>
+                        </div>
                   </p:dialog>
             </h:form>
       </div>
