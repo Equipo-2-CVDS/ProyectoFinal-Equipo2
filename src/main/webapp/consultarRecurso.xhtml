@@ -143,10 +143,8 @@
         <h:form id="formConsultarRecursos" class="formbox">
             <center>
                 <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
-                    filteredValue="#{consultarRecursosBean.filtro}" rows="10" width="100%" paginator="true"
-                    emptyMessage="Not Found" class = "table" rowStyleClass="rows" paginatorPosition="bottom"
-                    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-                    currentPageReportTemplate="pag {startRecord} de {endRecord}">
+                    tableStyle="table-dark table-striped table-bordered justify-content-center" emptyMessage="No tienes reservaciones activas"
+                    scrollable="true"  draggableRows="false"  cellSeparator="true"  scrollHeight="330" >>
                     <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
 
                         <h:outputText value="#{recurso.nombre}" />
@@ -167,11 +165,10 @@
                         <h:outputText value="#{recurso.estado}" />
                     </p:column>
                     <p:column headerText="Consultar Horario">
-<!--                        <p:calendar value="fecha"/>-->
-                        <p:button value = "Consultar" oncomplete = "requestDialog();" ajax = "false"
-                                  outcome = "consultarHorarios"/>
-
-
+                        <div>
+                            <p:commandButton value="Consultar" update="formConsultarRecursos"
+                                    actionListener="#{scheduleView.inicializar(recurso.id)}"/>
+                        </div>
                     </p:column>
 
                 </p:dataTable>

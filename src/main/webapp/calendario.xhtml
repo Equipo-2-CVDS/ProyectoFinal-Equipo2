@@ -7,14 +7,6 @@
       xmlns:p="http://primefaces.org/ui">
 
 <style>
-    body {
-        font-family: 'Courier New';
-        background-color: rgb(46, 46, 184);
-        color: white;
-        text-align: center;
-        padding: 1% 3%;
-        align-content: center;
-    }
 
     .divBody {
         background-color: rgba(1, 1, 70, 0.623);
@@ -37,7 +29,7 @@
         align-content: center;
     }
 
-    .botn
+    .botn{
         width: 22%;
         height: 40px;
         margin: 10px;
@@ -149,13 +141,13 @@
 </h:head>
 <title>Consultar Recurso</title>
 
-<body class="table">
+<body>
     <center><h:form>
         <p:growl id="messages" showDetail="true" />
 
         <h:panelGrid columnClasses="value">
-            <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
-                <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
+            <p:schedule id="schedule" value="#{scheduleView.eventModel}" widgetVar="myschedule">
+                <p:ajax event="dateSelect" listener="#{scheduleView.onDateSelect}" update="eventDetails"/>
                 <p:ajax event="eventSelect" listener="#{scheduleView.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                 <p:ajax event="eventMove" listener="#{scheduleView.onEventMove}" update="messages" />
                 <p:ajax event="eventResize" listener="#{scheduleView.onEventResize}" update="messages" />
@@ -164,13 +156,13 @@
 
         <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
             <h:panelGrid id="eventDetails" columns="2">
-                <p:outputLabel value="Recurso: #{scheduleView.event.title}" />
+                <p:outputLabel value="Recurso:"/>
                 <br></br>
                 <p:outputLabel for="from" value="From:" />
-                <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="from" value="" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
 
                 <p:outputLabel for="to" value="To:" />
-                <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
+                <p:calendar id="to" value="" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
             </h:panelGrid>
         </p:dialog>
     </h:form></center>

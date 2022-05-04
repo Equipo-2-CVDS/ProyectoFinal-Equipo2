@@ -1,33 +1,25 @@
 package edu.eci.cvds.view;
 
-import java.io.Serializable;
-import java.sql.Time;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Horario;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 import org.primefaces.PrimeFaces;
-import org.primefaces.event.ScheduleEntryMoveEvent;
-import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
-@ManagedBean
+@ManagedBean(name = "scheduleView")
 @SessionScoped
 public class ScheduleView extends BasePageBean {
 
@@ -35,31 +27,54 @@ public class ScheduleView extends BasePageBean {
     private ProyectoServices userServices;
 
     private ScheduleModel eventModel;
+    private ScheduleEvent<?> event = new DefaultScheduleEvent<>();
 
-    private ScheduleEvent event = new DefaultScheduleEvent();
-
-    private ScheduleEvent eventAux = new DefaultScheduleEvent();
-
-    private int eventId = 0;
-
-    public void loadEvents() throws ServicesException {
+    public void inicializar(int id) throws IOException{
         eventModel = new DefaultScheduleModel();
+        loadEventos(id);
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/calendario.xhtml");
+    }
 
-        Object serviciosBiblioteca;
-        List<Horario> horarios = userServices.getHorariosDisponibles(1);
-        for (Horario r : horarios){
-            event = DefaultScheduleEvent.builder()
-                    .title(userServices.getRecursoPorId(r.getIdRecurso()).getTipo() + " - " + userServices.getRecursoPorId(r.getIdRecurso()).getNombre())
-                    .startDate(r.getDesde())
-                    .endDate(r.getHasta())
-                    .description("Trees, flowers, ...")
-                    .draggable(true)
-                    .borderColor("#27AE60")
-                    .build();
-            eventModel.addEvent(event);
-            event.setId(String.valueOf(r.getIdRecurso()));
+    private void loadEventos(int id) {
+        try {
+            List<Horario> horarios = userServices.getHorariosDisponibles(id);
+            LocalDateTime hoy = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+            for (int i = 0; i < 30; i++) {
+                for (Horario horario : horarios) {
+                    LocalDateTime dia = hoy.plusDays(i);
+                    if (horario.getIdDia() == dia.getDayOfWeek().getValue()) {
+                        LocalDateTime desde = dia.plusHours(horario.getDesde().getHours());
+                        LocalDateTime hasta = dia.plusHours(horario.getHasta().getHours());
+                        DefaultScheduleEvent<?> event1 = DefaultScheduleEvent.builder()
+                                .title(dia.getDayOfWeek().name())
+                                .startDate(desde)
+                                .endDate(hasta)
+                                .borderColor("orange")
+                                .overlapAllowed(true)
+                                .id(dia.getDayOfWeek().name())
+                                .build();
+                        eventModel.addEvent(event1);
+                    }
+                }
+            }
+            List<Reserva> reservas = userServices.getReservasRecurso(id);
+            for (Reserva reserva : reservas) {
+                LocalDateTime desde = reserva.getDesde().toLocalDateTime();
+                LocalDateTime hasta = reserva.getHasta().toLocalDateTime();
+                if (desde.isAfter(hoy)) {
+                    DefaultScheduleEvent<?> event1 = DefaultScheduleEvent.builder()
+                            .title("Reserva")
+                            .startDate(desde)
+                            .endDate(hasta)
+                            .borderColor("blue")
+                            .overlapAllowed(true)
+                            .build();
+                    eventModel.addEvent(event1);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-
     }
 
     public ScheduleModel getEventModel() {
@@ -70,26 +85,20 @@ public class ScheduleView extends BasePageBean {
         this.eventModel = eventModel;
     }
 
-    public void onEventSelect(SelectEvent selectEvent) {
-        this.event = (ScheduleEvent) selectEvent.getObject();
-        this.eventId = Integer.parseInt(event.getId());
+    public ScheduleEvent<?> getEvent() {
+        return event;
     }
 
-    public void onEventMove(ScheduleEntryMoveEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-        PrimeFaces.current().dialog().showMessageDynamic(message);
-        addMessage(message);
+    public void setEvent(ScheduleEvent<?> event) {
+        this.event = event;
+    }
+
+    public void onEventSelect(SelectEvent selectEvent) {
+        this.event = (ScheduleEvent<?>) selectEvent.getObject();
     }
 
     private void addMessage(FacesMessage message) {
         PrimeFaces.current().dialog().showMessageDynamic(message);
     }
 
-    public int getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
-    }
 }
