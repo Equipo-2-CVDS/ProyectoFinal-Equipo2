@@ -279,7 +279,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <excludes>edu/eci/eci/cvds/entities/**</excludes>
+                    <excludes>
+                        <exclude>edu/eci/cvds/view/**</exclude>
+                        <exclude>edu/eci/cvds/entities/**</exclude>
+                        <exclude>edu/eci/cvds/persistence/**</exclude>
+                        <exclude>edu/eci/cvds/security/**</exclude>
+                        <exclude>edu/eci/cvds/guice/**</exclude>
+                        <exclude>edu/eci/cvds/persistence/**</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
         </plugins>
