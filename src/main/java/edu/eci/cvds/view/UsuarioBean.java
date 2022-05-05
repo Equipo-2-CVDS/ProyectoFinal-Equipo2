@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import org.slf4j.LoggerFactory;
 
 import edu.eci.cvds.entities.Usuario;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
@@ -98,7 +99,7 @@ public class UsuarioBean extends BasePageBean {
         String res = "";
         try {
             res = (userServices.buscarUsuario(username).getRol() == 1) ? "True" : "None";
-        } catch (ServicesException e) {
+        } catch (PersistenceException e) {
             res = "None";
         }
 
@@ -114,7 +115,7 @@ public class UsuarioBean extends BasePageBean {
         String res = "";
         try {
             res = (userServices.buscarUsuario(username).getRol() == 2) ? "True" : "None";
-        } catch (ServicesException e) {
+        } catch (PersistenceException e) {
             res = "None";
         }
 

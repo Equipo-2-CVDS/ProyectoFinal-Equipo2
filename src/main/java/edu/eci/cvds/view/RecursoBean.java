@@ -9,8 +9,8 @@ import com.google.inject.Inject;
 
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import java.sql.Time;
 
@@ -31,7 +31,7 @@ public class RecursoBean extends BasePageBean {
     private String desde;
     private String hasta;
 
-    public void insertarRecurso() throws ServicesException{
+    public void insertarRecurso() throws PersistenceException{
         try {
             if(nombre.isEmpty() || tipo.isEmpty() || capacidad.isEmpty() || ubicacion.isEmpty() || desde.isEmpty() || hasta.isEmpty() || dias.length < 1){
                 messageError("Ningún campo puede ser vacio");
@@ -56,7 +56,7 @@ public class RecursoBean extends BasePageBean {
                 }
                 messageError("Se Agrego de forma exitosa la Oferta");
             }        
-        }catch(ServicesException e){
+        }catch(PersistenceException e){
             messageError("Verifique los datos ingresados");
         }
         clear();      
