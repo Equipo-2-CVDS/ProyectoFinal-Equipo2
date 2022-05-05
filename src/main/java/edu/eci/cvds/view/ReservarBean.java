@@ -15,8 +15,8 @@ import javax.faces.context.FacesContext;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 @ManagedBean(name = "reservarBean")
 @SessionScoped
@@ -106,7 +106,7 @@ public class ReservarBean extends BasePageBean {
     }
 
     private boolean busquedaReservas(int idRecurso, LocalDateTime fechaInsercion, int horas)
-            throws ServicesException {
+            throws PersistenceException {
         List<Reserva> reservas = userServices.getReservasRecurso(idRecurso);
         for (Reserva re : reservas) {
             LocalDateTime desde = re.getDesde().toLocalDateTime();
@@ -173,7 +173,7 @@ public class ReservarBean extends BasePageBean {
         this.idRecurso = idRecurso;
         try {
             this.recurso=userServices.getRecursoPorId(idRecurso).getNombre();
-        } catch (ServicesException e) {
+        } catch (PersistenceException e) {
             System.out.println(e);
         }
     }

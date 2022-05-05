@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ServicesException;
 
@@ -11,7 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +51,7 @@ public class MisReservasBean extends BasePageBean{
             } else if (this.filter == 2) {
                 reservas = new ArrayList<>();
             }
-        } catch (ServicesException e) {
+        } catch (PersistenceException e) {
             e.printStackTrace();
         }
         return reservas;
@@ -83,18 +83,18 @@ public class MisReservasBean extends BasePageBean{
             this.showFilterCancelled(id);
             this.showTableButtonDelete(id);
             this.showFilterOld(id);
-        } catch (ServicesException e) {
+        } catch (PersistenceException e) {
             e.printStackTrace();
         }
         this.showAll();
         this.showTableButtonDetail();
     }
 
-    public String showFilterOld(int id) throws ServicesException {
+    public String showFilterOld(int id) throws PersistenceException {
         return (this.filter != 1 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
-    public String showFilterCancelled(int id) throws ServicesException {
+    public String showFilterCancelled(int id) throws PersistenceException {
         return (this.filter != 2 && userServices.getRol(id).equals("Comunidad")) ? "" : "none";
     }
 
@@ -102,7 +102,7 @@ public class MisReservasBean extends BasePageBean{
         return (this.filter == 0 || this.filter == 1) ? "" : "none";
     }
 
-    public String showTableButtonDelete(int id) throws ServicesException {
+    public String showTableButtonDelete(int id) throws PersistenceException {
         return (this.filter == 0 && userServices.getRol(id).equals("Comunidad")) ? "" : "none"; // here
     }
 
@@ -114,7 +114,7 @@ public class MisReservasBean extends BasePageBean{
         return this.title;
     }
 
-    public String isAdmin(int id) throws ServicesException {
+    public String isAdmin(int id) throws PersistenceException {
         return userServices.getRol(id).equals("Administrador") ? "" : "none";
     }
 
@@ -160,7 +160,7 @@ public class MisReservasBean extends BasePageBean{
         idUsuario = event;
     }
 
-    public void serchReservasById() throws ServicesException {
+    public void serchReservasById() throws PersistenceException {
         reservas = userServices.getReservasRecurso(idUsuario);
     }
 

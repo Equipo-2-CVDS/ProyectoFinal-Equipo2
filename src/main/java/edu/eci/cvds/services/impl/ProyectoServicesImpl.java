@@ -1,6 +1,5 @@
 package edu.eci.cvds.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -17,7 +16,6 @@ import edu.eci.cvds.persistence.RolesDAO;
 import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.HorarioDAO;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 public class ProyectoServicesImpl implements ProyectoServices {
 
@@ -37,159 +35,89 @@ public class ProyectoServicesImpl implements ProyectoServices {
     private ReservaDAO reservaDAO;
 
     @Override
-    public Usuario buscarUsuario(String nombre) throws ServicesException {
-        try {
-            System.out.println(usuarioDAO);
+    public Usuario buscarUsuario(String nombre) throws PersistenceException {
             return usuarioDAO.buscarUsuario(nombre);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando usuario:" + nombre, ex);
-        }
     }
 
     @Override
-    public String getRol(int id) throws ServicesException {
-        try {
+    public String getRol(int id) throws PersistenceException {
             return rolesDAO.getRol(id);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando rol:" + id, ex);
-        }
-
     }
-
-    public List<Recurso> getRecursosDisponibles() throws ServicesException {
-        try {
+    @Override
+    public List<Recurso> getRecursosDisponibles() throws PersistenceException {
             return recursoDAO.getRecursosDisponibles();
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recursos", ex);
-        }
     }
     @Override
-    public void insertarRecurso(Recurso r) throws ServicesException {
-        try {
+    public void insertarRecurso(Recurso r) throws PersistenceException {
             recursoDAO.insertarRecurso(r);
-        } catch (Exception e) {
-            throw new ServicesException("Error al insertar recurso", e);
-        }
     }
 
     @Override
-    public List<Horario> getHorariosDisponibles(int idRecurso) throws ServicesException {
-        try {
+    public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException {
             return horarioDAO.getHorariosDisponibles(idRecurso);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando Horario", ex);
-        }
     }
 
     @Override
-    public void insertarHorario(Horario h) throws ServicesException {
-        try {
+    public void insertarHorario(Horario h) throws PersistenceException {
             horarioDAO.insertarHorario(h);
-        } catch (Exception e) {
-            throw new ServicesException("Error al insertar Horario", e);
-        }
     }
 
     @Override
-    public Recurso getRecurso(String nombre) throws ServicesException {
-        try {
+    public Recurso getRecurso(String nombre) throws PersistenceException {
             return recursoDAO.getRecurso(nombre);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recurso con nombre: " + nombre, ex);
-        }
     }
 
     @Override
-    public void insertarReserva(Reserva re) throws ServicesException {
-        try {
+    public void insertarReserva(Reserva re) throws PersistenceException {
             reservaDAO.insertarReserva(re);
-        } catch (Exception e) {
-            throw new ServicesException("Error al insertar Reserva", e);
-        }
     }
 
     @Override
-    public List<Reserva> getReservasUsuario(int idUsuario) throws ServicesException {
-        try {
+    public List<Reserva> getReservasUsuario(int idUsuario) throws PersistenceException {
             return reservaDAO.getReservasUsuario(idUsuario);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando reservas con id: " + idUsuario, ex);
-        }
     }
 
     @Override
-    public List<Reserva> getReservas() throws ServicesException {
-        try {
+    public List<Reserva> getReservas() throws PersistenceException {
             return reservaDAO.getReservas();
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando reservas", ex);
-        }
     }
 
     @Override
-    public List<Recurso> getRecursos() throws ServicesException {
-        try {
+    public List<Recurso> getRecursos() throws PersistenceException {
             return recursoDAO.getRecursos();
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando los recursos", ex);
-        }
     }
-    public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException {
-        try {
+    public Horario getHorarioDia(int idRecurso, int idDia) throws PersistenceException {
             return horarioDAO.getHorarioDia(idRecurso, idDia);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando Horario", ex);
-        }
     }
 
     @Override
-    public List<Reserva> getReservasRecurso(int idRecurso) throws ServicesException {
-        try {
+    public List<Reserva> getReservasRecurso(int idRecurso) throws PersistenceException {
             return reservaDAO.getReservasRecurso(idRecurso);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando reservas con id: " + idRecurso, ex);
-        }
     }
 
     @Override
-    public UsuRecuRese getUsuRecuRese(int id) throws ServicesException {
-        try {
+    public UsuRecuRese getUsuRecuRese(int id) throws PersistenceException {
             Reserva reservas = reservaDAO.getReservaPorId(id);
             Usuario u = buscarUsuarioPorId(reservas.getIdUsuario());
             Recurso re = getRecursoPorId(reservas.getIdRecurso());
             String infoRecurso = "Capacidad: " + Integer.toString(re.getCapacidad()) + ", Ubicacion: " + re.getUbicacion() +", Tipo: " + re.getTipo();
             UsuRecuRese res = (new UsuRecuRese(re.getNombre(), infoRecurso, reservas.getFechaSolicitado(), reservas.getDesde(), reservas.getHasta(), u.getNombre(), u.getPrograma(), reservas.getRecurrencia()));
             return res;
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando reservas", ex);
-        }
     }
 
     @Override
-    public Usuario buscarUsuarioPorId(int id) throws ServicesException {
-        try {
+    public Usuario buscarUsuarioPorId(int id) throws PersistenceException {
             return usuarioDAO.getUsuarioPorId(id);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando usuario:" + id, ex);
-        }
     }
 
     @Override
-    public Recurso getRecursoPorId(int id) throws ServicesException {
-        try {
+    public Recurso getRecursoPorId(int id) throws PersistenceException {
             return recursoDAO.getRecursoPorId(id);
-        } catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recurso con id: " + id, ex);
-        }
     }
 
     @Override
-    public Reserva getReservaPorId(int id) throws ServicesException {
-        try {
+    public Reserva getReservaPorId(int id) throws PersistenceException {
             return reservaDAO.getReservaPorId(id);
-        }catch (PersistenceException ex) {
-            throw new ServicesException("Error buscando recurso con id: " + id, ex);
-        }
     }
 
 }

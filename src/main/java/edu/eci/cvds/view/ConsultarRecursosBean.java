@@ -1,11 +1,8 @@
 package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
-import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
-import edu.eci.cvds.security.iniciarSesion;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

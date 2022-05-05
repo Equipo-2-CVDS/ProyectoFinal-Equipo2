@@ -7,6 +7,7 @@ import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.entities.Usuario;
+import edu.eci.cvds.persistence.PersistenceException;
 
 public interface ProyectoServices {
 
@@ -17,7 +18,7 @@ public interface ProyectoServices {
      * @return Usuario
      * @throws ServicesException
      */
-    public Usuario buscarUsuario(String nombre) throws ServicesException;
+    public Usuario buscarUsuario(String nombre) throws PersistenceException;
 
         /**
      * Consulta el usuario dado su id
@@ -25,7 +26,7 @@ public interface ProyectoServices {
      * @return Usuario
      * @throws ServicesException
      */
-    public Usuario buscarUsuarioPorId(int id) throws ServicesException;
+    public Usuario buscarUsuarioPorId(int id) throws PersistenceException;
 
     /**
      * Retorna el rol correspondiente al id
@@ -33,7 +34,7 @@ public interface ProyectoServices {
      * @return
      * @throws ServicesException
      */
-    public String getRol(int id) throws ServicesException;
+    public String getRol(int id) throws PersistenceException;
 
     /**
      * Consulta los recursos de la biblioteca
@@ -41,14 +42,14 @@ public interface ProyectoServices {
      * @return Recurso
      * @throws ServicesException
      */
-    public List<Recurso> getRecursosDisponibles() throws ServicesException;
+    public List<Recurso> getRecursosDisponibles() throws PersistenceException;
 
     /**
      * Inserta recurso en la base de datos
      * @param r Recurso a insertar
      * @throws ServicesException
      */
-    public void insertarRecurso(Recurso r) throws ServicesException; 
+    public void insertarRecurso(Recurso r) throws PersistenceException; 
 
     /**
      * Consulta los horarios de un recurso
@@ -56,7 +57,7 @@ public interface ProyectoServices {
      * @return
      * @throws ServicesException
      */
-    public List<Horario> getHorariosDisponibles(int idRecurso) throws ServicesException;
+    public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException;
 
     /**
      * Consulta si el recurso tiene horario un dia especifico
@@ -67,14 +68,14 @@ public interface ProyectoServices {
      * @return El horario de el recurso ese dia
      * @throws ServicesException
      */
-    public Horario getHorarioDia(int idRecurso, int idDia) throws ServicesException;
+    public Horario getHorarioDia(int idRecurso, int idDia) throws PersistenceException;
 
     /**
      * Inserta horario en la base de datos
      * @param h horario a insertar
      * @throws ServicesException
      */
-    public void insertarHorario(Horario h) throws ServicesException; 
+    public void insertarHorario(Horario h) throws PersistenceException; 
 
     /**
      * Consulta el recurso segun el nombre
@@ -83,7 +84,7 @@ public interface ProyectoServices {
      * @return Recurso
      * @throws ServicesException
      */
-    public Recurso getRecurso(String nombre) throws ServicesException;
+    public Recurso getRecurso(String nombre) throws PersistenceException;
 
     /**
      * Consulta los recursos
@@ -91,7 +92,7 @@ public interface ProyectoServices {
      * @return Recurso
      * @throws ServicesException
      */
-    public List<Recurso> getRecursos() throws ServicesException;
+    public List<Recurso> getRecursos() throws PersistenceException;
         /**
      * Consulta el recurso segun el id
      * 
@@ -99,14 +100,14 @@ public interface ProyectoServices {
      * @return Recurso
      * @throws ServicesException
      */
-    public Recurso getRecursoPorId(int id) throws ServicesException;
+    public Recurso getRecursoPorId(int id) throws PersistenceException;
 
     /**
      * Inserta reserva en la base de datos
      * @param re Reserva a insertar
      * @throws ServicesException
      */
-    public void insertarReserva(Reserva re) throws ServicesException; 
+    public void insertarReserva(Reserva re) throws PersistenceException; 
 
     /**
      * Consulta las reservas de un usuario
@@ -114,7 +115,7 @@ public interface ProyectoServices {
      * @return
      * @throws ServicesException
      */
-    public List<Reserva> getReservasUsuario(int idUsuario) throws ServicesException;
+    public List<Reserva> getReservasUsuario(int idUsuario) throws PersistenceException;
 
         /**
      * Consulta las reservas de un usuario
@@ -122,21 +123,21 @@ public interface ProyectoServices {
      * @return
      * @throws ServicesException
      */
-    public List<Reserva> getReservas() throws ServicesException;
+    public List<Reserva> getReservas() throws PersistenceException;
     /**
      * Consulta las reservas de un recurso
      * @param idRecurso
      * @return
      * @throws ServicesException
      */
-    public List<Reserva> getReservasRecurso(int idRecurso) throws ServicesException;
+    public List<Reserva> getReservasRecurso(int idRecurso) throws PersistenceException;
 
     /**
      * Consulta informacion detallada de reservas
      * @return
      * @throws ServicesException
      */
-    public UsuRecuRese getUsuRecuRese(int id) throws ServicesException;
+    public UsuRecuRese getUsuRecuRese(int id) throws PersistenceException;
 
             /**
      * Consulta el recurso segun el id
@@ -145,5 +146,5 @@ public interface ProyectoServices {
      * @return Recurso
      * @throws ServicesException
      */
-    public Reserva getReservaPorId(int id) throws ServicesException;
+    public Reserva getReservaPorId(int id) throws PersistenceException;
 }
