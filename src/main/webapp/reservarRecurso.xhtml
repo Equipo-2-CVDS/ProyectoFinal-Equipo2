@@ -194,7 +194,7 @@
                         <h:outputLabel for="calendario" value="Fecha final: "
                               style="display: #{reservarBean.mostrar}" />
                         <p:calendar class="calendario" id="calendario" value="#{reservarBean.fechaFinal}"
-                              disabledWeekends="true" style="display: #{reservarBean.mostrar}" />
+                              disabledWeekends="true" style="display: #{reservarBean.mostrar}" mindate="#{reservarBean.fechaInicial}" maxdate="#{reservarBean.finCalendar}" />
                   </div>
                   <!--Aqui enlace con pagina horarios -->
                   <p:commandButton update="formReservarRecurso" class="botn but-style" value="Reservar"

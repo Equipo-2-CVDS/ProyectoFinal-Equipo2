@@ -31,6 +31,7 @@ public class ReservarBean extends BasePageBean {
     private int idRecurso;
     private String recurso;
     private LocalDateTime fechaInicial;
+    private LocalDateTime finCalendar = LocalDateTime.of(2022,05,20, 0, 0, 0);
     private String mostrar = "None";
     private String encabezado = "Hubo errores en las siguientes reservas: ";
     private String fallos = "";
@@ -230,5 +231,14 @@ public class ReservarBean extends BasePageBean {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Error", message));
     }
+
+    public LocalDateTime getFinCalendar() {
+        return finCalendar;
+    }
+
+    public void setFinCalendar(LocalDateTime finCalendar) {
+        this.finCalendar = finCalendar;
+    }
+    
 
 }
