@@ -31,7 +31,7 @@ public class ReservarBean extends BasePageBean {
     private int idRecurso;
     private String recurso;
     private LocalDateTime fechaInicial;
-    private LocalDateTime finCalendar = LocalDateTime.of(2022, 05, 20, 0, 0, 0);
+    private LocalDateTime finCalendar = LocalDateTime.of(2022, 05, 20, 11, 59, 59);
     private String mostrar = "None";
     private String encabezado = "Hubo errores en las siguientes reservas: ";
     private String fallos = "";
@@ -44,6 +44,7 @@ public class ReservarBean extends BasePageBean {
                 LocalTime horaReserva = fechaInicial.plusHours(horas).toLocalTime();
                 if (horaHorario.isAfter(horaReserva) || horaHorario.equals(horaReserva)) {
                     this.fechaInicial = fechaInicial;
+                    this.fechaFinal = new Date(Timestamp.valueOf(fechaInicial).getTime());
                     setIdRecurso(idRecurso);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/reservarRecurso.xhtml");
                 } else {
@@ -90,7 +91,6 @@ public class ReservarBean extends BasePageBean {
 
     private void clear() {
         this.recurrencia = 0;
-        this.fechaFinal = new Date();
         this.mostrar = "None";
     }
 
