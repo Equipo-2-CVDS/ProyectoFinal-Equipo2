@@ -30,7 +30,7 @@ public class ScheduleView extends BasePageBean {
     private LocalDateTime desde;
     private LocalDateTime hasta;
 
-    public void inicializar(int id) throws IOException{
+    public void inicializar(int id) throws IOException {
         this.idRecurso = id;
         eventModel = new DefaultScheduleModel();
         loadEventos();
@@ -41,11 +41,11 @@ public class ScheduleView extends BasePageBean {
         try {
             List<Horario> horarios = userServices.getHorariosDisponibles(idRecurso);
             LocalDateTime hoy = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
-            LocalDateTime finCalendar = LocalDateTime.of(2022,05,20, 0, 0, 0);
+            LocalDateTime finCalendar = LocalDateTime.of(2022, 05, 20, 11, 59, 59);
             for (int i = 0; i < 30; i++) {
                 for (Horario horario : horarios) {
                     LocalDateTime dia = hoy.plusDays(i);
-                    if(!finCalendar.isBefore(dia)){
+                    if (!finCalendar.isBefore(dia)) {
                         if (horario.getIdDia() == dia.getDayOfWeek().getValue()) {
                             LocalDateTime desde = dia.plusHours(horario.getDesde().getHours());
                             LocalDateTime hasta = dia.plusHours(horario.getHasta().getHours());
@@ -55,7 +55,6 @@ public class ScheduleView extends BasePageBean {
                                     .endDate(hasta)
                                     .borderColor("orange")
                                     .overlapAllowed(true)
-                                    .id(dia.getDayOfWeek().name())
                                     .build();
                             eventModel.addEvent(event1);
                         }
@@ -101,7 +100,7 @@ public class ScheduleView extends BasePageBean {
     public void onEventSelect(SelectEvent selectEvent) {
         this.event = (ScheduleEvent<?>) selectEvent.getObject();
         this.desde = event.getStartDate();
-        this.hasta = event.getStartDate();
+        this.hasta = event.getEndDate();
     }
 
     public int getIdRecurso() {
