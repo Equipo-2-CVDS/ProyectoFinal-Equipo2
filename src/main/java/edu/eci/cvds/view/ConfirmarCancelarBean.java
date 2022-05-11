@@ -60,7 +60,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
             }
             return;
         }
-        if (value == "") {
+        if (value.equals("")) {
             messageError("Debe seleccionar un tipo de cancelación recurrente");
             return;
         }
@@ -79,6 +79,10 @@ public class ConfirmarCancelarBean extends BasePageBean {
             }
         }
         int index = idReservas.indexOf(Integer.valueOf(reserva.getId()));
+        this.casoRecurrencia(value, index, idReservas);
+    }
+
+    private void casoRecurrencia(String value, int index, List<Integer> idReservas) {
         switch (value) {
             case "1":
                 for (Integer integer : idReservas) {
@@ -105,8 +109,25 @@ public class ConfirmarCancelarBean extends BasePageBean {
                     }
                 }
                 break;
+            default:
+                break;
         }
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/misReservas.xhtml");
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/misReservas.xhtml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean reservasRecurrentes(Reserva re) {
+        if (re.getFechaSolicitado().getHours() == reserva.getFechaSolicitado().getHours()
+                && re.getFechaSolicitado().getMinutes() == reserva.getFechaSolicitado().getMinutes()
+                && re.getFechaSolicitado().getDay() == reserva.getFechaSolicitado().getDay()
+                && re.getRecurrencia() == reserva.getRecurrencia()
+                && !re.getEstado()) {
+            return true;
+        } else
+            return false;
     }
 
     private void messageError(String message) {
