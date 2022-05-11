@@ -31,30 +31,32 @@ public class ReservarBean extends BasePageBean {
     private int idRecurso;
     private String recurso;
     private LocalDateTime fechaInicial;
-    private LocalDateTime finCalendar = LocalDateTime.of(2022,05,20, 0, 0, 0);
+    private LocalDateTime finCalendar = LocalDateTime.of(2022, 05, 20, 11, 59, 59);
     private String mostrar = "None";
     private String encabezado = "Hubo errores en las siguientes reservas: ";
     private String fallos = "";
 
-    public void inicializar(int idRecurso, LocalDateTime fechaInicial) throws IOException{
-        try{
-            if(busquedaReservas(idRecurso,fechaInicial,horas)){
-                LocalTime horaHorario = userServices.getHorarioDia(idRecurso, fechaInicial.getDayOfWeek().getValue()).getHasta().toLocalTime();
+    public void inicializar(int idRecurso, LocalDateTime fechaInicial) throws IOException {
+        try {
+            if (busquedaReservas(idRecurso, fechaInicial, horas)) {
+                LocalTime horaHorario = userServices.getHorarioDia(idRecurso, fechaInicial.getDayOfWeek().getValue())
+                        .getHasta().toLocalTime();
                 LocalTime horaReserva = fechaInicial.plusHours(horas).toLocalTime();
-                if(horaHorario.isAfter(horaReserva) || horaHorario.equals(horaReserva)){
-                    this.fechaInicial=fechaInicial;
+                if (horaHorario.isAfter(horaReserva) || horaHorario.equals(horaReserva)) {
+                    this.fechaInicial = fechaInicial;
+                    this.fechaFinal = new Date(Timestamp.valueOf(fechaInicial).getTime());
                     setIdRecurso(idRecurso);
                     FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/reservarRecurso.xhtml");
-                }else{
+                } else {
                     messageError("Solo se puede reservar por una hora");
                 }
-            } else{
+            } else {
                 messageError("Ya existe una reserva en esas hora");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             messageError("No se pudo realizar la accion, intentelo de nuevo");
         }
-        
+
     }
 
     public void reservar(int idUsuario) {
@@ -81,6 +83,7 @@ public class ReservarBean extends BasePageBean {
             }
             clear();
         } catch (Exception e) {
+            System.out.println(e);
             encabezado = "No se pudo reservar";
             fallos = "Intentelo de nuevo";
         }
@@ -88,7 +91,6 @@ public class ReservarBean extends BasePageBean {
 
     private void clear() {
         this.recurrencia = 0;
-        this.fechaFinal = new Date();
         this.mostrar = "None";
     }
 
@@ -115,7 +117,7 @@ public class ReservarBean extends BasePageBean {
             if ((desde.isBefore(fechaInsercion) && hasta.isAfter(fechaInsercion))
                     || (desde.isBefore(fechaInsercion.plusHours(horas))
                             && hasta.isAfter(fechaInsercion.plusHours(horas)))
-                    || (desde.isEqual(fechaInsercion))||(hasta.isEqual((fechaInsercion).plusHours(horas)))) {
+                    || (desde.isEqual(fechaInsercion)) || (hasta.isEqual((fechaInsercion).plusHours(horas)))) {
                 return false;
             }
         }
@@ -173,7 +175,7 @@ public class ReservarBean extends BasePageBean {
     public void setIdRecurso(int idRecurso) {
         this.idRecurso = idRecurso;
         try {
-            this.recurso=userServices.getRecursoPorId(idRecurso).getNombre();
+            this.recurso = userServices.getRecursoPorId(idRecurso).getNombre();
         } catch (PersistenceException e) {
             System.out.println(e);
         }
@@ -239,6 +241,5 @@ public class ReservarBean extends BasePageBean {
     public void setFinCalendar(LocalDateTime finCalendar) {
         this.finCalendar = finCalendar;
     }
-    
 
 }
