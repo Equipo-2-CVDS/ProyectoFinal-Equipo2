@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
+<link rel="stylesheet" href="style.css"></link>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500&amp;family=Orbitron:wght@900&amp;family=Poppins:wght@300;700&amp;family=Righteous&amp;display=swap');
+    * {
+        font-family: 'Poppins', sans-serif;
+        text-shadow: 0 0 10px #599bff;
+    }
+    body {
+        font-family: 'Courier New';
+        background-color: rgb(46, 46, 184);
+        color: white;
+        text-align: center;
+        padding: 1% 3%;
+        align-content: center;
+    }
+
+    .divBody {
+        background-color: rgba(1, 1, 70, 0.623);
+        border-radius: 15px;
+        height: auto;
+        width: auto;
+        padding: 3% 10%;
+    }
+
+    .titulo {
+        font-size: 40px;
+    }
+
+    .formbox {
+        border-radius: 15px;
+        background-color: rgba(1, 1, 70, 0.623);
+        padding: 3%;
+    }
+
+    .botn {
+        width: 22%;
+        height: 40px;
+        margin: 10px;
+        text-align: center;
+        align-self: center;
+        align-items: center;
+        position: relative;
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        margin-right: auto;
+        margin-top: 0px;
+    }
+
+    .input {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+    }
+
+    .gri {
+        display: grid;
+        background: rgba(4, 0, 8, 0.664);
+        border-radius: 15px;
+        text-align: center;
+        padding: 10% 8%;
+        margin: 3%;
+        grid-template-columns: 50% 50%;
+        align-items: center;
+    }
+
+    .table {
+        align-self: center;
+        text-align: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .select {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        height: 40px;
+    }
+
+    .logo {
+        margin-left: auto;
+    }
+
+    .time {
+        border-radius: 10px;
+        margin-bottom: 10px;
+        text-align: left;
+        align-items: center;
+
+    }
+
+    .bodylogo {
+        background-color: rgb(46, 46, 184);
+        color: rgb(46, 46, 184);
+    }
+
+    .check {
+        padding: 1%;
+        align-self: center;
+        align-items: center;
+    }
+
+    .dividendo {
+        margin-top: 3%;
+    }
+    .msgs{
+        font-size: 32px;
+    }
+</style>
+<title>Registro Recurso</title>
+
+<body class="page">
+    <p:messages class="msgs" id="messages" showDetail="true" closable="true">
+        <p:autoUpdate />
+    </p:messages>
+    <div class="bodylogo">
+        <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
+    </div>
+    <div class="divBody">
+        <p class="titulo">Confirmar cancelación</p>
+
+        <h:form id="formCancelarReserva" class="formbox">
+
+            <h1>Recuerda que se cancelará tu reserva del #{cancelarBean.reserva.desde}</h1>
+            <div class="gri" style="display: #{cancelarBean.isRecurrent()};">
+                <h1>Tipo de cancelacion recurrente</h1>
+                <h:selectOneMenu binding="#{diego}" class="select">
+                    <f:selectItem hidden="" itemLabel="Seleccione hora" itemValue="" />
+                    <f:selectItem class="select" itemLabel="Reserva completa" itemValue="1"/>
+                    <f:selectItem class="select" itemLabel="Evento único" itemValue="2"/>
+                    <f:selectItem class="select" itemLabel="A partir de este evento" itemValue="3"/>
+                </h:selectOneMenu>
+
+            </div>
+
+            <p:commandButton update="formCancelarReserva" class="botn but-style-delete" value="Confirmar"
+                actionListener="#{cancelarBean.delete(diego.value)}" />
+            <br>
+            <p:commandButton update="formCancelarReserva" class="botn but-style" value="Volver"
+                actionListener="#{navigationController.paginaMisReservas()}" /></br>
+        </h:form>
+    </div>
+</body>
+
+</html>

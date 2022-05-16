@@ -9,6 +9,7 @@
         <result property='hasta' column='hasta' />
         <result property='fechaSolicitado' column='fechaSolicitado' />
         <result property='recurrencia' column='recurrencia' />
+        <result property='estado' column='estado' />
     </resultMap>
 
     <select id="getReservasUsuario" resultMap="ReservaResult" parameterType="map">
@@ -19,7 +20,8 @@
             re.desde ,
             re.hasta ,
             re.fechaSolicitado,
-            re.recurrencia
+            re.recurrencia,
+            re.estado
         FROM RESERVAS as re
             WHERE re.idUsuario=#{idUsuario}
             ORDER by re.desde ASC  
@@ -32,7 +34,8 @@
             re.desde ,
             re.hasta ,
             re.fechaSolicitado,
-            re.recurrencia
+            re.recurrencia,
+            re.estado
         FROM RESERVAS as re  
         ORDER by re.desde ASC     
     </select>
@@ -44,9 +47,10 @@
             re.desde ,
             re.hasta ,
             re.fechaSolicitado,
-            re.recurrencia
+            re.recurrencia,
+            re.estado
         FROM RESERVAS as re
-            WHERE re.idRecurso=#{idRecurso}
+            WHERE re.idRecurso=#{idRecurso} AND re.estado=false
     </select>
 
     <select id="getReservaPorId" resultMap="ReservaResult" parameterType="map">
@@ -57,14 +61,21 @@
             re.desde ,
             re.hasta ,
             re.fechaSolicitado,
-            re.recurrencia
+            re.recurrencia,
+            re.estado
         FROM RESERVAS as re
-            WHERE re.id=#{id}
-            ORDER by re.desde ASC  
+            WHERE re.id=#{id} AND re.estado=false
+            ORDER by re.desde ASC 
     </select>
 
     <insert id="insertarReserva" parameterType="map">
-        insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia) values
-        (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia})
+        insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia, estado) values
+        (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia}, #{re.estado})
     </insert>
+
+    <update id="cancelarReserva" parameterType="map">
+        UPDATE reservas 
+        SET estado = true
+        WHERE reservas.id = #{id}
+    </update>
 </mapper>

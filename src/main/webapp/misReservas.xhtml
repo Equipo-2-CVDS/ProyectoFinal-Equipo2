@@ -164,7 +164,7 @@
                         <p:commandButton style="display: #{misReservasBean.showTableButtonDetail()};" update="formConsultarMisReservas" class="but but-table but-style-detail" value="Detallar"
                             actionListener="#{consultarReservaBean.load(reserva.id)}" />
                         <p:commandButton style="display: #{misReservasBean.showTableButtonDelete(userBean.userId)};" update="formConsultarMisReservas" class="but but-table but-style-delete" value="Eliminar"
-                            actionListener="#{misReservasBean.deleteBooking(reserva.id)}" />
+                            actionListener="#{cancelarBean.inicializar(reserva)}" />
                     </p:column>
                 </p:dataTable>
                 <div class="buttons">

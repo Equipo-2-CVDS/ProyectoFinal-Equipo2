@@ -18,7 +18,7 @@ import java.util.List;
 
 @ManagedBean(name = "misReservasBean")
 @SessionScoped
-public class MisReservasBean extends BasePageBean{
+public class MisReservasBean extends BasePageBean {
     @Inject
     private ProyectoServices userServices;
 
@@ -41,15 +41,15 @@ public class MisReservasBean extends BasePageBean{
         try {
             List<Reserva> refreshReserva = userServices.getReservasUsuario(id);
             if (idUsuario != 0) {
-                reservas = userServices.getReservasRecurso(idUsuario);
+                reservas = filterByDate(userServices.getReservasRecurso(idUsuario), today, filterNewest);
             } else if (userServices.getRol(id).equals("Administrador")) {
-                reservas = userServices.getReservas();
+                reservas = filterByDate(userServices.getReservas(), today, filterNewest);
             } else if (this.filter == 0) {
                 reservas = filterByDate(refreshReserva, today, filterNewest);
             } else if (this.filter == 1) {
                 reservas = filterByDate(refreshReserva, today, filterOlders);
             } else if (this.filter == 2) {
-                reservas = new ArrayList<>();
+                reservas = filterCancelled(refreshReserva);
             }
         } catch (PersistenceException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class MisReservasBean extends BasePageBean{
     }
 
     public void setfilterCancelled(int id) {
-        this.title = "Reservas canceladas (¡Funcionalidad en construcción!)";
+        this.title = "Reservas canceladas";
         this.filter = 2;
         this.callFilters(id);
         this.consultarReservas(id);
@@ -123,19 +123,26 @@ public class MisReservasBean extends BasePageBean{
         messageError("la funcionalidad de cancelar está en construcción.");
     }
 
-    public void detailBooking(int idUsuario) {
-        messageError("la funcionalidad de detalles está en construcción.");
-    }
-
     public List<Reserva> filterByDate(List<Reserva> initialArray, Timestamp date, char filterType) {
         List<Reserva> filteredList = new ArrayList<>();
 
         for (Reserva reserva : initialArray) {
             int comparation = reserva.getHasta().compareTo(date);
-            if (comparation > 0 && filterType == filterNewest) {
+            if (comparation > 0 && filterType == filterNewest && !reserva.getEstado()) {
                 filteredList.add(reserva);
             }
-            if (comparation < 0 && filterType == filterOlders) {
+            if (comparation < 0 && filterType == filterOlders && !reserva.getEstado()) {
+                filteredList.add(reserva);
+            }
+        }
+        return filteredList;
+    }
+
+    public List<Reserva> filterCancelled(List<Reserva> initialArray) {
+        List<Reserva> filteredList = new ArrayList<>();
+
+        for (Reserva reserva : initialArray) {
+            if (reserva.getEstado()) {
                 filteredList.add(reserva);
             }
         }

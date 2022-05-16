@@ -9,7 +9,7 @@ import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.ReservaDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper;
 
-public class MyBatisReservaDAO implements ReservaDAO{
+public class MyBatisReservaDAO implements ReservaDAO {
     @Inject
     ReservaMapper reservaMapper;
 
@@ -20,7 +20,7 @@ public class MyBatisReservaDAO implements ReservaDAO{
         } catch (Exception e) {
             throw new PersistenceException("Error al insertar reserva", e);
         }
-        
+
     }
 
     @Override
@@ -53,8 +53,17 @@ public class MyBatisReservaDAO implements ReservaDAO{
     public Reserva getReservaPorId(int id) throws PersistenceException {
         try {
             return reservaMapper.getReservaPorId(id);
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public void cancelarReserva(int id) throws PersistenceException {
+        try {
+            reservaMapper.cancelarReserva(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al cancelar", e);
         }
     }
 }
