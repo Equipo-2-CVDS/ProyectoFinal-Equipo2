@@ -66,4 +66,59 @@ public class MyBatisReservaDAO implements ReservaDAO {
             throw new PersistenceException("Error al cancelar", e);
         }
     }
+
+    @Override
+    public List<String> getRecursoMasUsado() throws PersistenceException {
+        try {
+            return reservaMapper.getRecursoMasUsado();
+
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<String> getRecursoMenosUsado() throws PersistenceException {
+        try {
+            return reservaMapper.getRecursoMenosUsado();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<String> getHorariosMasUsados() throws PersistenceException {
+        try {
+            return reservaMapper.getHorariosMasUsados();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<String> getHorariosMenosUsados() throws PersistenceException {
+        try {
+            return reservaMapper.getHorariosMenosUsados();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<Reserva> getReservasRecurentes() throws PersistenceException {
+        try {
+            return reservaMapper.getReservasRecurentes();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public List<Reserva> getReservasCanceladas() throws PersistenceException {
+        try {
+            return reservaMapper.getReservasCanceladas();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
 }
