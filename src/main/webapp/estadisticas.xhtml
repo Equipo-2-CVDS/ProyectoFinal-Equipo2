@@ -61,33 +61,26 @@
     </p:messages>
     <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>
     <div class="divPrimer">
-        <h1>Bienvenido #{userBean.username}</h1>
-        <div class="options">
-            <h:form>
-                <div>
-                    <h:commandButton class="but but-style" value="Registrar Recurso"
-                        style="display: #{userBean.visible()}"
-                        actionListener="#{navigationController.paginaRegistroR()}" />
-                </div>
-                <div>
-                    <h:commandButton class="but but-style" value="Consultar Recurso"
-                        actionListener="#{navigationController.paginaConsultaR()}" />
-                </div>
-                <div>
-                    <h:commandButton class="but but-style" value="Mis Reservas"
-                        style="display: #{userBean.isEstudiante()}"
-                        actionListener="#{navigationController.paginaMisReservas()}" />
-                </div>
-                <div>
-                    <h:commandButton class="but but-style" value="Consultar Reservas"
-                        style="display: #{userBean.visible()}"
-                        actionListener="#{navigationController.paginaMisReservas()}" />
-                </div>
-                <div>
-                    <h:commandButton action="#{userBean.cerrarSesion()}" class="but but-style" value="Salir" />
-                </div>
-            </h:form>
-        </div>
+        <h1>Reportes</h1>
+        <h:form id="formReportes" class="formbox">
+            <h:outputLabel for="selectRecurrencia" value="Reportes: " />
+            <div class="opcion">
+                <h:selectOneMenu id="selectRecurrencia" value="#{estadisticasBean.opcion}">
+                    <p:ajax event="change" render="formReportes" execute="selectRecurrencia" update="formReportes"
+                        listener="#{reservarBean.cambioEstado}" />
+                    <f:selectItem class="select" itemLabel="Recursos más usados" itemValue="0"></f:selectItem>
+                    <f:selectItem class="select" itemLabel="Recursos menos usados" itemValue="1"></f:selectItem>
+                    <f:selectItem class="select" itemLabel="Horarios de mayor ocupación de recursos" itemValue="2"></f:selectItem>
+                    <f:selectItem class="select" itemLabel="Horarios de menor ocupación de recursos" itemValue="3"></f:selectItem>
+                    <f:selectItem class="select" itemLabel="Reservas recurrentes" itemValue="4"></f:selectItem>
+                    <f:selectItem class="select" itemLabel="Reservas canceladas" itemValue="5"></f:selectItem>
+                </h:selectOneMenu>
+            </div>
+            <div>
+                <p:chart type="bar" model="#{estadisticasBean.barModel}" style="height:300px" />
+            </div>
+            
+        </h:form>
     </div>
     <h:messages />
 </h:body>
