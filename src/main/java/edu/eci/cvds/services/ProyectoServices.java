@@ -52,13 +52,6 @@ public interface ProyectoServices {
     public void insertarRecurso(Recurso r) throws PersistenceException;
 
     /**
-     * Inserta recurso en la base de datos
-     * @param id id del Recurso a cancelar
-     * @throws ServicesException
-     */
-    public void cancelarRecurso(int id, boolean estado) throws PersistenceException;
-
-    /**
      * Consulta los horarios de un recurso
      * @param idRecurso
      * @return
@@ -154,4 +147,13 @@ public interface ProyectoServices {
      * @throws ServicesException
      */
     public Reserva getReservaPorId(int id) throws PersistenceException;
+
+    /**
+     * Consulta el recurso segun el id
+     *
+     * @param id id del recurso
+     * @param estado estado del recurso
+     * @throws ServicesException
+     */
+    void cambiarEstadoRecurso(int i, boolean estado) throws PersistenceException;
 }

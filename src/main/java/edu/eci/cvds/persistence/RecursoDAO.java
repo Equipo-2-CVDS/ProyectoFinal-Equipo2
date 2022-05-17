@@ -16,4 +16,6 @@ public interface RecursoDAO {
     public void insertarRecurso(Recurso r) throws PersistenceException;
 
     public void cancelarRecurso(int id) throws  PersistenceException;
+
+    public void activarRecurso(int id) throws PersistenceException;
 }

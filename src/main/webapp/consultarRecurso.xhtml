@@ -144,9 +144,9 @@
         <p class="titulo">Consultar Recurso</p>
         <h:form id="formConsultarRecursos" class="formbox">
             <center>
-                <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.recursos}"
+                <p:dataTable id="table" var="recurso" value="#{consultarRecursosBean.getRecursosDisponibles()}"
                     tableStyle="table-dark table-striped table-bordered justify-content-center" emptyMessage="No tienes reservaciones activas"
-                    scrollable="true"  draggableRows="false"  cellSeparator="true"  scrollHeight="330" >>
+                    scrollable="true"  draggableRows="false"  cellSeparator="true"  scrollHeight="330" >
                     <p:column headerText="Nombre" sortBy="#{recurso.nombre}">
                         <h:outputText value="#{recurso.nombre}" />
                     </p:column>
@@ -178,8 +178,8 @@
             <br/>
             <br><p:commandButton class="but-style" value="Volver"
                                  actionListener="#{consultarRecursosBean.volver(userBean.userId)}"/></br>
-            <c:if test="#{userbean.userId!=1}">
-                <p:commandButton class="but-style" value="Ver todos los recursos" style = "margin-left: 90%"/>
+            <c:if test="#{userBean.getRol()==1}">
+                <p:commandButton class="but-style" value="Modificar recursos" style = "margin-left: 90%" actionListener = "#{navigationController.modificarRecursos()}"/>
             </c:if>
         </h:form>
     </div>

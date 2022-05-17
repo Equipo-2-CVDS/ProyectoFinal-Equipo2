@@ -1,13 +1,11 @@
 package edu.eci.cvds.services;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
+import edu.eci.cvds.entities.Usuario;
+import edu.eci.cvds.persistence.*;
 import org.mybatis.guice.XMLMyBatisModule;
 
-import edu.eci.cvds.persistence.HorarioDAO;
-import edu.eci.cvds.persistence.RecursoDAO;
-import edu.eci.cvds.persistence.ReservaDAO;
-import edu.eci.cvds.persistence.RolesDAO;
-import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisHorarioDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisRecursoDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisReservaDAO;
@@ -20,7 +18,6 @@ import java.util.Optional;
 import static com.google.inject.Guice.createInjector;
 
 public class ProyectoServicesFactory {
-
     private static final ProyectoServicesFactory instance = new ProyectoServicesFactory();
 
     private static Optional<Injector> optInjector;
@@ -63,6 +60,10 @@ public class ProyectoServicesFactory {
         return instance;
     }
 
-    public static void main(String a[]) throws ServicesException {
+    public static void main(String [] args) throws ServicesException, PersistenceException {
+        ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
+        servicio.cambiarEstadoRecurso(14, true);
+        System.out.println(servicio.getRecursos());
+
     }
 }

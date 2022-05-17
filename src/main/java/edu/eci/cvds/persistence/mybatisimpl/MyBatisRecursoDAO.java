@@ -30,7 +30,15 @@ public class MyBatisRecursoDAO implements RecursoDAO {
         } catch (Exception e) {
             throw new PersistenceException("Error al cancelar recurso", e);
         }
+    }
 
+    @Override
+    public void activarRecurso(int id) throws PersistenceException {
+        try {
+            recursoMapper.activarRecurso(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al activar recurso", e);
+        }
     }
 
     @Override

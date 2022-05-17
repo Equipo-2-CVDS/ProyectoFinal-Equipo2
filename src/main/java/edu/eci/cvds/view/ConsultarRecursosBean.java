@@ -20,18 +20,42 @@ public class ConsultarRecursosBean extends BasePageBean {
     private ArrayList<Recurso> filtro = new ArrayList<>();
     private List<Recurso> recursos;
 
-    public void inicializar() {
+
+
+    public List<Recurso> getRecursosDisponibles() {
         try {
             recursos = userServices.getRecursosDisponibles();
         } catch (Exception e) {
             System.out.println(e);
         }
+        return recursos;
     }
 
     public List<Recurso> getRecursos() {
-        inicializar();
+        try {
+            recursos = userServices.getRecursos();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return recursos;
     }
+
+    public void cambiarEstadoRecurso(int id, boolean estado){
+        try {
+            userServices.cambiarEstadoRecurso(id, estado);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public String getHabilitar(boolean habilitado){
+        if(habilitado){
+            return "Desabilitar";
+        } else {
+            return "Habilitar";
+        }
+    }
+
 
     public void volver(int ingresado) throws IOException {
         if (ingresado > 0) {
