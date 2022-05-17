@@ -21,7 +21,7 @@
         background-color: rgb(46, 46, 184);
         color: white;
         text-align: center;
-        padding: 3% 25%;
+        padding: 3% 5%;
         border-radius: 3%;
         text-shadow: 0 0 10px rgb(46, 46, 184);
     }
@@ -46,13 +46,14 @@
 
     .divPrimer {
         background-color: rgba(1, 1, 70, 0.623);
-        padding: 3% 15%;
+        padding: 3% 5%;
         border-radius: 3%;
     }
 
     form>div {
         margin-bottom: 25px;
     }
+
 </style>
 
 <h:body>
@@ -63,6 +64,55 @@
     <div class="divPrimer">
         <h1>Reportes</h1>
         <h:form id="formReportes" class="formbox">
+            <p:dataTable class="table" id="table" var="table" borde="10px"
+                value="#{estadisticasBean.consultarTable()}" widgetVar="tableWidget"
+                emptyMessage="No tienes reservaciones para esta busqueda" scrollable="true" draggableRows="false"
+                cellSeparator="true" scrollHeight="330">
+                <p:column class="column" sortBy="#{recurso.tipo}" filterBy="#{table.nombreRecurso}">
+                    <f:facet name="header"> Recurso </f:facet>
+                    #{table.nombreRecurso}
+                </p:column>
+                <p:column class="column">
+                    <f:facet name="header"> Tipo </f:facet>
+                    #{table.tipoRecurso}
+                </p:column>
+                <p:column class="column" filterBy="#{table.nombreRecurso}">
+                    <f:facet name="header"> Estudiante </f:facet>
+                    #{table.nombreEstudiante}
+                </p:column>
+                <p:column class="column" filterBy="#{table.nombreRecurso}">
+                    <f:facet name="header"> Programa </f:facet>
+                    #{table.programaEstudiante}
+                </p:column>
+                <p:column class="column">
+                    <f:facet field="date" name="header" filterMatchMode="between"> 
+                        Fecha 
+                        <p:calendar id="from" value="#{testDateRange.dateFrom}" styleClass="customCalendar" pattern="dd/MM/yyyy">
+                            <p:ajax event="dateSelect" oncomplete="PF('tableWidget').filter()" update="table" />
+                        </p:calendar>
+                        <p:calendar id="to" value="#{testDateRange.dateTo}" styleClass="customCalendar" pattern="dd/MM/yyyy">
+                            <p:ajax event="dateSelect" oncomplete="PF('tableWidget').filter()" update="table" />
+                        </p:calendar>
+                    </f:facet>
+                    #{table.fecha}
+                </p:column>
+                <p:column class="column">
+                    <f:facet name="header"> Desde </f:facet>
+                    #{table.desde}
+                </p:column>
+                <p:column class="column">
+                    <f:facet name="header"> Hasta </f:facet>
+                    #{table.hasta}
+                </p:column>
+                <p:column class="column">
+                    <f:facet name="header"> Estado </f:facet>
+                    #{table.estado}
+                </p:column>
+                <p:column class="column" filterBy="#{table.nombreRecurso}">
+                    <f:facet name="header"> Cantidad </f:facet>
+                    #{table.cantidad}
+                </p:column>
+            </p:dataTable>
             <h:outputLabel for="selectRecurrencia" value="Reportes: " />
             <div class="opcion">
                 <h:selectOneMenu id="selectRecurrencia" value="#{estadisticasBean.opcion}">

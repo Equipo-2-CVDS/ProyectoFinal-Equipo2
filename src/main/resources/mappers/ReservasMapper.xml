@@ -12,6 +12,34 @@
         <result property='estado' column='estado' />
     </resultMap>
 
+    <resultMap id="TableResult" type="Table">
+        <result property="nombreRecurso" column="nombreRecurso" />
+        <result property="tipoRecurso" column="tipoRecurso" />
+        <result property="nombreEstudiante" column="nombreEstudiante" />
+        <result property="programaEstudiante" column="programaEstudiante" />
+        <result property="fecha" column="fecha" />
+        <result property="desde" column="desde" />
+        <result property="hasta" column="hasta" />
+        <result property="estado" column="estado" />
+        <result property="cantidad" column="cantidad" />
+    </resultMap>
+    <select id="getTable" resultMap="TableResult" parameterType="map">
+        SELECT 
+            r.nombre as nombreRecurso,
+            r.tipo as tipoRecurso,
+            u.nombre as nombreEstudiante,
+            u.programa as programaEstudiante,
+            re.desde::date as fecha,
+            re.desde::time as desde,
+            re.hasta::time as hasta,
+            re.estado as estado,
+            count (*) as cantidad
+        FROM public.reservas AS re
+        JOIN public.recursos AS r ON re.idrecurso=r.id
+        JOIN public.usuarios AS u ON re.idusuario=u.id
+        GROUP BY r.nombre,r.tipo,u.nombre,u.programa,re.desde,re.hasta,re.estado  
+            ORDER BY COUNT(*) DESC
+    </select>
     <select id="getReservasUsuario" resultMap="ReservaResult" parameterType="map">
         SELECT
             re.id ,

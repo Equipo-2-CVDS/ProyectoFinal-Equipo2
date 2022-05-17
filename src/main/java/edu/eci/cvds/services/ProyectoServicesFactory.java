@@ -66,6 +66,6 @@ public class ProyectoServicesFactory {
 
     public static void main(String a[]) throws ServicesException, PersistenceException {
         ProyectoServices proyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-        System.out.println(proyecto.getRecursoMenosUsado());
+        System.out.println(proyecto.getTable());
     }
 }

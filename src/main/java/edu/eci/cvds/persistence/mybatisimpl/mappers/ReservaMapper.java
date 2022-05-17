@@ -5,8 +5,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Table;
 
 public interface ReservaMapper {
+    public List<Table> getTable();
 
     public void insertarReserva(@Param("re") Reserva re);
 

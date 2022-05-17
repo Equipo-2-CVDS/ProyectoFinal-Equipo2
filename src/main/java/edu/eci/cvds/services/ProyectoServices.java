@@ -5,6 +5,7 @@ import java.util.List;
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Table;
 import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -214,4 +215,12 @@ public interface ProyectoServices {
      * @throws PersistenceException
      */
     public List<Reserva> getReservasCanceladas() throws PersistenceException;
+
+    /**
+     * Consulta la tabla de reportes
+     * 
+     * @return Lista de table
+     * @throws PersistenceException
+     */
+    public List<Table> getTable() throws PersistenceException;
 }

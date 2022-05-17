@@ -3,8 +3,11 @@ package edu.eci.cvds.persistence;
 import java.util.List;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Table;
 
 public interface ReservaDAO {
+
+    List<Table> getTable() throws PersistenceException;
 
     void insertarReserva(Reserva re) throws PersistenceException;
 
