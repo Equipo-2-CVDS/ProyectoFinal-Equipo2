@@ -63,6 +63,12 @@
             WHERE r.estado and r.id=#{id}
     </select>
 
+    <update id = "cancelarRecurso" parameterType="map">
+        UPDATE recursos
+        SET estado = false
+        WHERE id = #{id}
+    </update>
+
     <insert id="insertarRecurso" parameterType="map">
         insert into RECURSOS (nombre, tipo, capacidad, ubicacion, estado) values
         (#{r.nombre}, #{r.tipo}, #{r.capacidad}, #{r.ubicacion}, #{r.estado})

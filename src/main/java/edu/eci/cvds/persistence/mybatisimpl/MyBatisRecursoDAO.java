@@ -23,6 +23,15 @@ public class MyBatisRecursoDAO implements RecursoDAO {
         }
     }
 
+    @Override
+    public void cancelarRecurso(int id) throws PersistenceException {
+        try {
+            recursoMapper.cancelarRecurso(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al cancelar recurso", e);
+        }
+
+    }
 
     @Override
     public void insertarRecurso(Recurso r) throws PersistenceException {

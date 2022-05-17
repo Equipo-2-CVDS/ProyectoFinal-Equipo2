@@ -49,7 +49,14 @@ public interface ProyectoServices {
      * @param r Recurso a insertar
      * @throws ServicesException
      */
-    public void insertarRecurso(Recurso r) throws PersistenceException; 
+    public void insertarRecurso(Recurso r) throws PersistenceException;
+
+    /**
+     * Inserta recurso en la base de datos
+     * @param id id del Recurso a cancelar
+     * @throws ServicesException
+     */
+    public void cancelarRecurso(int id, boolean estado) throws PersistenceException;
 
     /**
      * Consulta los horarios de un recurso

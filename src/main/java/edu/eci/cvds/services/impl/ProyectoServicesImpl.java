@@ -53,6 +53,13 @@ public class ProyectoServicesImpl implements ProyectoServices {
     }
 
     @Override
+    public void cancelarRecurso(int id, boolean estadoActual) throws PersistenceException {
+        if (estadoActual == false){
+            recursoDAO.cancelarRecurso(id);
+        }
+    }
+
+    @Override
     public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException {
             return horarioDAO.getHorariosDisponibles(idRecurso);
     }
