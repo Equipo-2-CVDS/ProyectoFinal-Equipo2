@@ -65,7 +65,6 @@ public class ScheduleView extends BasePageBean {
             for (Reserva reserva : reservas) {
                 LocalDateTime desde = reserva.getDesde().toLocalDateTime();
                 LocalDateTime hasta = reserva.getHasta().toLocalDateTime();
-                System.out.println(reserva.getEstado());
                 if (desde.isAfter(hoy) && reserva.getEstado()) {
                     DefaultScheduleEvent<?> event1 = DefaultScheduleEvent.builder()
                             .title("Reserva")

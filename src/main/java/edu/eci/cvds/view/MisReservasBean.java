@@ -3,7 +3,6 @@ package edu.eci.cvds.view;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -171,7 +170,7 @@ public class MisReservasBean extends BasePageBean {
         reservas = userServices.getReservasRecurso(idUsuario);
     }
 
-    public void reset() throws ServicesException {
+    public void reset() {
         idUsuario = 0;
     }
 

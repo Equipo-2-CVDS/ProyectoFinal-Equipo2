@@ -173,4 +173,13 @@ public class ProyectoTest {
         }
     }
 
+    @Test
+    public void deberiaEncontrarTablaReportes() {
+        try {
+            Assert.assertTrue(serviciosProyecto.getTable().size() > 0);
+        } catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+    }
+
 }
