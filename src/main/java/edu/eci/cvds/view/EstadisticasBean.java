@@ -5,14 +5,11 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.google.inject.Inject;
 
-import org.primefaces.model.FilterMeta;
-import org.primefaces.model.MatchMode;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -84,6 +81,26 @@ public class EstadisticasBean extends BasePageBean {
                 break;
             case 1:
                 this.nomDic = t.getDesde().toString() + " - " + t.getHasta().toString();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 2:
+                this.nomDic = t.getProgramaEstudiante();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 3:
+                this.nomDic = t.getTipoRecurso();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 4:
+                this.nomDic = t.getNombreEstudiante();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 5:
+                this.nomDic = t.getRecurrencia();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 6:
+                this.nomDic = t.getEstado();
                 this.cantDic = (int) t.getCantidad();
                 break;
             default:
