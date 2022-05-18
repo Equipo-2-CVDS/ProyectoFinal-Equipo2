@@ -4,7 +4,11 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Home</title>
+    <title>Reportes</title>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js">
+    </script>
+    <script src="https://code.jquery.com/jquery-migrate-3.4.0.min.js">
+    </script>
 
 </h:head>
 <link rel="stylesheet" href="style.css">
@@ -21,7 +25,7 @@
         background-color: rgb(46, 46, 184);
         color: white;
         text-align: center;
-        padding: 3% 5%;
+        padding: 3% 1%;
         border-radius: 3%;
         text-shadow: 0 0 10px rgb(46, 46, 184);
     }
@@ -33,25 +37,81 @@
     }
 
     .but {
-        margin-top: 15px;
-        padding: 3% 10%;
+        width: 22%;
+        height: 40px;
+        margin: 10px;
+        text-align: center;
+        align-self: center;
+        align-items: center;
         position: relative;
-        text-shadow: 1px 1px 10px white;
-        overflow: hidden;
-        color: #fff;
-        border-radius: 30px;
-        border-color: blue;
-        border-width: 1px;
+        font-size: 18px;
     }
 
     .divPrimer {
         background-color: rgba(1, 1, 70, 0.623);
-        padding: 3% 5%;
+        padding: 3% 1%;
         border-radius: 3%;
     }
 
     form>div {
         margin-bottom: 25px;
+    }
+
+    /* Tabla */
+    /* -- Padign filas */
+    .ui-datatable thead th,.ui-datatable tbody td,.ui-datatable tfoot td{
+        padding:4px 10px;
+        overflow:hidden;
+        font-size: 14px;
+    }
+
+    body .ui-inputfield{
+        width: 100%;
+    }
+    /* -- Estilo header */
+    .ui-datatable-scrollable-header {
+        border-width:1px;
+        border-style: solid;
+        border-top: 0;
+        border-left: 0;
+        border-right: 1px;
+        white-space:nowrap;
+    }
+    /* -- Separacion titulos header */
+    .ui-datatable table{
+	    border-collapse:collapse;width:100%;
+    }
+    /* -- Estilo columnas cuerpo y scroll */
+    .ui-datatable .ui-datatable-header,.ui-datatable .ui-datatable-footer{
+        text-align:center;padding:4px 10px;
+    }
+    .ui-datatable thead th, .ui-datatable tfoot td{
+        text-align:center;
+    }
+    .ui-datatable-scrollable table{
+        table-layout:fixed;
+    }
+    .ui-datatable-scrollable-body{
+        overflow:auto;
+    }
+    .ui-datatable-scrollable-header,.ui-datatable-scrollable-footer{
+        overflow:hidden;
+    }
+    .ui-datatable-scrollable .ui-datatable-scrollable-header,.ui-datatable-scrollable .ui-datatable-scrollable-footer{
+        position:relative;
+    }
+    .ui-datatable-scrollable .ui-datatable-scrollable-header td{
+        font-weight:normal;
+    }
+    .ui-datatable-scrollable-body::-webkit-scrollbar{
+        -webkit-appearance:none;
+        width:15px;
+        background-color:transparent;
+    }
+    .ui-datatable-scrollable-body::-webkit-scrollbar-thumb{
+        border-radius:8px;
+        border:1px solid white;
+        background-color:rgba(77,167,255,1);
     }
 
 </style>
@@ -64,72 +124,94 @@
     <div class="divPrimer">
         <h1>Reportes</h1>
         <h:form id="formReportes" class="formbox">
-            <p:dataTable class="table" id="table" var="table" borde="10px"
-                value="#{estadisticasBean.consultarTable()}" widgetVar="tableWidget"
-                emptyMessage="No tienes reservaciones para esta busqueda" scrollable="true" draggableRows="false"
-                cellSeparator="true" scrollHeight="330">
-                <p:column class="column" sortBy="#{recurso.tipo}" filterBy="#{table.nombreRecurso}">
-                    <f:facet name="header"> Recurso </f:facet>
-                    #{table.nombreRecurso}
-                </p:column>
-                <p:column class="column">
-                    <f:facet name="header"> Tipo </f:facet>
-                    #{table.tipoRecurso}
-                </p:column>
-                <p:column class="column" filterBy="#{table.nombreRecurso}">
-                    <f:facet name="header"> Estudiante </f:facet>
-                    #{table.nombreEstudiante}
-                </p:column>
-                <p:column class="column" filterBy="#{table.nombreRecurso}">
-                    <f:facet name="header"> Programa </f:facet>
-                    #{table.programaEstudiante}
-                </p:column>
-                <p:column class="column">
-                    <f:facet field="date" name="header" filterMatchMode="between"> 
-                        Fecha 
-                        <p:calendar id="from" value="#{testDateRange.dateFrom}" styleClass="customCalendar" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" oncomplete="PF('tableWidget').filter()" update="table" />
-                        </p:calendar>
-                        <p:calendar id="to" value="#{testDateRange.dateTo}" styleClass="customCalendar" pattern="dd/MM/yyyy">
-                            <p:ajax event="dateSelect" oncomplete="PF('tableWidget').filter()" update="table" />
-                        </p:calendar>
-                    </f:facet>
-                    #{table.fecha}
-                </p:column>
-                <p:column class="column">
-                    <f:facet name="header"> Desde </f:facet>
-                    #{table.desde}
-                </p:column>
-                <p:column class="column">
-                    <f:facet name="header"> Hasta </f:facet>
-                    #{table.hasta}
-                </p:column>
-                <p:column class="column">
-                    <f:facet name="header"> Estado </f:facet>
-                    #{table.estado}
-                </p:column>
-                <p:column class="column" filterBy="#{table.nombreRecurso}">
-                    <f:facet name="header"> Cantidad </f:facet>
-                    #{table.cantidad}
-                </p:column>
-            </p:dataTable>
-            <h:outputLabel for="selectRecurrencia" value="Reportes: " />
-            <div class="opcion">
-                <h:selectOneMenu id="selectRecurrencia" value="#{estadisticasBean.opcion}">
-                    <p:ajax event="change" render="formReportes" execute="selectRecurrencia" update="formReportes"
-                        listener="#{reservarBean.cambioEstado}" />
-                    <f:selectItem class="select" itemLabel="Recursos más usados" itemValue="0"></f:selectItem>
-                    <f:selectItem class="select" itemLabel="Recursos menos usados" itemValue="1"></f:selectItem>
-                    <f:selectItem class="select" itemLabel="Horarios de mayor ocupación de recursos" itemValue="2"></f:selectItem>
-                    <f:selectItem class="select" itemLabel="Horarios de menor ocupación de recursos" itemValue="3"></f:selectItem>
-                    <f:selectItem class="select" itemLabel="Reservas recurrentes" itemValue="4"></f:selectItem>
-                    <f:selectItem class="select" itemLabel="Reservas canceladas" itemValue="5"></f:selectItem>
-                </h:selectOneMenu>
-            </div>
-            <div>
-                <p:chart type="bar" model="#{estadisticasBean.barModel}" style="height:300px" />
-            </div>
-            
+                <p:dataTable class="table" id="idTable" var="table" borde="10px"
+                    value="#{estadisticasBean.consultarTable()}" widgetVar="tableWidget"
+                    emptyMessage="No tienes reservaciones para esta busqueda" scrollable="true" draggableRows="false"
+                    cellSeparator="true" scrollHeight="330" filteredValue="#{estadisticasBean.tableFilter}">
+                    <p:column class="column" sortBy="#{table.nombreRecurso}" filterBy="#{table.nombreRecurso}" filterMatchMode="contains">
+                        <f:facet name="header"> Recurso </f:facet>                   
+                        <h:outputText value="#{table.nombreRecurso}" />
+                    </p:column>
+                    <p:column class="column" field="tipoRecurso" headerName="Tipo" filterMatchMode="exact" sortBy="#{table.tipoRecurso}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tableWidget').filter()" styleClass="custom-filter">
+                                <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItem class="select" itemLabel="Sala de Estudio" itemValue="Sala de Estudio" />
+                                <f:selectItem class="select" itemLabel="Equipo multimedia" itemValue="Equipo multimedia" />
+                                <f:selectItem class="select" itemLabel="Equipo de Computo" itemValue="Equipo de Computo" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{table.tipoRecurso}" />
+                    </p:column>
+                    <p:column class="column" sortBy="#{table.nombreEstudiante}" filterBy="#{table.nombreEstudiante}" filterMatchMode="contains">
+                        <f:facet name="header"> Estudiante </f:facet>
+                        <h:outputText value="#{table.nombreEstudiante}" />
+                    </p:column>
+                    <p:column class="column" sortBy="#{table.programaEstudiante}" filterBy="#{table.programaEstudiante}" filterMatchMode="contains">
+                        <f:facet name="header"> Programa </f:facet>
+                        <h:outputText value="#{table.programaEstudiante}" />
+                    </p:column>
+                    <p:column field="fecha" headerText="Fecha" class="column" filterMatchMode="between">
+                        <f:facet name="filter">
+                            <p:datePicker selectionMode="range" onchange="PF('tableWidget').filter()" />
+                        </f:facet>
+                        <h:outputText value="#{table.fecha}" />
+                    </p:column>
+                    <p:column class="column" field="desde" headerText="Desde" filterMatchMode="exact">
+                        <f:facet name="filter"> 
+                            <p:datePicker onchange="PF('tableWidget').filter()" timeOnly="true" pattern="HH" showTime="true" stepMinute="60"/>
+                        </f:facet>                   
+                        <h:outputText value="#{table.desde}" />
+                    </p:column>
+                    <p:column class="column" field="hasta" headerText="Hasta" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:datePicker onchange="PF('tableWidget').filter()" timeOnly="true" pattern="HH" showTime="true" stepMinute="60" />
+                        </f:facet>
+                    
+                        <h:outputText value="#{table.hasta}" />
+                    </p:column>
+                    <p:column class="column" field="estado" headerName="Estado" filterMatchMode="exact" sortBy="#{table.estado}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tableWidget').filter()" styleClass="custom-filter">
+                                <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Habilitada" itemValue="Habilitada" />
+                                <f:selectItem itemLabel="Deshabilitada" itemValue="Deshabilitada" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{table.estado}" />
+                    </p:column>
+                    <p:column class="column" field="recurrencia" headerName="Recurrencia" filterMatchMode="exact" sortBy="#{table.recurrencia}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tableWidget').filter()" styleClass="custom-filter">
+                                <f:selectItem itemLabel="All" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Sin recurrencia" itemValue="Sin recurrencia" />
+                                <f:selectItem itemLabel="Diariamente" itemValue="Diariamente" />
+                                <f:selectItem itemLabel="Semanalmente" itemValue="Semanalmente" />
+                                <f:selectItem itemLabel="Mensualmente" itemValue="Mensualmente" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{table.recurrencia}" />
+                    </p:column>
+                    <p:column class="column" field="cantidad" headerName="Cantidad" filterMatchMode="gte" sortBy="#{table.cantidad}" filterBy="#{table.cantidad}" filterValue="1">
+                        <h:outputText value="#{table.cantidad}" />
+                    </p:column>
+                </p:dataTable>
+                <div class="p-d-flex p-jc-between">
+                    <div>
+                        <h:commandButton value="Exportar Excel" class="but but-style">
+                            <p:dataExporter type="xls" target="idTable" fileName="reportes" />
+                        </h:commandButton>
+                        <h:selectOneMenu id="selectOpcion" value="#{estadisticasBean.opcion}">
+                            <p:ajax event="change" render="formReportes" execute="selectOpcion" update="formReportes" />
+                            <f:selectItem class="select" itemLabel="Recursos" itemValue="0"></f:selectItem>
+                            <f:selectItem class="select" itemLabel="Horarios" itemValue="1"></f:selectItem>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                    
+                <div>
+                    <p:chart id="grafica" type="bar" model="#{estadisticasBean.barModel}" style="height:300px" />
+                </div>
         </h:form>
     </div>
     <h:messages />

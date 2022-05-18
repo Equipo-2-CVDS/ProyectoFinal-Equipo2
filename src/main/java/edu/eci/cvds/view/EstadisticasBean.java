@@ -1,20 +1,18 @@
 package edu.eci.cvds.view;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Hashtable;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.google.inject.Inject;
 
-import org.codehaus.plexus.util.StringUtils;
 import org.primefaces.model.FilterMeta;
+import org.primefaces.model.MatchMode;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -34,13 +32,16 @@ public class EstadisticasBean extends BasePageBean {
     private BarChartModel barModel;
     private List<Table> table = new ArrayList<Table>();
     private List<Table> tableFilter = new ArrayList<Table>();
-    private List<FilterMeta> filterBy;
-    private Date dateFrom;
-    private Date dateTo;
+    private String nomDic;
+    private int cantDic;
 
     public List<Table> consultarTable() {
         try {
             table = userServices.getTable();
+            if (tableFilter.isEmpty()) {
+                tableFilter = table;
+            }
+            inicializarBarModel();
         } catch (PersistenceException e) {
             System.out.println(e);
         }
@@ -58,44 +59,37 @@ public class EstadisticasBean extends BasePageBean {
 
     private void traerInfo() throws PersistenceException {
         ChartSeries info = new ChartSeries();
-        if (opcion < 2) {
-            List<String> recursos = opcion == 0 ? userServices.getRecursoMasUsado()
-                    : userServices.getRecursoMenosUsado();
-            for (String r : recursos) {
-                String[] item = r.split(",");
-                info.setLabel("Recursos");
-                info.set(item[0], Integer.parseInt(item[1]));
+        Hashtable<String, Integer> recursosXCantidad = new Hashtable<String, Integer>();
+        List<Table> uso = tableFilter.isEmpty() ? table : tableFilter;
+        for (Table t : uso) {
+            nombres(t);
+            if (recursosXCantidad.containsKey(nomDic)) {
+                recursosXCantidad.replace(nomDic, recursosXCantidad.get(nomDic) + (cantDic));
+            } else {
+                recursosXCantidad.put(nomDic, cantDic);
             }
-        } else if (opcion < 4) {
-            List<String> horarios = opcion == 2 ? userServices.getHorariosMasUsados()
-                    : userServices.getHorariosMenosUsados();
-            for (String h : horarios) {
-                String[] item = h.split(" ");
-                info.setLabel("Horarios");
-                info.set(item[0] + " " + item[1], Integer.parseInt(item[2]));
-            }
-        } else {
+        }
+        for (Entry<String, Integer> entry : recursosXCantidad.entrySet()) {
+            info.set(entry.getKey(), entry.getValue());
         }
         barModel.addSeries(info);
+        tableFilter = new ArrayList<Table>();
     }
 
-    public boolean filterByDate(Object value, Object filter, Locale locale) {
-        // it fails before calling this method
-        String filterText = (filter == null) ? null : filter.toString().trim();
-        if (StringUtils.isEmpty(filterText)) {
-            return true;
+    private void nombres(Table t) {
+        switch (opcion) {
+            case 0:
+                this.nomDic = t.getNombreRecurso();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            case 1:
+                this.nomDic = t.getDesde().toString() + " - " + t.getHasta().toString();
+                this.cantDic = (int) t.getCantidad();
+                break;
+            default:
+                break;
         }
-        if (value == null) {
-            return false;
-        }
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date filterDate;
-        try {
-            filterDate = df.parse(filterText);
-        } catch (ParseException e) {
-            return false;
-        }
-        return filterDate.after(dateFrom) && filterDate.before(dateTo);
+
     }
 
     public int getOpcion() {
@@ -107,7 +101,6 @@ public class EstadisticasBean extends BasePageBean {
     }
 
     public BarChartModel getBarModel() {
-        inicializarBarModel();
         return barModel;
     }
 
@@ -128,16 +121,7 @@ public class EstadisticasBean extends BasePageBean {
     }
 
     public void setTableFilter(List<Table> tableFilter) {
-        System.out.println(tableFilter.get(0).getCantidad());
         this.tableFilter = tableFilter;
-    }
-
-    public List<FilterMeta> getFilterBy() {
-        return filterBy;
-    }
-
-    public void setFilterBy(List<FilterMeta> filterBy) {
-        this.filterBy = filterBy;
     }
 
 }

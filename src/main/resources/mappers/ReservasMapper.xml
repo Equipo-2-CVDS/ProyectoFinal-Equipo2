@@ -21,6 +21,7 @@
         <result property="desde" column="desde" />
         <result property="hasta" column="hasta" />
         <result property="estado" column="estado" />
+        <result property="recurrencia" column="recurrencia" />
         <result property="cantidad" column="cantidad" />
     </resultMap>
     <select id="getTable" resultMap="TableResult" parameterType="map">
@@ -32,12 +33,13 @@
             re.desde::date as fecha,
             re.desde::time as desde,
             re.hasta::time as hasta,
+            re.recurrencia as recurrencia,
             re.estado as estado,
             count (*) as cantidad
         FROM public.reservas AS re
         JOIN public.recursos AS r ON re.idrecurso=r.id
         JOIN public.usuarios AS u ON re.idusuario=u.id
-        GROUP BY r.nombre,r.tipo,u.nombre,u.programa,re.desde,re.hasta,re.estado  
+        GROUP BY r.nombre,r.tipo,u.nombre,u.programa,re.desde,re.hasta,re.estado,re.recurrencia  
             ORDER BY COUNT(*) DESC
     </select>
     <select id="getReservasUsuario" resultMap="ReservaResult" parameterType="map">

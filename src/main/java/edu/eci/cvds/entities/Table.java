@@ -13,11 +13,12 @@ public class Table {
     private LocalDate fecha;
     private LocalTime desde;
     private LocalTime hasta;
-    private boolean estado;
+    private String estado;
     private long cantidad;
+    private String recurrencia;
 
     public Table(String nombreRecurso, String tipoRecurso, String nombreEstudiante, String programaEstudiante,
-            Date fecha, Time desde, Time hasta, boolean estado, long cantidad) {
+            Date fecha, Time desde, Time hasta, int recurrencia, boolean estado, long cantidad) {
         this.nombreRecurso = nombreRecurso;
         this.tipoRecurso = tipoRecurso;
         this.nombreEstudiante = nombreEstudiante;
@@ -25,6 +26,9 @@ public class Table {
         this.fecha = fecha.toLocalDate();
         this.desde = desde.toLocalTime();
         this.hasta = hasta.toLocalTime();
+        this.estado = estado ? "Habilitada" : "Deshabilitada";
+        this.recurrencia = recurrencia == 0 ? "Sin recurrencia"
+                : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
         this.cantidad = cantidad;
     }
 
@@ -84,12 +88,21 @@ public class Table {
         this.hasta = hasta;
     }
 
-    public boolean isEstado() {
+    public String getEstado() {
         return estado;
     }
 
     public void setEstado(boolean estado) {
-        this.estado = estado;
+        this.estado = estado ? "Habilitada" : "Deshabilitada";
+    }
+
+    public String getRecurrencia() {
+        return recurrencia;
+    }
+
+    public void setRecurrencia(int recurrencia) {
+        this.recurrencia = recurrencia == 0 ? "Sin recurrencia"
+                : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
     }
 
     public long getCantidad() {
@@ -104,7 +117,8 @@ public class Table {
     public String toString() {
         return "Table: Recurso = " + nombreRecurso + ", tipo = " + tipoRecurso + ", estudiante = " + nombreEstudiante
                 + ", programa = " + programaEstudiante + ", desde = " + desde + ", hasta = " + hasta + ", Estado = "
-                + estado + ", Cantidad = " + cantidad + "]";
+                + estado + ", Recurrencia = "
+                + recurrencia + ", Cantidad = " + cantidad + "]";
     }
 
 }
