@@ -6,7 +6,6 @@ import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
 import edu.eci.cvds.persistence.ReservaDAO;
 
-import edu.eci.cvds.services.impl.ProyectoServicesImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
