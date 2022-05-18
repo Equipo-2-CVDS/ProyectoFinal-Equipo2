@@ -68,7 +68,7 @@ public class ReservarBean extends BasePageBean {
                 if (userServices.getHorarioDia(idRecurso, fechaInsercion.getDayOfWeek().getValue()) != null) {
                     if (busquedaReservas(idRecurso, fechaInsercion, horas)) {
                         Reserva reserva = new Reserva(idUsuario, idRecurso, Timestamp.valueOf(fechaInsercion),
-                                Timestamp.valueOf(fechaInsercion.plusHours(horas)), recurrencia, false);
+                                Timestamp.valueOf(fechaInsercion.plusHours(horas)), recurrencia, true);
                         userServices.insertarReserva(reserva);
                     } else {
                         fallos = fallos + " " + fechaInsercion.toString();

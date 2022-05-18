@@ -80,7 +80,7 @@
             re.recurrencia,
             re.estado
         FROM RESERVAS as re
-            WHERE re.idRecurso=#{idRecurso} AND re.estado=false
+            WHERE re.idRecurso=#{idRecurso}
     </select>
 
     <select id="getReservaPorId" resultMap="ReservaResult" parameterType="map">
@@ -94,9 +94,10 @@
             re.recurrencia,
             re.estado
         FROM RESERVAS as re
-            WHERE re.id=#{id} AND re.estado=false
+            WHERE re.id=#{id}
             ORDER by re.desde ASC 
     </select>
+
 
     <insert id="insertarReserva" parameterType="map">
         insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia, estado) values
@@ -105,7 +106,7 @@
 
     <update id="cancelarReserva" parameterType="map">
         UPDATE reservas 
-        SET estado = true
+        SET estado = false
         WHERE reservas.id = #{id}
     </update>
 </mapper>

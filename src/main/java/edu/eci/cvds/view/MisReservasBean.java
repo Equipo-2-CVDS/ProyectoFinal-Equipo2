@@ -128,10 +128,10 @@ public class MisReservasBean extends BasePageBean {
 
         for (Reserva reserva : initialArray) {
             int comparation = reserva.getHasta().compareTo(date);
-            if (comparation > 0 && filterType == filterNewest && !reserva.getEstado()) {
+            if (comparation > 0 && filterType == filterNewest && reserva.getEstado()) {
                 filteredList.add(reserva);
             }
-            if (comparation < 0 && filterType == filterOlders && !reserva.getEstado()) {
+            if (comparation < 0 && filterType == filterOlders && reserva.getEstado()) {
                 filteredList.add(reserva);
             }
         }
@@ -142,7 +142,7 @@ public class MisReservasBean extends BasePageBean {
         List<Reserva> filteredList = new ArrayList<>();
 
         for (Reserva reserva : initialArray) {
-            if (reserva.getEstado()) {
+            if (!reserva.getEstado()) {
                 filteredList.add(reserva);
             }
         }
