@@ -7,26 +7,26 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import edu.eci.cvds.services.ServicesException;
+import edu.eci.cvds.persistence.PersistenceException;
 
 public class iniciarSesionImpl implements iniciarSesion {
 
     @Override
-    public void login(String fullname, String password, boolean RememberMe) throws ServicesException {
+    public void login(String fullname, String password, boolean RememberMe) throws PersistenceException {
         try {
             Subject user = SecurityUtils.getSubject();
             Session session = user.getSession();// crear la sesion usuario
             session.setAttribute("username", fullname);
-            if(!user.isAuthenticated()){ //abrir la sesion si no tiene una activa
-                UsernamePasswordToken token = new UsernamePasswordToken("username",fullname);
+            if (!user.isAuthenticated()) { // abrir la sesion si no tiene una activa
+                UsernamePasswordToken token = new UsernamePasswordToken("username", fullname);
                 token.setRememberMe(true);
                 user.login(token);
             }
-        } catch ( IncorrectCredentialsException a ) {
-            throw new ServicesException("Wrong Password"+a);
-        }catch ( UnknownAccountException a ) {
-            throw new ServicesException("User not register"+a);
-        } 
+        } catch (IncorrectCredentialsException a) {
+            throw new PersistenceException("Wrong Password" + a);
+        } catch (UnknownAccountException a) {
+            throw new PersistenceException("User not register" + a);
+        }
     }
 
     @Override
@@ -39,5 +39,5 @@ public class iniciarSesionImpl implements iniciarSesion {
     public boolean isLog() {
         return SecurityUtils.getSubject().isAuthenticated();
     }
-    
+
 }

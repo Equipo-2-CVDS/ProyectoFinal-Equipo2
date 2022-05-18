@@ -4,6 +4,7 @@ import com.google.inject.Injector;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.persistence.HorarioDAO;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.ReservaDAO;
 import edu.eci.cvds.persistence.RolesDAO;
@@ -63,6 +64,8 @@ public class ProyectoServicesFactory {
         return instance;
     }
 
-    public static void main(String a[]) throws ServicesException {
+    public static void main(String a[]) throws PersistenceException {
+        ProyectoServices proyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
+        System.out.println(proyecto.getTable());
     }
 }

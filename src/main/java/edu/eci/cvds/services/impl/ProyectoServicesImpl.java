@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import edu.eci.cvds.entities.Horario;
 import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Table;
 import edu.eci.cvds.entities.UsuRecuRese;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
@@ -129,6 +130,11 @@ public class ProyectoServicesImpl implements ProyectoServices {
         @Override
         public void cancelarReserva(int id) throws PersistenceException {
                 reservaDAO.cancelarReserva(id);
+        }
+
+        @Override
+        public List<Table> getTable() throws PersistenceException {
+                return reservaDAO.getTable();
         }
 
 }

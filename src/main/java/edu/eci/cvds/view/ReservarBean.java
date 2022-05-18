@@ -51,7 +51,7 @@ public class ReservarBean extends BasePageBean {
                     messageError("Solo se puede reservar por una hora");
                 }
             } else {
-                messageError("Ya existe una reserva en esas hora");
+                messageError("Ya existe una reserva en esas horas");
             }
         } catch (Exception e) {
             messageError("No se pudo realizar la accion, intentelo de nuevo");
@@ -68,7 +68,7 @@ public class ReservarBean extends BasePageBean {
                 if (userServices.getHorarioDia(idRecurso, fechaInsercion.getDayOfWeek().getValue()) != null) {
                     if (busquedaReservas(idRecurso, fechaInsercion, horas)) {
                         Reserva reserva = new Reserva(idUsuario, idRecurso, Timestamp.valueOf(fechaInsercion),
-                                Timestamp.valueOf(fechaInsercion.plusHours(horas)), recurrencia, false);
+                                Timestamp.valueOf(fechaInsercion.plusHours(horas)), recurrencia, true);
                         userServices.insertarReserva(reserva);
                     } else {
                         fallos = fallos + " " + fechaInsercion.toString();
@@ -114,10 +114,11 @@ public class ReservarBean extends BasePageBean {
         for (Reserva re : reservas) {
             LocalDateTime desde = re.getDesde().toLocalDateTime();
             LocalDateTime hasta = re.getHasta().toLocalDateTime();
-            if ((desde.isBefore(fechaInsercion) && hasta.isAfter(fechaInsercion))
+            if (((desde.isBefore(fechaInsercion) && hasta.isAfter(fechaInsercion))
                     || (desde.isBefore(fechaInsercion.plusHours(horas))
                             && hasta.isAfter(fechaInsercion.plusHours(horas)))
-                    || (desde.isEqual(fechaInsercion)) || (hasta.isEqual((fechaInsercion).plusHours(horas)))) {
+                    || (desde.isEqual(fechaInsercion)) || (hasta.isEqual((fechaInsercion).plusHours(horas))))
+                    && re.getEstado()) {
                 return false;
             }
         }

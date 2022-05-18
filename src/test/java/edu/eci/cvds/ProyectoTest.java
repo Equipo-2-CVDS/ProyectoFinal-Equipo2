@@ -85,7 +85,7 @@ public class ProyectoTest {
     @Test
     public void deberiaEncontrarRecursos() {
         try {
-            Assert.assertEquals("HP", serviciosProyecto.getRecursosDisponibles().get(0).getNombre());
+            Assert.assertTrue(serviciosProyecto.getRecursosDisponibles().size() > 0);
         } catch (Exception e) {
             Assert.assertTrue(false);
         }
@@ -148,9 +148,9 @@ public class ProyectoTest {
     @Test
     public void deberiaEncontrarHorarioPorIds() {
         try {
-            Horario horario = serviciosProyecto.getHorarioDia(1,1);
-            Assert.assertEquals(7,horario.getDesde().toLocalTime().getHour());
-            Assert.assertEquals(19,horario.getHasta().toLocalTime().getHour());
+            Horario horario = serviciosProyecto.getHorarioDia(1, 1);
+            Assert.assertEquals(7, horario.getDesde().toLocalTime().getHour());
+            Assert.assertEquals(19, horario.getHasta().toLocalTime().getHour());
         } catch (Exception e) {
             Assert.assertTrue(false);
         }
@@ -168,8 +168,16 @@ public class ProyectoTest {
             }).when(reservaDAO).cancelarReserva(1);
             mockitoService.cancelarReserva(1);
             Assert.assertEquals(true, reservaMockito.getEstado());
+        } catch (Exception e) {
+            Assert.assertTrue(false);
         }
-        catch (Exception e) {
+    }
+
+    @Test
+    public void deberiaEncontrarTablaReportes() {
+        try {
+            Assert.assertTrue(serviciosProyecto.getTable().size() > 0);
+        } catch (Exception e) {
             Assert.assertTrue(false);
         }
     }

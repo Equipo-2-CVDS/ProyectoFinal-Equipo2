@@ -69,6 +69,10 @@
                 <h:commandButton class="but but-style" value="Consultar Reservas" style="display: #{userBean.visible()}" actionListener="#{navigationController.paginaMisReservas()}"/>
             </div>
             <div>
+                <h:commandButton class="but but-style" value="Ver Reportes" style="display: #{userBean.visible()}"
+                    actionListener="#{navigationController.paginaReporte()}" />
+            </div>
+            <div>
                 <h:commandButton action="#{userBean.cerrarSesion()}" class="but but-style" value="Salir"/>
             </div>
         </h:form>

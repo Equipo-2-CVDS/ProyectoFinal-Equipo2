@@ -3,7 +3,6 @@ package edu.eci.cvds.view;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -128,10 +127,10 @@ public class MisReservasBean extends BasePageBean {
 
         for (Reserva reserva : initialArray) {
             int comparation = reserva.getHasta().compareTo(date);
-            if (comparation > 0 && filterType == filterNewest && !reserva.getEstado()) {
+            if (comparation > 0 && filterType == filterNewest && reserva.getEstado()) {
                 filteredList.add(reserva);
             }
-            if (comparation < 0 && filterType == filterOlders && !reserva.getEstado()) {
+            if (comparation < 0 && filterType == filterOlders && reserva.getEstado()) {
                 filteredList.add(reserva);
             }
         }
@@ -142,7 +141,7 @@ public class MisReservasBean extends BasePageBean {
         List<Reserva> filteredList = new ArrayList<>();
 
         for (Reserva reserva : initialArray) {
-            if (reserva.getEstado()) {
+            if (!reserva.getEstado()) {
                 filteredList.add(reserva);
             }
         }
@@ -171,7 +170,7 @@ public class MisReservasBean extends BasePageBean {
         reservas = userServices.getReservasRecurso(idUsuario);
     }
 
-    public void reset() throws ServicesException {
+    public void reset() {
         idUsuario = 0;
     }
 

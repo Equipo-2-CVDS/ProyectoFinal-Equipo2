@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
-import edu.eci.cvds.services.ServicesException;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -237,7 +236,7 @@ public class UsuarioBean extends BasePageBean {
     public void setHome(String home) {
         this.home = home;
     }
-    
+
     public String getReservar() {
         return reservar;
     }
@@ -245,5 +244,5 @@ public class UsuarioBean extends BasePageBean {
     public void setReservar(String reservar) {
         this.reservar = reservar;
     }
-    
+
 }
