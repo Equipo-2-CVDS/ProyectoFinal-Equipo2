@@ -2,7 +2,6 @@ package edu.eci.cvds.entities;
 
 import java.sql.Timestamp;
 
-
 public class UsuRecuRese {
     private String nombreRecurso;
     private String infoRecurso;
@@ -11,10 +10,11 @@ public class UsuRecuRese {
     private Timestamp fechaHasta;
     private String nombreUsuario;
     private String programaUsuario;
-    private int recurrencia;
+    private String recurrencia;
 
-    public UsuRecuRese(String nombreRecurso,String infoRecurso,Timestamp fechaSolicitado,Timestamp fechaDesde,Timestamp fechaHasta,
-    String nombreUsuario,String programaUsuario,int recurrencia){
+    public UsuRecuRese(String nombreRecurso, String infoRecurso, Timestamp fechaSolicitado, Timestamp fechaDesde,
+            Timestamp fechaHasta,
+            String nombreUsuario, String programaUsuario, int recurrencia) {
 
         this.nombreRecurso = nombreRecurso;
         this.infoRecurso = infoRecurso;
@@ -23,8 +23,9 @@ public class UsuRecuRese {
         this.fechaHasta = fechaHasta;
         this.nombreUsuario = nombreUsuario;
         this.programaUsuario = programaUsuario;
-        this.recurrencia = recurrencia;
-            
+        this.recurrencia = recurrencia == 0 ? "Sin recurrencia"
+                : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
+
     }
 
     public String getNombreRecurso() {
@@ -83,19 +84,21 @@ public class UsuRecuRese {
         this.programaUsuario = programaUsuario;
     }
 
-    public int getRecurrencia() {
+    public String getRecurrencia() {
         return recurrencia;
     }
 
     public void setRecurrencia(int recurrencia) {
-        this.recurrencia = recurrencia;
+        this.recurrencia = recurrencia == 0 ? "Sin recurrencia"
+                : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
     }
-
 
     @Override
     public String toString() {
-        return "UsuRecuRese: [nombreRecurso= " + nombreRecurso + ", infoRecurso= " + infoRecurso + 
-        ", fechaSolicitado= " + fechaSolicitado +  ", fechaDesde= " + fechaDesde + ", fechaHasta= " + fechaHasta + ", nombreUsuario= " + nombreUsuario + ", programaUsuario= " + programaUsuario + ", recurrencia= " + recurrencia +"]";
+        return "UsuRecuRese: [nombreRecurso= " + nombreRecurso + ", infoRecurso= " + infoRecurso +
+                ", fechaSolicitado= " + fechaSolicitado + ", fechaDesde= " + fechaDesde + ", fechaHasta= " + fechaHasta
+                + ", nombreUsuario= " + nombreUsuario + ", programaUsuario= " + programaUsuario + ", recurrencia= "
+                + recurrencia + "]";
     }
 
 }
