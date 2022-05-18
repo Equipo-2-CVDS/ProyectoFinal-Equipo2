@@ -1,14 +1,39 @@
 package edu.eci.cvds;
 
 import edu.eci.cvds.entities.Horario;
+import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
+import edu.eci.cvds.persistence.ReservaDAO;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.sql.Timestamp;
+
+import static org.mockito.Mockito.doAnswer;
 
 public class ProyectoTest {
+
+    @Mock
+    private ReservaDAO reservaDAO;
+
+    @InjectMocks
+    private ProyectoServices mockitoService;
+
+    private Reserva reservaMockito;
+
+    @BeforeEach
+    void setUpMockito() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     ProyectoServices serviciosProyecto;
     ProyectoServices serviciosProyectoTest;
@@ -20,6 +45,12 @@ public class ProyectoTest {
 
     @Before
     public void setUp() {
+        mockitoService = ProyectoServicesFactory.getInstance().getServiciosProyecto();
+        MockitoAnnotations.initMocks(this);
+
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        reservaMockito = new Reserva(1, 99, time, time, 0, false);
+
         serviciosProyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
         serviciosProyectoTest = ProyectoServicesFactory.getInstance().getServiciosProyectoTesting();
     }
@@ -54,7 +85,7 @@ public class ProyectoTest {
     @Test
     public void deberiaEncontrarRecursos() {
         try {
-            Assert.assertEquals("Asus", serviciosProyecto.getRecursosDisponibles().get(0).getNombre());
+            Assert.assertEquals("HP", serviciosProyecto.getRecursosDisponibles().get(0).getNombre());
         } catch (Exception e) {
             Assert.assertTrue(false);
         }
@@ -124,4 +155,23 @@ public class ProyectoTest {
             Assert.assertTrue(false);
         }
     }
+
+    @Test
+    public void deberiaCancelarRecurso() {
+        try {
+            doAnswer(new Answer<Void>() {
+                @Override
+                public Void answer(InvocationOnMock invocationOnMock) throws Throwable {
+                    reservaMockito.setEstado(true);
+                    return null;
+                }
+            }).when(reservaDAO).cancelarReserva(1);
+            mockitoService.cancelarReserva(1);
+            Assert.assertEquals(true, reservaMockito.getEstado());
+        }
+        catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+    }
+
 }
