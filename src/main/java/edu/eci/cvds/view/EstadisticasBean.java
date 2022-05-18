@@ -77,31 +77,31 @@ public class EstadisticasBean extends BasePageBean {
         switch (opcion) {
             case 0:
                 this.nomDic = t.getNombreRecurso();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 1:
                 this.nomDic = t.getDesde().toString() + " - " + t.getHasta().toString();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 2:
                 this.nomDic = t.getProgramaEstudiante();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 3:
                 this.nomDic = t.getTipoRecurso();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 4:
                 this.nomDic = t.getNombreEstudiante();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 5:
                 this.nomDic = t.getRecurrencia();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             case 6:
                 this.nomDic = t.getEstado();
-                this.cantDic = (int) t.getCantidad();
+                this.cantDic = t.getCantidad();
                 break;
             default:
                 break;

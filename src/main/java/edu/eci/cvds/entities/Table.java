@@ -14,7 +14,7 @@ public class Table {
     private LocalTime desde;
     private LocalTime hasta;
     private String estado;
-    private long cantidad;
+    private int cantidad;
     private String recurrencia;
 
     public Table(String nombreRecurso, String tipoRecurso, String nombreEstudiante, String programaEstudiante,
@@ -29,7 +29,7 @@ public class Table {
         this.estado = estado ? "Habilitada" : "Deshabilitada";
         this.recurrencia = recurrencia == 0 ? "Sin recurrencia"
                 : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
-        this.cantidad = cantidad;
+        this.cantidad = (int) cantidad;
     }
 
     public String getNombreRecurso() {
@@ -105,12 +105,12 @@ public class Table {
                 : recurrencia == 1 ? "Diariamente" : recurrencia == 2 ? "Semanalmente" : "Mensualmente";
     }
 
-    public long getCantidad() {
+    public int getCantidad() {
         return cantidad;
     }
 
     public void setCantidad(long cantidad) {
-        this.cantidad = cantidad;
+        this.cantidad = (int) cantidad;
     }
 
     @Override
