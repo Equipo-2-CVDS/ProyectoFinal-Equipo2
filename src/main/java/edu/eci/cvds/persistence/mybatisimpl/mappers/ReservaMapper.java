@@ -22,16 +22,4 @@ public interface ReservaMapper {
 
     public void cancelarReserva(@Param("id") int id);
 
-    List<String> getRecursoMasUsado();
-
-    List<String> getRecursoMenosUsado();
-
-    List<String> getHorariosMasUsados();
-
-    List<String> getHorariosMenosUsados();
-
-    List<Reserva> getReservasRecurentes();
-
-    List<Reserva> getReservasCanceladas();
-
 }

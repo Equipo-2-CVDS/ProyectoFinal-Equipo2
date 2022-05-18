@@ -133,36 +133,6 @@ public class ProyectoServicesImpl implements ProyectoServices {
         }
 
         @Override
-        public List<String> getRecursoMasUsado() throws PersistenceException {
-                return reservaDAO.getRecursoMasUsado();
-        }
-
-        @Override
-        public List<String> getRecursoMenosUsado() throws PersistenceException {
-                return reservaDAO.getRecursoMenosUsado();
-        }
-
-        @Override
-        public List<String> getHorariosMasUsados() throws PersistenceException {
-                return reservaDAO.getHorariosMasUsados();
-        }
-
-        @Override
-        public List<String> getHorariosMenosUsados() throws PersistenceException {
-                return reservaDAO.getHorariosMenosUsados();
-        }
-
-        @Override
-        public List<Reserva> getReservasRecurentes() throws PersistenceException {
-                return reservaDAO.getReservasRecurentes();
-        }
-
-        @Override
-        public List<Reserva> getReservasCanceladas() throws PersistenceException {
-                return reservaDAO.getReservasCanceladas();
-        }
-
-        @Override
         public List<Table> getTable() throws PersistenceException {
                 return reservaDAO.getTable();
         }

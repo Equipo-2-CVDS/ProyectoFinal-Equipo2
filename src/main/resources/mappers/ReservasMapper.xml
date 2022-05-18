@@ -98,68 +98,6 @@
             ORDER by re.desde ASC 
     </select>
 
-    <select id="getRecursoMasUsado" resultType="String">
-        SELECT concat(r.nombre, ',' ,count (*))
-            FROM public.reservas AS re
-            JOIN public.recursos AS r ON re.idrecurso=r.id
-            GROUP BY r.nombre
-                ORDER BY COUNT(*) DESC
-                LIMIT    3;
-    </select>
-
-    <select id="getRecursoMenosUsado" resultType="String">
-        SELECT concat(r.nombre, ',' ,count (*))
-            FROM public.reservas AS re
-            JOIN public.recursos AS r ON re.idrecurso=r.id
-            GROUP BY r.nombre
-                ORDER BY COUNT(*) ASC   
-                LIMIT    3;
-    </select>
-
-    <select id="getHorariosMasUsados" resultType="String">
-        SELECT  concat(to_char(desde ,'HH24:MI:SS'),' ',to_char(hasta ,'HH24:MI:SS'),' ', count (*))
-            FROM public.reservas
-                GROUP BY to_char(desde ,'HH24:MI:SS'),to_char(hasta ,'HH24:MI:SS')
-                ORDER BY COUNT(*) DESC
-                LIMIT    3;
-    </select>
-
-    <select id="getHorariosMenosUsados" resultType="String">
-        SELECT  concat(to_char(desde ,'HH24:MI:SS'),' ',to_char(hasta ,'HH24:MI:SS'),' ', count (*))
-            FROM public.reservas
-                GROUP BY to_char(desde ,'HH24:MI:SS'),to_char(hasta ,'HH24:MI:SS')
-                ORDER BY COUNT(*) ASC
-                LIMIT    3;
-    </select>
-
-    <select id="getReservasRecurentes" resultMap="ReservaResult">
-        SELECT
-            id ,
-            idUsuario ,
-            idRecurso ,
-            desde ,
-            hasta ,
-            fechaSolicitado,
-            recurrencia,
-            estado
-            FROM public.reservas
-                where recurrencia != 0;
-    </select>
-
-    <select id="getReservasCanceladas" resultMap="ReservaResult">
-        SELECT
-            id ,
-            idUsuario ,
-            idRecurso ,
-            desde ,
-            hasta ,
-            fechaSolicitado,
-            recurrencia,
-            estado
-            FROM public.reservas
-                where estado != False;
-    </select>
-
     <insert id="insertarReserva" parameterType="map">
         insert into RESERVAS (idUsuario, idRecurso, desde, hasta, recurrencia, estado) values
         (#{re.idUsuario}, #{re.idRecurso}, #{re.desde}, #{re.hasta}, #{re.recurrencia}, #{re.estado})

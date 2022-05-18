@@ -169,54 +169,6 @@ public interface ProyectoServices {
     public void cancelarReserva(int id) throws PersistenceException;
 
     /**
-     * Muestra los recursos mas usados
-     * 
-     * @return lista de recursos mas usados
-     * @throws PersistenceException
-     */
-    public List<String> getRecursoMasUsado() throws PersistenceException;
-
-    /**
-     * Muestra los recursos menos usados
-     * 
-     * @return lista de recursos menos usados
-     * @throws PersistenceException
-     */
-    public List<String> getRecursoMenosUsado() throws PersistenceException;
-
-    /**
-     * Muestra los horarios mas usados
-     * 
-     * @return lista de horarios mas usados
-     * @throws PersistenceException
-     */
-    public List<String> getHorariosMasUsados() throws PersistenceException;
-
-    /**
-     * Muestra los horarios menos usados
-     * 
-     * @return lista de horarios menos usados
-     * @throws PersistenceException
-     */
-    public List<Reserva> getReservasRecurentes() throws PersistenceException;
-
-    /**
-     * Muestra los horarios menos usados
-     * 
-     * @return lista de horarios menos usados
-     * @throws PersistenceException
-     */
-    public List<String> getHorariosMenosUsados() throws PersistenceException;
-
-    /**
-     * Muestra los horarios menos usados
-     * 
-     * @return lista de horarios menos usados
-     * @throws PersistenceException
-     */
-    public List<Reserva> getReservasCanceladas() throws PersistenceException;
-
-    /**
      * Consulta la tabla de reportes
      * 
      * @return Lista de table
