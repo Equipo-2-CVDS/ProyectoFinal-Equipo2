@@ -70,11 +70,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
             // Las reservas que pertenezcan a la indicada coinciden en dia, hora y minuto ya
             // que se hacen de manera automatica y el metodo las trae ordenadas de la mas
             // antigua a la mas nueva
-            if (re.getFechaSolicitado().getHours() == reserva.getFechaSolicitado().getHours()
-                    && re.getFechaSolicitado().getMinutes() == reserva.getFechaSolicitado().getMinutes()
-                    && re.getFechaSolicitado().getDay() == reserva.getFechaSolicitado().getDay()
-                    && re.getRecurrencia() == reserva.getRecurrencia()
-                    && !re.getEstado()) {
+            if (reservasRecurrentes(re)) {
                 idReservas.add(Integer.valueOf(re.getId()));
             }
         }
@@ -119,7 +115,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
         }
     }
 
-    private boolean reservasRecurrentes(Reserva re) {
+    public boolean reservasRecurrentes(Reserva re) {
         if (re.getFechaSolicitado().getHours() == reserva.getFechaSolicitado().getHours()
                 && re.getFechaSolicitado().getMinutes() == reserva.getFechaSolicitado().getMinutes()
                 && re.getFechaSolicitado().getDay() == reserva.getFechaSolicitado().getDay()
