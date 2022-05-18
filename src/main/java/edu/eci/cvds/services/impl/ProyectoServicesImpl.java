@@ -55,7 +55,11 @@ public class ProyectoServicesImpl implements ProyectoServices {
     @Override
     public void cambiarEstadoRecurso(int id, boolean estado) throws PersistenceException {
         if (estado == true){
-            recursoDAO.cancelarRecurso(id);
+            if (reservaDAO.getReservasRecurso(id).isEmpty()){
+                recursoDAO.cancelarRecurso(id);
+            } else{
+                throw new PersistenceException("Hay reservas del recurso");
+            }
         }
         else {
             recursoDAO.activarRecurso(id);

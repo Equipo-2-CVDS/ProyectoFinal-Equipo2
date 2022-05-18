@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
 
 import javax.faces.bean.ManagedBean;
@@ -40,9 +41,11 @@ public class ConsultarRecursosBean extends BasePageBean {
         return recursos;
     }
 
-    public void cambiarEstadoRecurso(int id, boolean estado){
+    public void cambiarEstadoRecurso(int id, boolean estado) throws IOException {
         try {
             userServices.cambiarEstadoRecurso(id, estado);
+        } catch (PersistenceException e){
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/confirmacionCancelarReservas.xhtml");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -53,6 +56,14 @@ public class ConsultarRecursosBean extends BasePageBean {
             return "Desabilitar";
         } else {
             return "Habilitar";
+        }
+    }
+
+    public String getHabilitado(boolean estado){
+        if(estado){
+            return "Disponible";
+        } else {
+            return "No disponible";
         }
     }
 

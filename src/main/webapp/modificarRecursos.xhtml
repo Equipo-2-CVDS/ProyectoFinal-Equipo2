@@ -163,7 +163,7 @@
                     <h:outputText value="#{recurso.ubicacion}" />
                 </p:column>
                 <p:column headerText="Estado">
-                    <h:outputText value="#{recurso.estado}" />
+                    <h:outputText value="#{consultarRecursosBean.getHabilitado(recurso.estado)}" />
                 </p:column>
                 <p:column headerText="Cambiar estado">
                     <div>
