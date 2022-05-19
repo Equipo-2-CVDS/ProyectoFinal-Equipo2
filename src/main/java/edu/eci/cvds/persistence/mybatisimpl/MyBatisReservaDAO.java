@@ -5,11 +5,12 @@ import java.util.List;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.entities.Reserva;
+import edu.eci.cvds.entities.Table;
 import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.persistence.ReservaDAO;
 import edu.eci.cvds.persistence.mybatisimpl.mappers.ReservaMapper;
 
-public class MyBatisReservaDAO implements ReservaDAO{
+public class MyBatisReservaDAO implements ReservaDAO {
     @Inject
     ReservaMapper reservaMapper;
 
@@ -20,7 +21,7 @@ public class MyBatisReservaDAO implements ReservaDAO{
         } catch (Exception e) {
             throw new PersistenceException("Error al insertar reserva", e);
         }
-        
+
     }
 
     @Override
@@ -53,7 +54,34 @@ public class MyBatisReservaDAO implements ReservaDAO{
     public Reserva getReservaPorId(int id) throws PersistenceException {
         try {
             return reservaMapper.getReservaPorId(id);
-        }catch (Exception e) {
+        } catch (Exception e) {
+            throw new PersistenceException("Error al consultar", e);
+        }
+    }
+
+    @Override
+    public void cancelarReserva(int id) throws PersistenceException {
+        try {
+            reservaMapper.cancelarReserva(id);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al cancelar", e);
+        }
+    }
+
+    @Override
+    public List<Reserva> getReservasActivas() throws PersistenceException {
+        try {
+            return reservaMapper.getReservasActivas();
+        } catch (Exception e) {
+            throw new PersistenceException("Error al cancelar", e);
+        }
+    }
+
+    @Override
+    public List<Table> getTable() throws PersistenceException {
+        try {
+            return reservaMapper.getTable();
+        } catch (Exception e) {
             throw new PersistenceException("Error al consultar", e);
         }
     }

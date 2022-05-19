@@ -10,8 +10,10 @@ public class Reserva {
     private Timestamp hasta;
     private Timestamp fechaSolicitado;
     private int recurrencia;
+    private boolean estado;
 
-    public Reserva(int id, int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, Timestamp fechaSolicitado, int recurrencia) {
+    public Reserva(int id, int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, Timestamp fechaSolicitado,
+            int recurrencia, boolean estado) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
@@ -19,14 +21,16 @@ public class Reserva {
         this.hasta = hasta;
         this.recurrencia = recurrencia;
         this.fechaSolicitado = fechaSolicitado;
+        this.estado = estado;
     }
 
-    public Reserva(int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, int recurrencia) {
+    public Reserva(int idUsuario, int idRecurso, Timestamp desde, Timestamp hasta, int recurrencia, boolean estado) {
         this.idUsuario = idUsuario;
         this.idRecurso = idRecurso;
         this.desde = desde;
         this.hasta = hasta;
         this.recurrencia = recurrencia;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -76,7 +80,7 @@ public class Reserva {
     public void setFechaSolicitado(Timestamp fechaSolicitado) {
         this.fechaSolicitado = fechaSolicitado;
     }
-    
+
     public int getRecurrencia() {
         return recurrencia;
     }
@@ -85,9 +89,17 @@ public class Reserva {
         this.recurrencia = recurrencia;
     }
 
+    public boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
     @Override
     public String toString() {
-        return "Reserva: [id=" + id + ", idUsuario=" + idUsuario + 
-        ", idReserva=" + idRecurso +  ", desde=" + desde + ", hasta=" + hasta +"]";
+        return "Reserva: [id=" + id + ", idUsuario=" + idUsuario +
+                ", idReserva=" + idRecurso + ", desde=" + desde + ", hasta=" + hasta + ", estado=" + estado + "]";
     }
 }

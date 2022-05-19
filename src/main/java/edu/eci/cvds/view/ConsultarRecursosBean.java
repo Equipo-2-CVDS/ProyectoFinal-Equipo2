@@ -45,7 +45,15 @@ public class ConsultarRecursosBean extends BasePageBean {
         try {
             userServices.cambiarEstadoRecurso(id, estado);
         } catch (PersistenceException e){
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/confirmacionCancelarReservas.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/confirmacionCancelarRecurso.xhtml");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void cancelacionConfirmada(int id) throws IOException {
+        try {
+            userServices.cancelacionConfirmada(id);
         } catch (Exception e) {
             System.out.println(e);
         }

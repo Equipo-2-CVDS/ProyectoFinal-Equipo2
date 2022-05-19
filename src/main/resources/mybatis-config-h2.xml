@@ -1,18 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="test.properties">
-	</properties>
+	<properties resource="test.properties"></properties>
 
 	<typeAliases>
-        <typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario'/>
-		<typeAlias type='edu.eci.cvds.entities.Rol' alias='Rol'/>
-		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso'/>
-		<typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario'/>
+		<typeAlias type='edu.eci.cvds.entities.Usuario' alias='Usuario' />
+		<typeAlias type='edu.eci.cvds.entities.Rol' alias='Rol' />
+		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso' />
+		<typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario' />
 		<typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva' />
-    </typeAliases>
+		<typeAlias type='edu.eci.cvds.entities.Table' alias='Table' />
+	</typeAliases>
 
 	<environments default="test">
 		<environment id="test">
@@ -27,10 +25,10 @@
 	</environments>
 
 	<mappers>
-        <mapper resource="mappers/UsuarioMapper.xml"></mapper>  
-		<mapper resource="mappers/RolesMapper.xml"></mapper>     
-		<mapper resource="mappers/RecursoMapper.xml"></mapper>  
+		<mapper resource="mappers/UsuarioMapper.xml"></mapper>
+		<mapper resource="mappers/RolesMapper.xml"></mapper>
+		<mapper resource="mappers/RecursoMapper.xml"></mapper>
 		<mapper resource="mappers/HorariosMapper.xml"></mapper>
-		<mapper resource="mappers/ReservasMapper.xml"></mapper>          
-    </mappers> 
+		<mapper resource="mappers/ReservasMapper.xml"></mapper>
+	</mappers>
 </configuration>

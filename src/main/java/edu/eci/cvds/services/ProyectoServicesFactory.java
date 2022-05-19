@@ -6,6 +6,12 @@ import edu.eci.cvds.entities.Usuario;
 import edu.eci.cvds.persistence.*;
 import org.mybatis.guice.XMLMyBatisModule;
 
+import edu.eci.cvds.persistence.HorarioDAO;
+import edu.eci.cvds.persistence.PersistenceException;
+import edu.eci.cvds.persistence.RecursoDAO;
+import edu.eci.cvds.persistence.ReservaDAO;
+import edu.eci.cvds.persistence.RolesDAO;
+import edu.eci.cvds.persistence.UsuarioDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisHorarioDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisRecursoDAO;
 import edu.eci.cvds.persistence.mybatisimpl.MyBatisReservaDAO;
@@ -60,10 +66,10 @@ public class ProyectoServicesFactory {
         return instance;
     }
 
-    public static void main(String [] args) throws ServicesException, PersistenceException {
+    public static void main(String [] args) throws PersistenceException {
         ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
         servicio.cambiarEstadoRecurso(14, true);
         System.out.println(servicio.getRecursos());
-
     }
+
 }

@@ -9,6 +9,7 @@
 		<typeAlias type='edu.eci.cvds.entities.Recurso' alias='Recurso' />
 		<typeAlias type='edu.eci.cvds.entities.Horario' alias='Horario' />
 		<typeAlias type='edu.eci.cvds.entities.Reserva' alias='Reserva' />
+		<typeAlias type='edu.eci.cvds.entities.Table' alias='Table' />
 	</typeAliases>
 
 	<environments default="development">

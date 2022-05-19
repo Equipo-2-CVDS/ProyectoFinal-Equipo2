@@ -167,8 +167,8 @@
                 </p:column>
                 <p:column headerText="Cambiar estado">
                     <div>
-                        <p:commandButton value="#{consultarRecursosBean.getHabilitar(recurso.estado)}" update="formConsultarRecursos"
-                                         actionListener="#{consultarRecursosBean.cambiarEstadoRecurso(recurso.id, recurso.estado)}"/>
+                        <p:commandButton value="#{consultarRecursosBean.getHabilitar(recurso.estado)}" update="formConsultarRecursos" actionListener = "#{confirmacionCancelarRecursoBean.setIdRecurso(recurso.id)}"
+                                         action="#{consultarRecursosBean.cambiarEstadoRecurso(recurso.id, recurso.estado)}"/>
                     </div>
                 </p:column>
             </p:dataTable>
