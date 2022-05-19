@@ -6,7 +6,7 @@ public class Recurso {
     private String tipo;
     private int capacidad;
     private String ubicacion;
-    private String estado;
+    private boolean estado;
 
     public Recurso() {
         super();
@@ -18,7 +18,7 @@ public class Recurso {
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.ubicacion = ubicacion;
-        this.estado = estado ? "Habilitada" : "Deshabilitada";
+        this.estado = estado;
     }
 
     public Recurso(String nombre, String tipo, int capacidad, String ubicacion, boolean estado) {
@@ -26,7 +26,7 @@ public class Recurso {
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.ubicacion = ubicacion;
-        this.estado = estado ? "Habilitada" : "Deshabilitada";
+        this.estado = estado;
     }
 
     public int getId() {
@@ -69,12 +69,12 @@ public class Recurso {
         this.ubicacion = ubicacion;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
     public void setEstado(boolean estado) {
-        this.estado = estado ? "Habilitado" : "Deshabilitado";
+        this.estado = estado;
     }
 
     @Override
