@@ -1,9 +1,6 @@
 package edu.eci.cvds.services;
 
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-import edu.eci.cvds.entities.Usuario;
-import edu.eci.cvds.persistence.*;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.persistence.HorarioDAO;

@@ -1,11 +1,9 @@
 package edu.eci.cvds;
 
 import edu.eci.cvds.entities.Horario;
-import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
-import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.ReservaDAO;
 
 import org.junit.Assert;
