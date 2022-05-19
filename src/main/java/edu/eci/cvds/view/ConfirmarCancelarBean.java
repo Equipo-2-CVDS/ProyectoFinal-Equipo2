@@ -53,7 +53,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
     public void delete(String value) throws PersistenceException, IOException {
         if (reserva.getRecurrencia() == 0) {
             try {
-                userServices.cancelarReserva(reserva.getId());
+                userServices.cancelarReserva(reserva.getId(), false);
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/misReservas.xhtml");
             } catch (Exception e) {
                 messageError("No se pudo cancelar la reserva, lo sentimos");
@@ -83,7 +83,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
             case "1":
                 for (Integer integer : idReservas) {
                     try {
-                        userServices.cancelarReserva(integer);
+                        userServices.cancelarReserva(integer, false);
                     } catch (Exception e) {
                         messageError("Ocurrió un error cancelando las reservas, lo sentimos");
                     }
@@ -91,7 +91,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
                 break;
             case "2":
                 try {
-                    userServices.cancelarReserva(reserva.getId());
+                    userServices.cancelarReserva(reserva.getId(), false);
                 } catch (Exception e) {
                     messageError("Ocurrió un error cancelando las reservas, lo sentimos");
                 }
@@ -99,7 +99,7 @@ public class ConfirmarCancelarBean extends BasePageBean {
             case "3":
                 for (int i = index; i <= idReservas.size() - 1; i++) {
                     try {
-                        userServices.cancelarReserva(idReservas.get(i));
+                        userServices.cancelarReserva(idReservas.get(i), false);
                     } catch (Exception e) {
                         messageError("Ocurrió un error cancelando las reservas, lo sentimos");
                     }

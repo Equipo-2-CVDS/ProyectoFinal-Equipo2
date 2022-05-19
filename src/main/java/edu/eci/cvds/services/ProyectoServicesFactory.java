@@ -21,7 +21,6 @@ import java.util.Optional;
 import static com.google.inject.Guice.createInjector;
 
 public class ProyectoServicesFactory {
-
     private static final ProyectoServicesFactory instance = new ProyectoServicesFactory();
 
     private static Optional<Injector> optInjector;
@@ -64,8 +63,9 @@ public class ProyectoServicesFactory {
         return instance;
     }
 
-    public static void main(String a[]) throws PersistenceException {
-        ProyectoServices proyecto = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-        System.out.println(proyecto.getTable());
+    public static void main(String[] args) throws PersistenceException {
+        ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
+        System.out.println(servicio.getReservasRecurso(1));
     }
+
 }

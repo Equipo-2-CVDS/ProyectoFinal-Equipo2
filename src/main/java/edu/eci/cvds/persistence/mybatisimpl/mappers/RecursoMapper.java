@@ -16,4 +16,9 @@ public interface RecursoMapper {
     public List<Recurso> getRecursos();
 
     public Recurso getRecursoPorId(@Param("id") int id);
+
+    public void cancelarRecurso(@Param("id") int id);
+
+    public void activarRecurso(@Param("id") int id);
+
 }

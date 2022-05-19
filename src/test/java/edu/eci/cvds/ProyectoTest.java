@@ -65,6 +65,15 @@ public class ProyectoTest {
     }
 
     @Test
+    public void deberiaEncontrarUsuario() {
+        try {
+            Assert.assertEquals(1, serviciosProyecto.buscarUsuario("admin").getId());
+        } catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Test
     public void deberiaEncontrarRecurso() {
         try {
             Assert.assertEquals("Asus", serviciosProyecto.getRecurso("Asus").getNombre());
@@ -157,7 +166,7 @@ public class ProyectoTest {
     }
 
     @Test
-    public void deberiaCancelarRecurso() {
+    public void deberiaCancelarReserva() {
         try {
             doAnswer(new Answer<Void>() {
                 @Override
@@ -165,8 +174,8 @@ public class ProyectoTest {
                     reservaMockito.setEstado(true);
                     return null;
                 }
-            }).when(reservaDAO).cancelarReserva(1);
-            mockitoService.cancelarReserva(1);
+            }).when(reservaDAO).cancelarReserva(1, false);
+            mockitoService.cancelarReserva(1, false);
             Assert.assertEquals(true, reservaMockito.getEstado());
         } catch (Exception e) {
             Assert.assertTrue(false);

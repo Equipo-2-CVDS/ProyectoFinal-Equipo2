@@ -2,6 +2,7 @@ package edu.eci.cvds.view;
 
 import com.google.inject.Inject;
 import edu.eci.cvds.entities.Recurso;
+import edu.eci.cvds.persistence.PersistenceException;
 import edu.eci.cvds.services.ProyectoServices;
 
 import javax.faces.bean.ManagedBean;
@@ -20,17 +21,57 @@ public class ConsultarRecursosBean extends BasePageBean {
     private ArrayList<Recurso> filtro = new ArrayList<>();
     private List<Recurso> recursos;
 
-    public void inicializar() {
+    public List<Recurso> getRecursosDisponibles() {
         try {
             recursos = userServices.getRecursosDisponibles();
         } catch (Exception e) {
             System.out.println(e);
         }
+        return recursos;
     }
 
     public List<Recurso> getRecursos() {
-        inicializar();
+        try {
+            recursos = userServices.getRecursos();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return recursos;
+    }
+
+    public void cambiarEstadoRecurso(int id, boolean estado) throws IOException {
+        try {
+            userServices.cambiarEstadoRecurso(id, estado);
+        } catch (PersistenceException e) {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/confirmacionCancelarRecurso.xhtml");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void cancelacionConfirmada(int id) {
+        try {
+            userServices.cancelacionConfirmada(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public String getHabilitar(boolean habilitado) {
+        if (habilitado) {
+            return "Desabilitar";
+        } else {
+            return "Habilitar";
+        }
+
+    }
+
+    public String getHabilitado(boolean estado) {
+        if (estado) {
+            return "Disponible";
+        } else {
+            return "No disponible";
+        }
     }
 
     public void volver(int ingresado) throws IOException {
@@ -52,4 +93,5 @@ public class ConsultarRecursosBean extends BasePageBean {
     public void setFiltro(ArrayList<Recurso> filtro) {
         this.filtro = filtro;
     }
+
 }

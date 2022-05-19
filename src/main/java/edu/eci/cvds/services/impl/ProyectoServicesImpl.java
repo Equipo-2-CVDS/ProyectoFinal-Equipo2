@@ -46,6 +46,25 @@ public class ProyectoServicesImpl implements ProyectoServices {
         }
 
         @Override
+        public void cancelacionConfirmada(int id) throws PersistenceException {
+                recursoDAO.cancelarRecurso(id);
+        }
+
+        @Override
+        public void cambiarEstadoRecurso(int id, boolean estado) throws PersistenceException {
+                if (!estado) {
+                        recursoDAO.cancelarRecurso(id);
+                } else {
+                        recursoDAO.activarRecurso(id);
+                }
+        }
+
+        @Override
+        public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException {
+                return horarioDAO.getHorariosDisponibles(idRecurso);
+        }
+
+        @Override
         public List<Recurso> getRecursosDisponibles() throws PersistenceException {
                 return recursoDAO.getRecursosDisponibles();
         }
@@ -53,11 +72,6 @@ public class ProyectoServicesImpl implements ProyectoServices {
         @Override
         public void insertarRecurso(Recurso r) throws PersistenceException {
                 recursoDAO.insertarRecurso(r);
-        }
-
-        @Override
-        public List<Horario> getHorariosDisponibles(int idRecurso) throws PersistenceException {
-                return horarioDAO.getHorariosDisponibles(idRecurso);
         }
 
         @Override
@@ -128,8 +142,8 @@ public class ProyectoServicesImpl implements ProyectoServices {
         }
 
         @Override
-        public void cancelarReserva(int id) throws PersistenceException {
-                reservaDAO.cancelarReserva(id);
+        public void cancelarReserva(int id, boolean estado) throws PersistenceException {
+                reservaDAO.cancelarReserva(id, estado);
         }
 
         @Override
