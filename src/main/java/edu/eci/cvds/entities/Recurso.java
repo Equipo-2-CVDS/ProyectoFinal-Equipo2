@@ -6,7 +6,7 @@ public class Recurso {
     private String tipo;
     private int capacidad;
     private String ubicacion;
-    private boolean estado;
+    private String estado;
 
     public Recurso() {
         super();
@@ -18,7 +18,7 @@ public class Recurso {
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.ubicacion = ubicacion;
-        this.estado = estado;
+        this.estado = estado ? "Habilitada" : "Deshabilitada";
     }
 
     public Recurso(String nombre, String tipo, int capacidad, String ubicacion, boolean estado) {
@@ -26,9 +26,8 @@ public class Recurso {
         this.tipo = tipo;
         this.capacidad = capacidad;
         this.ubicacion = ubicacion;
-        this.estado = estado;
+        this.estado = estado ? "Habilitada" : "Deshabilitada";
     }
-
 
     public int getId() {
         return id;
@@ -54,29 +53,32 @@ public class Recurso {
         this.tipo = tipo;
     }
 
-    public int getCapacidad() {return capacidad;}
+    public int getCapacidad() {
+        return capacidad;
+    }
 
     public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
-    public String getUbicacion() {return ubicacion;}
+    public String getUbicacion() {
+        return ubicacion;
+    }
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
 
-
-    public boolean getEstado() {return estado;}
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public String getEstado() {
+        return estado;
     }
 
+    public void setEstado(boolean estado) {
+        this.estado = estado ? "Habilitado" : "Deshabilitado";
+    }
 
     @Override
     public String toString() {
-        return "Recurso: [id=" + id + ", nombre=" + nombre + ", ubicacion=" + ubicacion +  ", Estado=" + estado +"]";
+        return "Recurso: [id=" + id + ", nombre=" + nombre + ", ubicacion=" + ubicacion + ", Estado=" + estado + "]";
     }
 }
-
