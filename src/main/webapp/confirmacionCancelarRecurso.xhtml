@@ -44,14 +44,11 @@
         width: 22%;
         height: 40px;
         margin: 10px;
-        border-radius: 15px;
-        background: rgb(248, 248, 248);
-        color: black;
         text-align: center;
-        font-size: 50%;
         align-self: center;
         align-items: center;
-
+        position: relative;
+        font-size: 18px;
     }
 
     h1 {
@@ -77,34 +74,35 @@
     }
 
 </style>
-<h:head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js">
-    </script>
-</h:head>
 <title>Confirmar cancelacion</title>
 
 <body class="page">
-<p:messages id="messages" showDetail="true" closable="true">
-    <p:autoUpdate />
-</p:messages>
 <div class="bodylogo">
     <img class="logo" src="img\Logoescuelaazul.jpg" alt="logo"> </img>`
 </div>
 
 <div class="divBody">
-    <p class="titulo">Confirmacion de Cancelacion</p>
+    <p class="titulo">Confirmacion</p>
+    
+    
     <h:form id="formConsultarRecursos" class="formbox">
-        <h1>El recurso seleccionado tiene reservas asignadas</h1>
-        <h2>Desea cancelar estas reservas?</h2>
-        <br/>
+        <c:if test="#{confirmacionCancelarRecursoBean.reservas()}">
+            <h1>El recurso seleccionado tiene reservas asignadas</h1>
+            <h:outputText value="#{confirmacionCancelarRecursoBean.getText0()}" />
+            <br/>
+            <br>
+            <p:commandButton style="margin-right: 5%" class="botn but-style" value="#{confirmacionCancelarRecursoBean.getText1()}"
+                            actionListener="#{confirmacionCancelarRecursoBean.cancelarReserva()}"/>
+            <p:commandButton style="margin-left: 5%" class="botn but-style" value="Mantener reservas"
+                    actionListener="#{confirmacionCancelarRecursoBean.cambiarEstado()}"/></br>
+        </c:if>
+        <c:if test="#{confirmacionCancelarRecursoBean.reservasDiv()}">
+            <p:commandButton class="botn but-style" value="Confirmar"
+                actionListener="#{confirmacionCancelarRecursoBean.cambiarEstado()}" />        
+        </c:if>
         <br>
-        <p:commandButton style="margin-right: 5%" class="but-style" value="Cancelar Reservas"
-                         actionListener="#{confirmacionCancelarRecursoBean.cancelarReserva()}"/>
-        <p:commandButton style="margin-left: 5%" class="but-style" value="Mantener Reservas"
-                 actionListener="#{consultarRecursosBean.cancelacionConfirmada(confirmacionCancelarRecursoBean.getIdRecurso())}" action="#{navigationController.modificarRecursos()}"/></br>
-        <br>
-        <p:commandButton class="but-style" value="Volver"
-                         actionListener="#{navigationController.modificarRecursos()}"/></br>
+        <p:commandButton style="margin-top: 2%" class="botn but-style" value="Volver" actionListener="#{navigationController.modificarRecursos()}" />
+        </br>
     </h:form>
 </div>
 </body>

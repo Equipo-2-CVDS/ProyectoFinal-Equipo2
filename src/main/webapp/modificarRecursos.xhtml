@@ -133,7 +133,7 @@
 <title>Consultar Recurso</title>
 
 <body class="page">
-<p:messages id="messages" showDetail="true" closable="true">
+<p:messages class="msgs" id="messages" showDetail="true" closable="true">
     <p:autoUpdate />
 </p:messages>
 <div class="bodylogo">
@@ -167,8 +167,7 @@
                 </p:column>
                 <p:column headerText="Cambiar estado">
                     <div>
-                        <p:commandButton value="#{consultarRecursosBean.getHabilitar(recurso.estado)}" update="formConsultarRecursos" actionListener = "#{confirmacionCancelarRecursoBean.setIdRecurso(recurso.id)}"
-                                         action="#{consultarRecursosBean.cambiarEstadoRecurso(recurso.id, recurso.estado)}"/>
+                        <p:commandButton value="#{consultarRecursosBean.getHabilitar(recurso.estado)}" update="formConsultarRecursos" actionListener = "#{confirmacionCancelarRecursoBean.inicializar(recurso.id,recurso.estado)}"/>
                     </div>
                 </p:column>
             </p:dataTable>

@@ -60,9 +60,9 @@ public class MyBatisReservaDAO implements ReservaDAO {
     }
 
     @Override
-    public void cancelarReserva(int id) throws PersistenceException {
+    public void cancelarReserva(int id, boolean estado) throws PersistenceException {
         try {
-            reservaMapper.cancelarReserva(id);
+            reservaMapper.cancelarReserva(id, estado);
         } catch (Exception e) {
             throw new PersistenceException("Error al cancelar", e);
         }

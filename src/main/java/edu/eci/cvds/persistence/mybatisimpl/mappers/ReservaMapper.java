@@ -20,7 +20,7 @@ public interface ReservaMapper {
 
     public Reserva getReservaPorId(@Param("id") int id);
 
-    public void cancelarReserva(@Param("id") int id);
+    public void cancelarReserva(@Param("id") int id, @Param("estado") boolean estado);
 
     List<Reserva> getReservasActivas();
 }

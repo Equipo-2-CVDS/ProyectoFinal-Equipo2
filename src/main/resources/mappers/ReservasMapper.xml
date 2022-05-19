@@ -120,7 +120,7 @@
 
     <update id="cancelarReserva" parameterType="map">
         UPDATE reservas 
-        SET estado = false
+        SET estado = #{estado}
         WHERE reservas.id = #{id}
     </update>
 </mapper>

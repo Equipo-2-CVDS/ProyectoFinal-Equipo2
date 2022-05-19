@@ -1,9 +1,11 @@
 package edu.eci.cvds;
 
 import edu.eci.cvds.entities.Horario;
+import edu.eci.cvds.entities.Recurso;
 import edu.eci.cvds.entities.Reserva;
 import edu.eci.cvds.services.ProyectoServices;
 import edu.eci.cvds.services.ProyectoServicesFactory;
+import edu.eci.cvds.persistence.RecursoDAO;
 import edu.eci.cvds.persistence.ReservaDAO;
 
 import org.junit.Assert;
@@ -59,6 +61,15 @@ public class ProyectoTest {
     public void deberiaEncontrarRol() {
         try {
             Assert.assertEquals("Administrador", serviciosProyecto.getRol(1));
+        } catch (Exception e) {
+            Assert.assertTrue(false);
+        }
+    }
+
+    @Test
+    public void deberiaEncontrarUsuario() {
+        try {
+            Assert.assertEquals(1, serviciosProyecto.buscarUsuario("admin").getId());
         } catch (Exception e) {
             Assert.assertTrue(false);
         }
@@ -157,7 +168,7 @@ public class ProyectoTest {
     }
 
     @Test
-    public void deberiaCancelarRecurso() {
+    public void deberiaCancelarReserva() {
         try {
             doAnswer(new Answer<Void>() {
                 @Override
@@ -165,8 +176,8 @@ public class ProyectoTest {
                     reservaMockito.setEstado(true);
                     return null;
                 }
-            }).when(reservaDAO).cancelarReserva(1);
-            mockitoService.cancelarReserva(1);
+            }).when(reservaDAO).cancelarReserva(1, false);
+            mockitoService.cancelarReserva(1, false);
             Assert.assertEquals(true, reservaMockito.getEstado());
         } catch (Exception e) {
             Assert.assertTrue(false);

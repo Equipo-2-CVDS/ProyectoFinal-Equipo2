@@ -19,7 +19,7 @@ public interface ReservaDAO {
 
     List<Reserva> getReservasRecurso(int idRecurso) throws PersistenceException;
 
-    void cancelarReserva(int id) throws PersistenceException;
+    void cancelarReserva(int id, boolean estado) throws PersistenceException;
 
     List<Reserva> getReservasActivas() throws PersistenceException;
 }

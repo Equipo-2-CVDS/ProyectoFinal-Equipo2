@@ -162,6 +162,7 @@ public interface ProyectoServices {
 
     /**
      * cancela elrecurso
+     * 
      * @param id
      * @param estado
      * @throws PersistenceException
@@ -171,7 +172,7 @@ public interface ProyectoServices {
     /**
      * Consulta el recurso segun el id
      *
-     * @param id id del recurso
+     * @param id     id del recurso
      * @param estado estado del recurso
      * @throws ServicesException
      */
@@ -183,7 +184,7 @@ public interface ProyectoServices {
      * @param id id de la reserva
      * @throws ServicesException
      */
-    public void cancelarReserva(int id) throws PersistenceException;
+    public void cancelarReserva(int id, boolean estado) throws PersistenceException;
 
     /**
      * Consulta la tabla de reportes

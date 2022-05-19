@@ -21,8 +21,6 @@ public class ConsultarRecursosBean extends BasePageBean {
     private ArrayList<Recurso> filtro = new ArrayList<>();
     private List<Recurso> recursos;
 
-
-
     public List<Recurso> getRecursosDisponibles() {
         try {
             recursos = userServices.getRecursosDisponibles();
@@ -44,14 +42,14 @@ public class ConsultarRecursosBean extends BasePageBean {
     public void cambiarEstadoRecurso(int id, boolean estado) throws IOException {
         try {
             userServices.cambiarEstadoRecurso(id, estado);
-        } catch (PersistenceException e){
+        } catch (PersistenceException e) {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/confirmacionCancelarRecurso.xhtml");
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void cancelacionConfirmada(int id) throws IOException {
+    public void cancelacionConfirmada(int id) {
         try {
             userServices.cancelacionConfirmada(id);
         } catch (Exception e) {
@@ -59,22 +57,22 @@ public class ConsultarRecursosBean extends BasePageBean {
         }
     }
 
-    public String getHabilitar(boolean habilitado){
-        if(habilitado){
+    public String getHabilitar(boolean habilitado) {
+        if (habilitado) {
             return "Desabilitar";
         } else {
             return "Habilitar";
         }
+
     }
 
-    public String getHabilitado(boolean estado){
-        if(estado){
+    public String getHabilitado(boolean estado) {
+        if (estado) {
             return "Disponible";
         } else {
             return "No disponible";
         }
     }
-
 
     public void volver(int ingresado) throws IOException {
         if (ingresado > 0) {
@@ -95,4 +93,5 @@ public class ConsultarRecursosBean extends BasePageBean {
     public void setFiltro(ArrayList<Recurso> filtro) {
         this.filtro = filtro;
     }
+
 }

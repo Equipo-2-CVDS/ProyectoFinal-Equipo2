@@ -66,10 +66,9 @@ public class ProyectoServicesFactory {
         return instance;
     }
 
-    public static void main(String [] args) throws PersistenceException {
+    public static void main(String[] args) throws PersistenceException {
         ProyectoServices servicio = ProyectoServicesFactory.getInstance().getServiciosProyecto();
-        servicio.cambiarEstadoRecurso(14, true);
-        System.out.println(servicio.getRecursos());
+        System.out.println(servicio.getReservasRecurso(1));
     }
 
 }
